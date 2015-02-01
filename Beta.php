@@ -22,7 +22,7 @@ class Beta
     public static function run()
     {
         $uriHandler = new UriHandler();
-        $uriHandler->setPattern('/{s:controller}/{s:action}');
+        $uriHandler->setPattern('/{s:controller}/{s:action}/{i:id}');
         $router = new Router($uriHandler, PATH_CONTROLLER);
         $router->go($_SERVER['REQUEST_URI']);        
     }
