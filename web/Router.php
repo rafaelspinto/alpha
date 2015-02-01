@@ -21,6 +21,7 @@ class Router
     protected $uriHandler;
 
     /**
+     * Constructs a Router.
      * 
      * @param \Alpha\Http\UriHandler $uriHandler     The uri handler.
      * @param string                 $controllerPath The path of the controllers.
