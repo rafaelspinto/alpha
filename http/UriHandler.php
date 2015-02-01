@@ -4,7 +4,7 @@
  *
  * @author Rafael Pinto <santospinto.rafael@gmail.com>
  */
-namespace Http;
+namespace Alpha\Http;
 
 /**
  * Handles URI components.

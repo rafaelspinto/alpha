@@ -1,12 +1,12 @@
 <?php
-namespace Tests;
+namespace Alpha\Tests;
 
 require_once __DIR__.'/../core/Autoloader.php';
 
 /**
  * Test case for Autoloader.
  */
-class UriHandlerTestCase extends \Core\TestCaseAbstract
+class UriHandlerTestCase extends \Alpha\Core\TestCaseAbstract
 {
     /**
      * Tests getComponent method.
@@ -15,7 +15,7 @@ class UriHandlerTestCase extends \Core\TestCaseAbstract
      */
     public function testGetComponent_UriHasTwoComponents_ShouldAssertEquals()
     {
-        $uriHandler = new \Http\UriHandler();
+        $uriHandler = new \Alpha\Http\UriHandler();
         $uriHandler->setPattern('/{s:context}/{i:id}');
         $uriHandler->setUri('/users/123');
         $this->assertEquals('users', $uriHandler->getComponent('context'));
@@ -29,7 +29,7 @@ class UriHandlerTestCase extends \Core\TestCaseAbstract
      */
     public function testGetComponent_UriHasOneFullComponentAndOnePartialComponent_ShouldAssertEquals()
     {
-        $uriHandler = new \Http\UriHandler();
+        $uriHandler = new \Alpha\Http\UriHandler();
         $uriHandler->setPattern('/{s:context}/id-{i:id}');
         $uriHandler->setUri('/users/id-123');
         $this->assertEquals('users', $uriHandler->getComponent('context'));
@@ -43,7 +43,7 @@ class UriHandlerTestCase extends \Core\TestCaseAbstract
      */
     public function testGetComponent_UriHasTwoPartialComponent_ShouldAssertEquals()
     {
-        $uriHandler = new \Http\UriHandler();
+        $uriHandler = new \Alpha\Http\UriHandler();
         $uriHandler->setPattern('/my-{s:context}/id-{i:id}');
         $uriHandler->setUri('/my-users/id-123');
         $this->assertEquals('users', $uriHandler->getComponent('context'));
@@ -59,7 +59,7 @@ class UriHandlerTestCase extends \Core\TestCaseAbstract
      */
     public function testGetComponent_ComponentDoesNotExist_ShouldThrowException()
     {
-        $uriHandler = new \Http\UriHandler();
+        $uriHandler = new \Alpha\Http\UriHandler();
         $uriHandler->setPattern('/my-{s:context}/id-{i:id}');
         $uriHandler->setUri('/my-users/id-123');
         $uriHandler->getComponent('other');

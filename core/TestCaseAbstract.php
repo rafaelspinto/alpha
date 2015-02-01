@@ -4,7 +4,7 @@
  *
  * @author Rafael Pinto <santospinto.rafael@gmail.com>
  */
-namespace Core;
+namespace Alpha\Core;
 
 $found = false;
 if(stream_resolve_include_path('PHPUnit/Autoload.php') !== false) {

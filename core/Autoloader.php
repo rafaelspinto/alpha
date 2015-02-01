@@ -4,6 +4,7 @@
  *
  * @author Rafael Pinto <santospinto.rafael@gmail.com>
  */
+namespace Alpha\Core;
 
 /**
  * Simple Autoloader for classes where the namespace is camelcased and

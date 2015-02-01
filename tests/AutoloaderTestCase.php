@@ -1,5 +1,5 @@
 <?php
-namespace Tests;
+namespace Alpha\Tests;
 
 require_once __DIR__.'/../core/Autoloader.php';
 
