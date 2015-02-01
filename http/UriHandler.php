@@ -34,7 +34,8 @@ class UriHandler
      */
     public function setPattern($pattern)
     {
-        $this->pattern = $pattern;
+        $this->pattern           = $pattern;
+        $this->componentsAreInit = false;
     }
     
     /**
@@ -46,7 +47,8 @@ class UriHandler
      */
     public function setUri($uri)
     {
-        $this->uri = $uri;
+        $this->uri               = $uri;
+        $this->componentsAreInit = false;
     }
     
     /**
@@ -91,6 +93,7 @@ class UriHandler
     public function buildComponents()
     {
         $this->componentsAreInit = true;        
+        $this->components        = array();
         $matches                 = array();
         $found                   = preg_match_all(sprintf('#%s#', static::COMPONENT_REGEX), $this->pattern, $matches);
         if($found) {
