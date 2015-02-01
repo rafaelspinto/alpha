@@ -1,6 +1,6 @@
-# alpha
+# alpha (Work in progress)
 
-Lean core for building web applications (*MVC* pattern lean approach).
+Alpha is a lean framework for building web applications (*MVC* pattern).
 
 --
 
