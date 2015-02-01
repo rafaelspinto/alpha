@@ -1,4 +1,4 @@
-# alpha (Work in progress)
+# alpha *(work in progress)*
 
 Alpha is a lean framework for building web applications (*MVC* pattern).
 
