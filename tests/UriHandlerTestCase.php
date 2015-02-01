@@ -49,5 +49,20 @@ class UriHandlerTestCase extends \Core\TestCaseAbstract
         $this->assertEquals('users', $uriHandler->getComponent('context'));
         $this->assertEquals(123, $uriHandler->getComponent('id'));
     }
+    
+    /**
+     * Tests getComponent method.
+     * 
+     * @expectedException \Exception
+     * 
+     * @return void
+     */
+    public function testGetComponent_ComponentDoesNotExist_ShouldThrowException()
+    {
+        $uriHandler = new \Http\UriHandler();
+        $uriHandler->setPattern('/my-{s:context}/id-{i:id}');
+        $uriHandler->setUri('/my-users/id-123');
+        $uriHandler->getComponent('other');
+    }
 }
 

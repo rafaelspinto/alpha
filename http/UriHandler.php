@@ -62,6 +62,10 @@ class UriHandler
             $this->buildComponents();
         }
         
+        if(!isset($this->components[$componentName])){
+            throw new \Exception('component_does_not_exist:'.$componentName);
+        }
+        
         return $this->components[$componentName]['value'];
     }
     
