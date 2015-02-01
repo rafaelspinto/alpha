@@ -13,10 +13,10 @@ Alpha is a lean framework for building web applications (*MVC* pattern).
   
     e.g. :
 
-    * **GET**  http://example.com/User/edit/123 ----> ```UserController->getEdit(...);```
-    * **GET**  http://example.com/User/search?name=john ----> ```UserController->getSearch(...);```
-    * **POST** http://example.com/User/edit/123 ----> ```UserController->getEdit(...);```
-    * **DELETE** http://example.com/User/delete/123 ----> ```UserController->delete(...);```
+    * **GET**  http://example.com/User/edit/123 --> ```UserController->getEdit(...);```
+    * **GET**  http://example.com/User/search?name=john --> ```UserController->getSearch(...);```
+    * **POST** http://example.com/User/edit/123 --> ```UserController->getEdit(...);```
+    * **DELETE** http://example.com/User/delete/123 --> ```UserController->delete(...);```
 
   * **Injecting data** into the controller actions :
   
