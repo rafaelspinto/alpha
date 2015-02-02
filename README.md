@@ -1,6 +1,6 @@
-# alpha
+# alpha *(work in progress)*
 
-Lean core for building web applications (*MVC* pattern lean approach).
+Alpha is a lean framework for building web applications (*MVC* pattern).
 
 --
 
@@ -9,14 +9,14 @@ Lean core for building web applications (*MVC* pattern lean approach).
 * **Controller** :
   * Names should be like **User***Controller*
   
-  * Define **HTTP methods** by prefixing the *Controller* *Actions* with the type :
-  
-    * e.g. : **GET**  http://example.com/User/edit/123 is done by ```UserController->getEdit(...);```
-    * e.g. : **GET**  http://example.com/User/search?name=john is done by ```UserController->getSearch(...);```
-    * e.g. : **POST** http://example.com/User/edit/123 is done by ```UserController->getEdit(...);```
-    * e.g. : **DELETE** http://example.com/User/delete/123 is done by ```UserController->delete(...);```
+  * Define **HTTP methods** by prefixing the *Controller* *Actions* with the type, e.g. :
 
-  * **Injecting data** into the controller actions :
+    * **GET** http://example.com/User/edit/123 --> ```UserController->getEdit(...);```
+    * **GET** http://example.com/User/search?name=john --> ```UserController->getSearch(...);```
+    * **POST** http://example.com/User/edit/123 --> ```UserController->getEdit(...);```
+    * **DELETE** http://example.com/User/delete/123 --> ```UserController->delete(...);```
+
+  * **Inject data** into the controller actions :
   
     * Parameters from **URI path** : ```$PATH_parameter_name```
     * Parameters from **QueryString** : ```$QUERY_parameter_name```
