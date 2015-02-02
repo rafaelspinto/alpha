@@ -112,10 +112,16 @@ class Router
                     $parameters[$paramName] = $this->uriHandler->getComponent($paramName);
                     break;
                 case 'QUERY' :
-                    $parameters[$paramName] = $_GET[$paramName];
+                    $parameters[$paramName] = filter_input(INPUT_GET, $paramName);
                     break;
                 case 'PARAM' :
-                    $parameters[$paramName] = $_REQUEST[$paramName];
+                    $parameters[$paramName] = filter_input(INPUT_POST, $paramName);
+                    break;
+                case 'COOKIE' :
+                    $parameters[$paramName] = filter_input(INPUT_COOKIE, $paramName);
+                    break;
+                case 'SESSION' :
+                    $parameters[$paramName] = filter_input(INPUT_SESSION, $paramName);
                     break;
             }
         }
@@ -131,13 +137,14 @@ class Router
      */
     public function buildActionMethodName($actionName)
     {
-        $type = 'get';
-        switch($_SERVER['REQUEST_METHOD']){
+        $type   = 'get';
+        $method = filter_input(INPUT_SERVER, 'REQUEST_METHOD');
+        switch($method){
             case 'PUT' :
             case 'DELETE' :
             case 'POST' :
             case 'GET'  :
-                $type = strtolower($_SERVER['REQUEST_METHOD']);
+                $type = strtolower($method);
                 break;
         }
         return $type . ucfirst($actionName);
