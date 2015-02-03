@@ -10,7 +10,7 @@ require_once __DIR__. DIRECTORY_SEPARATOR . 'alpha/core' . DIRECTORY_SEPARATOR .
 define('PATH_ROOT', __DIR__);
 define('PATH_CONTROLLER', __DIR__ . DIRECTORY_SEPARATOR . 'webapp' . DIRECTORY_SEPARATOR . 'controller' . DIRECTORY_SEPARATOR);
 
-$autoloader = new \Alpha\Core\Autoloader('Alpha', PATH_ROOT);
+$autoloader = new \Alpha\Core\Autoloader(PATH_ROOT);
 $autoloader->register();
 
 try {

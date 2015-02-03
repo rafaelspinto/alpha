@@ -7,23 +7,20 @@
 namespace Alpha\Core;
 
 /**
- * Simple Autoloader for classes where the namespace is camelcased and
- * the filesystem structure is lowercased except the name of the file.
- * 
- * e.g. MyProject\Path\Class
+ * Class Autoloader for Alpha Framework.
  */
 class Autoloader
 {
-    protected $projectName, $rootDirectory, $projectNameIsFolderInRootDirectory;
+    protected $rootDirectory;
 
     /**
-     * Constructs an Autoloader.    
+     * Constructs an Autoloader.
+     * 
+     * @param string $rootDirectory The root directory of the Framework.    
      */
-    public function __construct($projectName, $rootDirectory)
+    public function __construct($rootDirectory)
     {
-        $this->projectName                        = $projectName;
-        $this->rootDirectory                      = $rootDirectory;
-        $this->projectNameIsFolderInRootDirectory = file_exists($this->rootDirectory . DIRECTORY_SEPARATOR . strtolower($this->projectName));
+        $this->rootDirectory = $rootDirectory;
     }
     
     /**
@@ -62,11 +59,7 @@ class Autoloader
      * @return string
      */
     public function getNameOfFileFromClassName($className)
-    {
-        if (!$this->projectNameIsFolderInRootDirectory) {
-            $className = preg_replace('#^' . $this->projectName . '#', '', $className);
-        }
-
+    {       
         $className = str_replace('\\', '/', $className);        
         $file      = $this->rootDirectory . DIRECTORY_SEPARATOR . $className . '.php';
         $dir       = strtolower(dirname($file));
