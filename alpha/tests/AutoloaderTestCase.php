@@ -6,7 +6,7 @@ require_once __DIR__.'/../core/Autoloader.php';
 /**
  * Test case for Autoloader.
  */
-class AutoloaderTestCase extends \Core\TestCaseAbstract
+class AutoloaderTestCase extends \Alpha\Core\TestCaseAbstract
 {
     /**
      * Tests getNameOfFileFromClassName method.
