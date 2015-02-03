@@ -19,7 +19,7 @@ class Beta
      * 
      * @return void
      */
-    public static function run()
+    public static function gamma()
     {
         $uriHandler = new UriHandler();
         $uriHandler->setPattern('/{s:controller}/{s:action}/{i:id}');

@@ -17,10 +17,7 @@ class Autoloader
     protected $projectName, $rootDirectory, $projectNameIsFolderInRootDirectory;
 
     /**
-     * Constructs an Autoloader.
-     * 
-     * @param string $projectName   The name of the project.
-     * @param string $rootDirectory The root directory.
+     * Constructs an Autoloader.    
      */
     public function __construct($projectName, $rootDirectory)
     {
@@ -29,6 +26,16 @@ class Autoloader
         $this->projectNameIsFolderInRootDirectory = file_exists($this->rootDirectory . DIRECTORY_SEPARATOR . strtolower($this->projectName));
     }
     
+    /**
+     * Register this as the class Autoloader.
+     * 
+     * @return boolean
+     */
+    public function register()
+    {
+        return spl_autoload_register(array($this, 'load'));
+    }
+
     /**
      * Includes the specified class.
      *            
@@ -65,7 +72,6 @@ class Autoloader
         $dir       = strtolower(dirname($file));
         $file      = basename($file);
         $file      = $dir . DIRECTORY_SEPARATOR . $file;
-        
         return $file;
     }
 }
