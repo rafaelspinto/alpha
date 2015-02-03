@@ -6,33 +6,13 @@
  */
 namespace Alpha\Core;
 
+spl_autoload_register(array('\Alpha\Core\Autoloader', 'load'));
+
 /**
  * Class Autoloader for Alpha Framework.
  */
 class Autoloader
 {
-    protected $rootDirectory;
-
-    /**
-     * Constructs an Autoloader.
-     * 
-     * @param string $rootDirectory The root directory of the Framework.    
-     */
-    public function __construct($rootDirectory)
-    {
-        $this->rootDirectory = $rootDirectory;
-    }
-    
-    /**
-     * Register this as the class Autoloader.
-     * 
-     * @return boolean
-     */
-    public function register()
-    {
-        return spl_autoload_register(array($this, 'load'));
-    }
-
     /**
      * Includes the specified class.
      *            
@@ -40,9 +20,9 @@ class Autoloader
      * 
      * @return void
      */
-    public function load($className)
+    public static function load($className)
     {      
-        $file = $this->getNameOfFileFromClassName($className);
+        $file = static::getNameOfFileFromClassName($className);
         
         if(!file_exists($file)) {
             return false;
@@ -58,10 +38,10 @@ class Autoloader
      * 
      * @return string
      */
-    public function getNameOfFileFromClassName($className)
+    public static function getNameOfFileFromClassName($className)
     {       
         $className = str_replace('\\', '/', $className);        
-        $file      = $this->rootDirectory . DIRECTORY_SEPARATOR . $className . '.php';
+        $file      = PATH_ROOT . DIRECTORY_SEPARATOR . $className . '.php';
         $dir       = strtolower(dirname($file));
         $file      = basename($file);
         $file      = $dir . DIRECTORY_SEPARATOR . $file;
