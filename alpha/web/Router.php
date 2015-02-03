@@ -68,7 +68,14 @@ class Router
             $controllerInstance = new $controllerClass();
             $actionName         = $this->buildActionMethodName($actionName);
             if (method_exists($controllerInstance, $actionName)) {
-                return call_user_func_array(array($controllerInstance, $actionName), $this->buildParameters($controllerClass, $actionName));
+                $response = call_user_func_array(array($controllerInstance, $actionName), $this->buildParameters($controllerClass, $actionName));
+                
+                // TODO: change this code to use Response.
+                $viewFile = PATH_VIEW . strtolower($controllerName) . DIRECTORY_SEPARATOR . $actionName . '.html';
+                if(file_exists($viewFile)){
+                    print file_get_contents($viewFile);
+                }
+                return $response;
             }
 
             throw new \Exception('action_not_found:' . $actionName);
