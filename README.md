@@ -1,6 +1,6 @@
 # alpha *(work in progress)*
 
-Alpha is a lean framework for building web applications (*MVC* pattern).
+Alpha is a lean framework for building WEB Applications/API's (*MVC* pattern).
 
 --
 
