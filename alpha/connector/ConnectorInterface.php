@@ -11,12 +11,12 @@ namespace Alpha\Connector;
  */
 interface ConnectorInterface
 {
-	/**
+    /**
      * Sets the configuration.
      * 
-	 * @param array $configuration The array containing the connector configuration.
+     * @param array $configuration The array containing the connector configuration.
      * 
      * @return void
-	 */	
-	function setup(array $configuration);
+     */
+    function setup(array $configuration);
 }
