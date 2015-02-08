@@ -13,7 +13,8 @@ use Alpha\Connector\ViewConnectorInterface;
  */
 class View implements ViewConnectorInterface
 {
-    const REGEX_DATA = '/@{(.*)}/';
+    const REGEX_DATA = '#@{(?!/?foreach)(.*?)}#';
+    const REGEX_LOOP = '#@{foreach (.*?)}(.*)@{/foreach \1}#si';
     
     /**
      * Renders the content of the view with the data.
@@ -25,20 +26,8 @@ class View implements ViewConnectorInterface
      */
     public function render($content, array $data)
     {
-        $matches = array();
-        $found   = preg_match_all(static::REGEX_DATA, $content, $matches);
-        if($found) {
-            for($i=0; $i < $found; $i++) {
-                $tmpData = explode('.', $matches[1][$i]);
-                $count   = count($tmpData); 
-                if($count > 1) {                    
-                    $value = $this->getValue($tmpData, $data);
-                }else{
-                    $value = $data[$matches[1][$i]];
-                }
-                $content = str_replace($matches[0][$i], $value, $content);
-            }
-        }
+        $this->handleLoops($content, $data);
+        $this->handleDataProperties($content, $data);
         return $content;
     }
     
@@ -68,5 +57,56 @@ class View implements ViewConnectorInterface
             return $this->getValue(array_slice($keys, 1), $data[$keys[0]]);
         }
         return $data[$keys[0]];
+    }
+    
+    /**
+     * Renders the content of the FOREACH with the data.
+     * 
+     * @param string $content The original content.
+     * @param array  $data    The data to bind.
+     * 
+     * @return string
+     */
+    protected function handleLoops(&$content, &$data)
+    {
+        $matches = array();
+        $found   = preg_match_all(static::REGEX_FOREACH, $content, $matches);
+        if($found) {
+            for($i=0;$i<$found;$i++) {
+                $list = $this->getValue(explode('.', $matches[1][$i]), $data);
+                foreach($list as $item) {
+                    $innerContent .= $this->render($matches[2][$i], $item);
+                }
+                $content = str_replace($matches[0][$i], $innerContent, $content);
+            }
+        }
+        return $content;
+    }
+    
+    /**
+     * Renders the content of the view with the data.
+     * 
+     * @param string $content The original content.
+     * @param array  $data    The data to bind.
+     * 
+     * @return string
+     */
+    protected function handleDataProperties(&$content, &$data)
+    {
+        $matches = array();
+        $found   = preg_match_all(static::REGEX_DATA, $content, $matches);
+        if($found) {
+            for($i=0; $i < $found; $i++) {
+                $tmpData = explode('.', $matches[1][$i]);
+                $count   = count($tmpData); 
+                if($count > 1) {                    
+                    $value = $this->getValue($tmpData, $data);
+                }else{
+                    $value = $data[$matches[1][$i]];
+                }
+                $content = str_replace($matches[0][$i], $value, $content);
+            }
+        }
+        return $content;
     }
 }
