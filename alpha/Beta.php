@@ -23,8 +23,9 @@ class Beta
     {
         $uriHandler = new UriHandler();
         $uriHandler->setPattern('/{s:controller}/{s:action}/{i:id}');
-        $router = new Router($uriHandler, PATH_CONTROLLER);
-        $router->go(filter_input(INPUT_SERVER, 'REQUEST_URI'));        
+        $router   = new Router($uriHandler, PATH_CONTROLLER, 'Index');
+        $response = $router->go(filter_input(INPUT_SERVER, 'REQUEST_URI'));        
+        print $response->getContent();
     }
 }
 
