@@ -70,7 +70,7 @@ class View implements ViewConnectorInterface
     protected function handleLoops(&$content, &$data)
     {
         $matches = array();
-        $found   = preg_match_all(static::REGEX_FOREACH, $content, $matches);
+        $found   = preg_match_all(static::REGEX_LOOP, $content, $matches);
         if($found) {
             for($i=0;$i<$found;$i++) {
                 $list = $this->getValue(explode('.', $matches[1][$i]), $data);
