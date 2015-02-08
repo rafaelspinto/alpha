@@ -13,8 +13,9 @@ use Alpha\Connector\ViewConnectorInterface;
  */
 class View implements ViewConnectorInterface
 {
-    const REGEX_DATA = '#@{(?!/?foreach)(.*?)}#';
-    const REGEX_LOOP = '#@{foreach (.*?)}(.*)@{/foreach \1}#si';
+    const REGEX_DATA   = '#@{(?!/?foreach|layout)(.*?)}#';
+    const REGEX_LOOP   = '#@{foreach (.*?)}(.*)@{/foreach \1}#si';
+    const REGEX_LAYOUT = '#@{layout "(.*?)"}#';
     
     /**
      * Renders the content of the view with the data.
@@ -26,6 +27,7 @@ class View implements ViewConnectorInterface
      */
     public function render($content, array $data)
     {
+        $this->handleLayouts($content);
         $this->handleLoops($content, $data);
         $this->handleDataProperties($content, $data);
         return $content;
@@ -57,6 +59,31 @@ class View implements ViewConnectorInterface
             return $this->getValue(array_slice($keys, 1), $data[$keys[0]]);
         }
         return $data[$keys[0]];
+    }
+    
+    /**
+     * Renders the content of the LAYOUTS with the data.
+     * 
+     * @param string $content The original content.
+     * 
+     * @return string
+     */
+    protected function handleLayouts(&$content)
+    {
+        $matches = array();
+        $found   = preg_match_all(static::REGEX_LAYOUT, $content, $matches);
+        if($found) {
+            for($i=0;$i<$found;$i++) {
+                $viewFile = PATH_VIEW . $matches[1][$i];
+                if(file_exists($viewFile)) {
+                    $replaceContent = file_get_contents($viewFile);
+                }else {
+                    $replaceContent = 'layout_not_found:'.$viewFile;
+                }
+                $content = str_replace($matches[0][$i], $replaceContent, $content);
+            }
+        }
+        return $content;
     }
     
     /**
