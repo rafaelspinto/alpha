@@ -7,6 +7,10 @@ class ExampleController extends \Alpha\Web\ControllerAbstract
         $this->data['user']['name'] = 'John Doe';
         $this->data['user']['age'] = 30;
         $this->data['title'] = 'Search';
+        $this->data['users'] = array(
+            array('name' => 'Peter Griffin', 'age' => 31),
+            array('name' => 'Marge Simpson', 'age' => 33)
+        );
     }
     
     public function getEdit($PATH_id)

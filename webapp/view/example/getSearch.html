@@ -16,5 +16,10 @@
                 <td>@{user.age}</td>
             </tr>
         </table>
+        <ul>
+        @{foreach users}
+            <li>@{name} - @{age}</li>
+        @{/foreach users}
+        </ul>
     </body>
 </html>
