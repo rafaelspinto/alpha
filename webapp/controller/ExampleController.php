@@ -8,7 +8,8 @@ class ExampleController extends \Alpha\Web\ControllerAbstract
         $this->data['user']['age'] = 30;
         $this->data['title'] = 'Search';
         $this->data['users'] = array(
-            array('name' => 'Peter Griffin', 'age' => 31),
+            array('name' => 'Peter Griffin', 'age' => 31, 
+                  'dates' => array(array('day' => '01/01/2015'), array('day' => '01/02/2015'), array('day' => '01/03/2015'))),
             array('name' => 'Marge Simpson', 'age' => 33)
         );
     }

@@ -18,7 +18,13 @@
         </table>
         <ul>
         @{foreach users}
-            <li>@{name} - @{age}</li>
+            <li>@{name} - @{age}
+                <ul>
+                    @{foreach dates}
+                        <li>@{day}</li>
+                    @{/foreach dates}
+                </ul>
+            </li>            
         @{/foreach users}
         </ul>
     </body>
