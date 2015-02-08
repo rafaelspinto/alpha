@@ -7,7 +7,7 @@
 namespace Alpha\Web;
 
 use Alpha\Http\UriHandler;
-use Alpha\Connector\Connectors;
+use Alpha\Core\Connectors;
 
 /**
  * Base class for Controllers.
