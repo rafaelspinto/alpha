@@ -25,3 +25,12 @@ Alpha is a lean framework for building WEB Applications/API's (*MVC* pattern).
     * Parameters from **Cookie** : ```$COOKIE_parameter_name```
       * e.g. : ```UserController->postEdit($PATH_id, $PARAM_name, $PARAM_age);```
       * e.g. : ```UserController->getSearch($QUERY_name);```
+
+* **Views/Html** :
+  * Assign data in *Controller* by ```$this->data['property_name'] = 'data';```
+  * Access data in *View/Html* by ```@{property_name}```
+  * Iterate a list in *View/Html* :
+    ```@{foreach list_var}
+          @{element_property}
+       @{/foreach list_var}
+    ```
