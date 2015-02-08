@@ -7,7 +7,6 @@
 namespace Alpha\Web;
 
 use Alpha\Http\UriHandler;
-use Alpha\Web\Response;
 
 /**
  * Class that handles request routing.
