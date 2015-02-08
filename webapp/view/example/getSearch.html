@@ -8,6 +8,7 @@
     <body>
         <h1>@{title}</h1>
         <div>This is an Example for getSearch view with placeholders.</div>
+        @{layout "/example/layout.html"}
         <table>
             <th>name</th>
             <th>age</th>
@@ -27,5 +28,8 @@
             </li>            
         @{/foreach users}
         </ul>
+        
+        <hr />
+        @{layout "/example/layout.html"}
     </body>
 </html>
