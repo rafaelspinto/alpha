@@ -1,9 +1,12 @@
 <?php
-class ExampleController
+class ExampleController extends \Alpha\Web\ControllerAbstract
 {       
     public function getSearch($QUERY_name)
     {
         print sprintf('You searched for "%s".', $QUERY_name);
+        $this->data['user']['name'] = 'John Doe';
+        $this->data['user']['age'] = 30;
+        $this->data['title'] = 'Search';
     }
     
     public function getEdit($PATH_id)
@@ -19,6 +22,12 @@ class ExampleController
     public function getInfo($COOKIE_var1, $SESSION_name)
     {
         print sprintf('You accessing info with the COOKIE var1 with the value "%s" and SESSION name with value "%s".', $COOKIE_var1, $SESSION_name);
+    }
+    
+    public function getJson()
+    {
+        $this->data['user']['name'] = 'John Doe';
+        $this->data['user']['age']  = 30;
     }
 }
 
