@@ -62,7 +62,7 @@ class View implements ViewConnectorInterface
     }
     
     /**
-     * Renders the content of the LAYOUTS with the data.
+     * Includes the content of the LAYOUTS.
      * 
      * @param string $content The original content.
      * 
