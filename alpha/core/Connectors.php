@@ -67,7 +67,6 @@ class Connectors
         if(!array_key_exists($name, $this->repository)) {
             throw new \Exception('instance_not_found:'.$name);
         }
-        
         if($this->repository[$name]['instance'] == null) {
             $this->repository[$name]['instance'] = $this->initConnector($this->repository[$name]);
         }
@@ -126,7 +125,7 @@ class Connectors
     {
         $className = $connector['className'];
         $instance  = new $className();
-        if(method_exists($instance, 'setup')) {
+        if(method_exists($instance, 'setup') && isset($connector['properties'])) {                
             $instance->setup($connector['properties']);
         }
         return $instance;
