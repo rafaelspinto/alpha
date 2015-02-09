@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>User</title>
+        <meta charset="ISO-8859-1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        @{layout "/style.html"}
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <nav>
+                    <ul class="nav nav-pills pull-right">
+                        <li role="presentation" class="active"><a href="#">Home</a></li>
+                    </ul>
+                </nav>
+                <h3 class="text-muted">Alpha</h3>
+                <hr>
+            </div>
+            
+            <div class="jumbotron">
+                <h1>User</h1>
+                <ul>
+                    @{foreach users}
+                    <li><a href="/User/edit/@{id}">@{id} - @{name}</a> <a href="/User/delete/@{id}" class="label label-danger">Delete</a></li>
+                    @{/foreach users}
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>
