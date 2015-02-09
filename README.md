@@ -1,4 +1,4 @@
-# alpha *(work in progress)*
+# alpha *(work in progress - webapp folder is an example of how to use in a project)*
 
 Alpha is a lean framework for building WEB Applications/API's (*MVC* pattern).
 
