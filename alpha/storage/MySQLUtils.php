@@ -88,10 +88,10 @@ class MySQLUtils
     public static function filter(array $schema, array $fieldsAndValues)
     {
         $filtered = array();
-        while(($elem = array_shift($fieldsAndValues))) {
-            foreach($elem as $k => $v) {
-                if(array_key_exists($k, $schema['fields'])) {
-                    $filtered[$k] = $fieldsAndValues[$k];
+         while(($elem = array_shift($schema['fields']))) {
+            foreach($fieldsAndValues as $field => $v) {
+                if(isset($elem[$field])) {
+                    $filtered[$field] = $fieldsAndValues[$field];
                 }
             }
         }
