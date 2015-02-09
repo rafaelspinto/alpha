@@ -11,5 +11,6 @@ namespace Alpha\Http;
  */
 class ContentType
 {
-    const TEXT_HTML = 'text/html';
+    const TEXT_HTML        = 'text/html';
+    const APPLICATION_JSON = 'application/json';
 }

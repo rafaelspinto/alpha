@@ -26,6 +26,7 @@ class Beta
         $router   = new Router($uriHandler, PATH_CONTROLLER, 'Index');
         $response = $router->go(filter_input(INPUT_SERVER, 'REQUEST_URI'));        
         print $response->getContent();
+        header('Content-type: '.$response->getContentType(), true, $response->getStatusCode());
     }
 }
 

@@ -8,13 +8,15 @@ namespace Alpha\Web;
 
 use Alpha\Http\UriHandler;
 use Alpha\Core\Connectors;
+use Alpha\Http\StatusCode;
+use Alpha\Http\ContentType;
 
 /**
  * Base class for Controllers.
  */
 abstract class ControllerAbstract
 {
-    protected $uriHandler, $data;
+    protected $uriHandler, $data, $statusCode, $contentType;
     
     /**
      * Constructs a ControllerAbstract.
@@ -23,8 +25,10 @@ abstract class ControllerAbstract
      */
     public function __construct(UriHandler $uriHandler)
     {
-        $this->uriHandler = $uriHandler;
-        $this->data       = array();
+        $this->uriHandler  = $uriHandler;
+        $this->data        = array();
+        $this->statusCode  = StatusCode::OK;
+        $this->contentType = ContentType::TEXT_HTML;
     }
           
     /**
@@ -73,6 +77,50 @@ abstract class ControllerAbstract
             $parameters[$parameter->getName()] = $this->makeParameterValue($parameter);
         }
         return $parameters;
+    }
+    
+    /**
+     * Sets the HTTP status code.
+     * 
+     * @param int $statusCode The http status code.
+     * 
+     * @return void
+     */
+    public function setStatusCode($statusCode)
+    {
+        $this->statusCode = $statusCode;
+    }
+
+    /**
+     * Sets the content type.
+     * 
+     * @param string $contentType The content type.
+     * 
+     * @return void
+     */
+    public function setContentType($contentType)
+    {
+        $this->contentType = $contentType;
+    }
+
+    /**
+     * Returns the http status code.
+     * 
+     * @return int
+     */
+    public function getStatusCode()
+    {
+        return $this->statusCode;
+    }
+
+    /**
+     * Returns the content type.
+     * 
+     * @return string
+     */
+    public function getContentType()
+    {
+        return $this->contentType;
     }
     
     /**
@@ -135,8 +183,8 @@ abstract class ControllerAbstract
     {
         // json response
         if(empty($content) && !empty ($this->data)){
-            return new Response(json_encode($this->data));
+            return new Response(json_encode($this->data), $this->getStatusCode(), ContentType::APPLICATION_JSON);
         }      
-        return new Response(Connectors::get('View')->render($content, $this->data));
+        return new Response(Connectors::get('View')->render($content, $this->data), $this->getStatusCode(), $this->getContentType());
     }
 }
