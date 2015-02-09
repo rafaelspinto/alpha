@@ -5,7 +5,12 @@ class UserController extends \Alpha\Web\ControllerAbstract
 {
     public function get()
     {
-        $this->data['users'] = User::find()->toArray();
+        $this->data['users'] = User::find(array('name' => 'Stewie'))->toArray();
+    }
+    
+    public function postSearch($PARAM_name)
+    {
+        $this->data['users'] = User::find(array('name' => $PARAM_name))->toArray();
     }
     
     public function getEdit($PATH_id)
