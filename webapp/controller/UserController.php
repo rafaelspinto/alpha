@@ -5,7 +5,7 @@ class UserController extends \Alpha\Web\ControllerAbstract
 {
     public function get()
     {
-        $this->data['users'] = User::find(array('name' => 'Stewie'))->toArray();
+        $this->data['users'] = User::find()->toArray();
     }
     
     public function postSearch($PARAM_name)
