@@ -34,20 +34,5 @@ class ExampleController extends \Alpha\Web\ControllerAbstract
         $this->data['user']['name'] = 'John Doe';
         $this->data['user']['age']  = 30;
     }
-    
-    public function getDatabase()
-    {
-//        $iter = Alpha\Core\Connectors::get('Repo')->findByKey(array('bucket' => 'model', 'key' => 'id'), '14');
-//        Alpha\Core\Connectors::get('Repo')->delete(array('bucket' => 'model', 'key' => 'id'), 4);
-//        $params = array();
-//        $params[] = array('name' => 'Stewie');
-//        $params[] = array('id' => 18);
-////        $params[] = array('age' => 17);
-//        $params[] = array('id' => 30);
-//        $iter = Alpha\Core\Connectors::get('Repo')->create(array('bucket' => 'model', 'key' => 'id', 'fields' => array( 'id' => array('type' => 'integer'), 'name' => array('type' => 's'), 'agae' => array('type' => 'i'))), $params);
-//        $iter = Alpha\Core\Connectors::get('Repo')->update(array('bucket' => 'model', 'key' => 'id', 'fields' => array( 'id' => array('type' => 'integer'), 'name' => array('type' => 's'), 'agae' => array('type' => 'i'))), $params);
-//        $iter = Alpha\Core\Connectors::get('Repo')->findByFields(array('bucket' => 'model', 'key' => 'id', 'fields' => array( 'id' => array('type' => 'integer'), 'name' => array('type' => 's'))), $params);        
-        $this->data['models'] = \Webapp\Model\User::find();
-    }
 }
 
