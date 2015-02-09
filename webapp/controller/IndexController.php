@@ -6,8 +6,8 @@
  */
 class IndexController extends \Alpha\Web\ControllerAbstract
 {
-    public function getXpto()
+    public function get()
     {
-        $this->data['pin'] = 1234;
+        $this->data['date'] = date(DATE_RFC2822);
     }
 }
