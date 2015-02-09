@@ -132,17 +132,11 @@ abstract class ControllerAbstract
      * @return \Alpha\Web\Response
      */
     protected function makeResponse($content)
-    {       
+    {
         // json response
         if(empty($content) && !empty ($this->data)){
             return new Response(json_encode($this->data));
-        }
-        
-        // html response with data to bind
-        if(!empty($content) && !empty($this->data)) {
-            return new Response(Connectors::get('View')->render($content, $this->data));
-        }
-        
-        return new Response($content);
+        }      
+        return new Response(Connectors::get('View')->render($content, $this->data));
     }
 }
