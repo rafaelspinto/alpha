@@ -130,7 +130,7 @@ class View implements ViewConnectorInterface
                 if($count > 1) {                    
                     $value = $this->getValue($tmpData, $data);
                 }else{
-                    $value = $data[$matches[1][$i]];
+                    $value = isset($data[$matches[1][$i]]) ? $data[$matches[1][$i]] : null;
                 }
                 $content = str_replace($matches[0][$i], $value, $content);
             }
