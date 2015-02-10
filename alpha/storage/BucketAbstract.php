@@ -83,4 +83,40 @@ abstract class BucketAbstract
     {
         return Connectors::get('Repo')->findByKey(static::getSchema(), $key);
     }
+    
+    /**
+     * Validates schema definition and returns schema if is valid.
+     * 
+     * @param array $schema The schema.
+     * 
+     * @return array
+     * 
+     * @throws \Exception
+     */
+    public static function validateSchemaDefinition(array $schema)
+    {        
+        if(!isset($schema['bucket'])) {
+            throw new \Exception('bucket_undefined:'.get_called_class());
+        }
+        
+        if(!isset($schema['key'])) {
+            throw new \Exception('bucket_key_undefined:'.get_called_class());
+        }
+        
+        if(!isset($schema['fields'])) {
+            throw new \Exception('fields_undefined:'.get_called_class());
+        }
+        
+        if(!isset($schema['fields'])) {
+            throw new \Exception('empty_field_definition:'.get_called_class());
+        }
+        
+        foreach($schema['fields'] as $k => $field) {
+            if(!isset($field['type'])) {
+                throw new \Exception('field_type_undefined:'.$k);
+            }
+        }
+        
+        return $schema;        
+    }
 }
