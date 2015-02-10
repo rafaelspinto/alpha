@@ -13,7 +13,7 @@ require_once PATH_ROOT .DIRECTORY_SEPARATOR . 'alpha' . DIRECTORY_SEPARATOR . 'c
 ini_set('error_reporting', E_ALL);
 
 try {
-	// funny right?
+    // funny right?
     \Alpha\Beta::gamma();
 } catch (\Exception $ex) {
     print $ex->getMessage();
