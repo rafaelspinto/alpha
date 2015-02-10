@@ -30,12 +30,12 @@ class MySQLRepository implements \Alpha\Connector\RepositoryInterface
      */
     public function setup(array $configuration)
     {
-        $this->host     = $configuration['host'];
-        $this->port     = $configuration['port'];
-        $this->user     = $configuration['user'];
-        $this->password = $configuration['password'];
-        $this->database = $configuration['database'];
-        $this->socket   = $configuration['socket'];
+        $this->host     = isset($configuration['host']) ? $configuration['host'] : null;
+        $this->port     = isset($configuration['port']) ? $configuration['port'] : null;
+        $this->user     = isset($configuration['user']) ? $configuration['user'] : null;
+        $this->password = isset($configuration['password']) ? $configuration['password'] : null;
+        $this->database = isset($configuration['database']) ? $configuration['database'] : null;
+        $this->socket   = isset($configuration['socket']) ? $configuration['socket'] : null;
     }
     
     /**

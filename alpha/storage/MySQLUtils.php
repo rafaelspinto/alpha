@@ -22,7 +22,12 @@ class MySQLUtils
      */
     public static function bindParameters(\mysqli_stmt $stmt, array $schema, array $fieldsAndValues)
     {
+        if(count($fieldsAndValues) == 0) {
+            return;
+        }
+        
         $types           = '';
+        $values          = array();
         $fieldsAndValues = static::filterNoKey($schema, $fieldsAndValues);
         foreach($fieldsAndValues as $parameter => $value) {
             $types   .= static::makeType($schema['fields'][$parameter]['type']);
@@ -33,6 +38,7 @@ class MySQLUtils
         foreach ($values as $val) {
             $args[] = $val;
         }
+        
         call_user_func_array(array($stmt, 'bind_param'), static::refValues($args));
     }
     
@@ -171,7 +177,7 @@ class MySQLUtils
             if(!$result) {
                 throw new \Exception('could_not_retrieve_statement_result:'.$stmt->error.':'.$stmt->errno);
             }
+            return $result;
         }
-        return $result;
     }
 }

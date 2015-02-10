@@ -46,6 +46,7 @@ abstract class ControllerAbstract
         $controllerName = str_replace('Controller', '', get_called_class());
         $actionName     = $this->buildActionMethodName($actionName);
         $viewFile       = PATH_VIEW . strtolower($controllerName) . DIRECTORY_SEPARATOR . $actionName . '.html';
+        $content        = '';
         if(($hasView = file_exists($viewFile))){
             $content = file_get_contents($viewFile);
         }
