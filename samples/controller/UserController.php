@@ -10,7 +10,7 @@ class UserController extends \Alpha\Web\ControllerAbstract
     
     public function postSearch($PARAM_name)
     {
-        $this->data['users'] = User::find(array('name' => $PARAM_name))->toArray();
+        $this->data['users'] = User::find(array('name' => $PARAM_name));
     }
     
     public function getEdit($PATH_id)
