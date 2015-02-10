@@ -20,17 +20,17 @@ class ArrayUtils
      */
     public static function encodeToUtf8(array &$array)
     {
-        array_walk_recursive($array, function(&$item, $key) {
-            if (!mb_detect_encoding($item, 'utf-8', true)) {
-                if (is_array($item)) {
-                    static::encodeToUtf8($item);
-                } else if ($item instanceof \Iterator) {
-                    $item = static::encodeToUtf8(iterator_to_array($item));
-                } else {
-                    $item = utf8_encode($item);
-                }
+        array_walk_recursive($array, function(&$item) {
+            if (is_array($item)) {
+                static::encodeToUtf8($item);
+            } else if ($item instanceof \Iterator) {
+                $array = iterator_to_array($item);
+                $item = static::encodeToUtf8($array);
+            } else if (!mb_detect_encoding($item, 'utf-8', true)) {
+                $item = utf8_encode($item);
             }
-        });
+        }
+        );
         return $array;
     }
 }
