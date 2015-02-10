@@ -10,6 +10,7 @@ use Alpha\Http\UriHandler;
 use Alpha\Core\Connectors;
 use Alpha\Http\StatusCode;
 use Alpha\Http\ContentType;
+use Alpha\Utils\ArrayUtils;
 
 /**
  * Base class for Controllers.
@@ -182,8 +183,8 @@ abstract class ControllerAbstract
     protected function makeResponse($content)
     {
         // json response
-        if(empty($content) && !empty ($this->data)){
-            return new Response(json_encode($this->data), $this->getStatusCode(), ContentType::APPLICATION_JSON);
+        if(empty($content) && !empty ($this->data)){            
+            return new Response(json_encode(ArrayUtils::encodeToUtf8($this->data)), $this->getStatusCode(), ContentType::APPLICATION_JSON);
         }      
         return new Response(Connectors::get('View')->render($content, $this->data), $this->getStatusCode(), $this->getContentType());
     }
