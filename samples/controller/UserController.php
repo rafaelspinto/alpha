@@ -31,6 +31,7 @@ class UserController extends \Alpha\Web\ControllerAbstract
     public function postEdit($PATH_id, $PARAM_name)
     {
         $this->data['user'] = User::update(array('id' => $PATH_id, 'name' => $PARAM_name));
+        $this->redirectTo('/User');
     }
     
     public function postCreate($PARAM_name)
