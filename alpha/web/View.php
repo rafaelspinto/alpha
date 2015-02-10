@@ -55,10 +55,10 @@ class View implements ViewConnectorInterface
      */
     protected function getValue($keys, $data)
     {
-        if(count($keys) > 1) {
+        if(count($keys) > 1 && isset($data[$keys[0]])) {
             return $this->getValue(array_slice($keys, 1), $data[$keys[0]]);
         }
-        return $data[$keys[0]];
+        return isset($data[$keys[0]]) ? $data[$keys[0]] : '';
     }
     
     /**
