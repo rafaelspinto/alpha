@@ -100,15 +100,15 @@ abstract class BucketAbstract
         }
         
         if(!isset($schema['key'])) {
-            throw new \Exception('bucket_key_undefined:'.get_called_class());
+            throw new \Exception('key_undefined:'.get_called_class());
         }
         
         if(!isset($schema['fields'])) {
             throw new \Exception('fields_undefined:'.get_called_class());
         }
-        
-        if(!isset($schema['fields'])) {
-            throw new \Exception('empty_field_definition:'.get_called_class());
+                
+        if(empty($schema['fields'])) {
+            throw new \Exception('empty_fields:'.get_called_class());
         }
         
         foreach($schema['fields'] as $k => $field) {
