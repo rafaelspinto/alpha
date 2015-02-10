@@ -145,6 +145,7 @@ class MySQLUtils
      */
     public static function prepare(\mysqli $mysqli, $query, array $schema)
     {
+        BucketAbstract::validateSchemaDefinition($schema);
         $stmt = $mysqli->prepare($query);
         if(!$stmt){
             throw new \Exception('could_not_prepare_query:'.$schema['bucket']);
