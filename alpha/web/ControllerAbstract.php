@@ -11,6 +11,7 @@ use Alpha\Core\Connectors;
 use Alpha\Http\StatusCode;
 use Alpha\Http\ContentType;
 use Alpha\Utils\ArrayUtils;
+use Alpha\Http\Header;
 
 /**
  * Base class for Controllers.
@@ -52,7 +53,13 @@ abstract class ControllerAbstract
         }
         
         if (($hasMethod = method_exists($this, $actionName))) {
-            call_user_func_array(array($this, $actionName), $this->buildParameters($actionName));            
+            $otherView = call_user_func_array(array($this, $actionName), $this->buildParameters($actionName));
+            if($otherView) {                
+                $otherView = PATH_VIEW . $otherView;
+                if(file_exists($otherView)) {
+                    $content = file_get_contents($otherView);
+                }
+            }
         }
 
         if($hasView || $hasMethod) {
@@ -123,6 +130,19 @@ abstract class ControllerAbstract
     public function getContentType()
     {
         return $this->contentType;
+    }
+    
+    /**
+     * Redirects the request to the given url.
+     * 
+     * @param string $url The url.
+     * 
+     * @return void
+     */
+    public static function redirectTo($url)
+    {        
+        header(Header::LOCATION.': '.$url);
+        exit;
     }
     
     /**
