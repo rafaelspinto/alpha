@@ -25,7 +25,7 @@ class Autoloader
         $file = static::getNameOfFileFromClassName($className);
         
         if(!file_exists($file)) {
-            return false;
+            throw new \Exception('class_not_found:'.$className);
         }
         
         include $file;
