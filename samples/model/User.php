@@ -14,8 +14,8 @@ class User extends \Alpha\Storage\BucketAbstract
             'bucket' => 'user',
             'key'    => 'id',
             'fields' => array(
-                array('id' => array('type' => 'integer')),
-                array('name' => array('type' => 'string')),
+                'id' => array('type' => 'integer'),
+                'name' => array('type' => 'string'),
             )
         );
     }

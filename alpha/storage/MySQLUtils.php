@@ -22,7 +22,7 @@ class MySQLUtils
      */
     public static function bindParameters(\mysqli_stmt $stmt, array $schema, array $fieldsAndValues)
     {
-        $types           = '';        
+        $types           = '';
         $fieldsAndValues = static::filterNoKey($schema, $fieldsAndValues);
         foreach($fieldsAndValues as $parameter => $value) {
             $types   .= static::makeType($schema['fields'][$parameter]['type']);
@@ -88,11 +88,9 @@ class MySQLUtils
     public static function filter(array $schema, array $fieldsAndValues)
     {
         $filtered = array();
-         while(($elem = array_shift($schema['fields']))) {
-            foreach($fieldsAndValues as $field => $v) {
-                if(isset($elem[$field])) {
-                    $filtered[$field] = $fieldsAndValues[$field];
-                }
+        foreach ($fieldsAndValues as $name => $value) {
+            if (isset($schema['fields'][$name])) {
+                $filtered[$name] = $value;
             }
         }
         return $filtered;
@@ -109,11 +107,9 @@ class MySQLUtils
     public static function filterNoKey(array $schema, array $fieldsAndValues)
     {   
         $filtered = array();        
-        while(($elem = array_shift($schema['fields']))) {
-            foreach($fieldsAndValues as $field => $v) {
-                if($field != $schema['key'] && isset($elem[$field])) {
-                    $filtered[$field] = $fieldsAndValues[$field];
-                }
+        foreach ($fieldsAndValues as $name => $value) {
+            if ($name != $schema['key'] && isset($schema['fields'][$name])) {
+                $filtered[$name] = $value;
             }
         }
         return $filtered;
