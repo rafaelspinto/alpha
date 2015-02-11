@@ -102,8 +102,10 @@ class View implements ViewConnectorInterface
             $innerContent = '';
             for($i=0;$i<$found;$i++) {
                 $list = $this->getValue(explode('.', $matches[1][$i]), $data);
-                foreach($list as $item) {
-                    $innerContent .= $this->render($matches[2][$i], $item);
+                if(!empty($list)){
+                    foreach($list as $item) {
+                        $innerContent .= $this->render($matches[2][$i], $item);
+                    }
                 }
                 $content = str_replace($matches[0][$i], $innerContent, $content);
             }
