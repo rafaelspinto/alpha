@@ -176,10 +176,23 @@ abstract class ControllerAbstract
      */
     protected function makeParameterValue(\ReflectionParameter $parameter)
     {
-        $param        = $parameter->getName();
+        $param = $parameter->getName();
+        if(strpos($param, '_') == false){
+            switch ($param){
+                case 'QUERY' :
+                    return $_GET;
+                case 'PARAM' :
+                    return $_POST;
+                case 'COOKIE' :
+                    return $_COOKIE;
+                case 'SESSION' :
+                    return $_SESSION;
+            }
+        }
         $separatorPos = stripos($param, '_');
-        $paramName    = substr($param, $separatorPos + 1);
         $paramType    = substr($param, 0, $separatorPos);
+        $paramName    = substr($param, $separatorPos + 1);
+        
         switch($paramType) {
             case 'PATH' :
                 return $this->uriHandler->getComponent($paramName);
