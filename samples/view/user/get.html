@@ -21,9 +21,9 @@
             <div class="jumbotron">
                 <h1>User</h1>
                 <ul>
-                    @{foreach users}
+                    @{foreach user}
                     <li><a href="/User/edit/@{id}">@{id} - @{name}</a> <a href="/User/delete/@{id}" class="label label-danger">Delete</a></li>
-                    @{/foreach users}
+                    @{/foreach user}
                 </ul>
             </div>
         </div>

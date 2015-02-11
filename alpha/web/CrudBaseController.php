@@ -14,22 +14,17 @@ use Alpha\Http\UriHandler;
  */
 class CrudBaseController extends ControllerAbstract
 {
-    protected $context, $multipleVar, $singleVar;
+    protected $context, $modelVar;
        
     /**
      * Constructs a CrudBaseController.
      * 
      * @param UriHandler $uriHandler The uri handler.
-     * @param string $context        The context.
-     * @param string $multipleVar    The variable to be used in the response return when multiple elements.
-     * @param string $singleVar      The variable to be used in the response when single element.
      */
-    public function __construct(UriHandler $uriHandler, $context, $multipleVar, $singleVar)
+    public function __construct(UriHandler $uriHandler)
     {
         parent::__construct($uriHandler);
-        $this->context     = $context;
-        $this->multipleVar = $multipleVar;
-        $this->singleVar   = $singleVar;
+        $this->init();
     }
     
     /**
@@ -39,8 +34,8 @@ class CrudBaseController extends ControllerAbstract
      */
     public function get()
     {
-        $context                        = $this->context;
-        $this->data[$this->multipleVar] = $context::find();
+        $context                     = $this->context;
+        $this->data[$this->modelVar] = $context::find();
     }
     
     /**
@@ -52,8 +47,8 @@ class CrudBaseController extends ControllerAbstract
      */
     public function postCreate($PARAM)
     {
-        $context                      = $this->context;
-        $this->data[$this->singleVar] = $context::create($PARAM);
+        $context                     = $this->context;
+        $this->data[$this->modelVar] = $context::create($PARAM);
     }
 
     /**
@@ -65,8 +60,8 @@ class CrudBaseController extends ControllerAbstract
      */
     public function getEdit($PATH_id)
     {
-        $context                      = $this->context;
-        $this->data[$this->singleVar] = $context::findByKey($PATH_id);
+        $context                     = $this->context;
+        $this->data[$this->modelVar] = $context::findByKey($PATH_id);
     }
     
     /**
@@ -78,9 +73,9 @@ class CrudBaseController extends ControllerAbstract
      */
     public function postEdit($PATH_id, $PARAM)
     {
-        $PARAM['id']                  = $PATH_id;
-        $context                      = $this->context;
-        $this->data[$this->singleVar] = $context::update($PARAM);
+        $PARAM['id']                 = $PATH_id;
+        $context                     = $this->context;
+        $this->data[$this->modelVar] = $context::update($PARAM);
     }
     
     /**
@@ -92,8 +87,8 @@ class CrudBaseController extends ControllerAbstract
      */
     public function getDelete($PATH_id)
     {
-        $context                      = $this->context;
-        $this->data[$this->singleVar] = $context::findByKey($PATH_id);
+        $context                     = $this->context;
+        $this->data[$this->modelVar] = $context::findByKey($PATH_id);
     }
     
     /**
@@ -105,7 +100,19 @@ class CrudBaseController extends ControllerAbstract
      */
     public function postDelete($PATH_id)
     {
-        $context                      = $this->context;
-        $this->data[$this->singleVar] = $context::delete($PATH_id);
+        $context                     = $this->context;
+        $this->data[$this->modelVar] = $context::delete($PATH_id);
+    }
+    
+    /**
+     * Initializes the controller.
+     * 
+     * @return void
+     */
+    protected function init()
+    {
+        $className      = str_replace('Controller', '', get_called_class());
+        $this->context  = "Webapp\Model\\" .$className;
+        $this->modelVar = strtolower($className);
     }
 }
