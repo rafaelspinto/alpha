@@ -76,8 +76,9 @@ class CrudBaseController extends ControllerAbstract
      * 
      * @return void
      */
-    public function postEdit($PARAM)
+    public function postEdit($PATH_id, $PARAM)
     {
+        $PARAM['id']                  = $PATH_id;
         $context                      = $this->context;
         $this->data[$this->singleVar] = $context::update($PARAM);
     }
