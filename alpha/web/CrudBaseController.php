@@ -53,6 +53,19 @@ class CrudBaseController extends ControllerAbstract
     }
 
     /**
+     * Searchs element(s) in the context.
+     * 
+     * @param array $PARAM The array containing the parameters.
+     * 
+     * @return void
+     */
+    public function postSearch($PARAM)
+    {
+        $context                     = $this->context;
+        $this->data[$this->modelVar] = $context::find($PARAM);
+    }
+    
+    /**
      * Returns the element to be updated.
      * 
      * @param int $PATH_id The id of the context.
