@@ -36,17 +36,17 @@ abstract class ControllerAbstract
     /**
      * Executes the controller action.
      * 
+     * @param string $context    The context.
      * @param string $actionName The name of the action.
      * 
      * @return \Alpha\Web\Response
      * 
      * @throws \Exception
      */
-    public function execute($actionName)
+    public function execute($context, $actionName)
     {        
-        $controllerName = str_replace('Controller', '', get_called_class());
         $actionName     = $this->buildActionMethodName($actionName);
-        $viewFile       = PATH_VIEW . strtolower($controllerName) . DIRECTORY_SEPARATOR . $actionName . '.html';
+        $viewFile       = PATH_VIEW . strtolower($context) . DIRECTORY_SEPARATOR . $actionName . '.html';
         $content        = '';
         if(($hasView = file_exists($viewFile))){
             $content = file_get_contents($viewFile);

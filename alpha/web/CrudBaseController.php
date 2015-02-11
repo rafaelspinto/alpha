@@ -14,17 +14,18 @@ use Alpha\Http\UriHandler;
  */
 class CrudBaseController extends ControllerAbstract
 {
-    protected $context, $modelVar;
+    protected $context, $modelVar, $className;
        
     /**
      * Constructs a CrudBaseController.
      * 
      * @param UriHandler $uriHandler The uri handler.
+     * @param string     $className  The name of the class.
      */
-    public function __construct(UriHandler $uriHandler)
+    public function __construct(UriHandler $uriHandler, $className = null)
     {
-        parent::__construct($uriHandler);
-        $this->init();
+        parent::__construct($uriHandler);        
+        $this->initFromModel($className);
     }
     
     /**
@@ -107,11 +108,15 @@ class CrudBaseController extends ControllerAbstract
     /**
      * Initializes the controller.
      * 
+     * @param string $className The name of the class.
+     * 
      * @return void
      */
-    protected function init()
+    protected function initFromModel($className = null)
     {
-        $className      = str_replace('Controller', '', get_called_class());
+        if($className == null) {
+            $className = str_replace('Controller', '', get_called_class());
+        }
         $this->context  = "Webapp\Model\\" .$className;
         $this->modelVar = strtolower($className);
     }

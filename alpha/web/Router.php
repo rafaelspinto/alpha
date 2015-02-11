@@ -46,11 +46,7 @@ class Router
     public function go($uri)
     {
         $this->uriHandler->setUri($uri);
-        list($ctrlFile, $ctrlName, $action) = $this->findController($this->uriHandler->getComponent('controller'), $this->uriHandler->getComponent('action'));
-        include_once $ctrlFile;
-        $controllerClass    = '\\' . $ctrlName . 'Controller';
-        $controllerInstance = new $controllerClass($this->uriHandler);
-        return $controllerInstance->execute($action);
+        return $this->findController($this->uriHandler->getComponent('controller'), $this->uriHandler->getComponent('action'));
     }
 
     /**
@@ -67,16 +63,41 @@ class Router
     {
         $controllerFilename = $this->makeControllerFilename($controllerName);
         if (file_exists($controllerFilename)) {
-            return array($controllerFilename, $controllerName, $actionName);
+            return $this->execute($controllerFilename, $controllerName, $actionName);
+        }
+        
+        // check if exists model
+        $modelFile = PATH_MODEL . $controllerName . '.php';
+        if(file_exists($modelFile)) {
+            $controller = new CrudBaseController($this->uriHandler, $controllerName);
+            return $controller->execute($controllerName, $actionName);
         }
         
         // could be the default controller
         $indexControllerFilename = $this->makeControllerFilename($this->defaultControllerName);
         if(file_exists($indexControllerFilename)) {
-            return array($indexControllerFilename, $this->defaultControllerName, $controllerName);
+            return $this->execute($indexControllerFilename, $this->defaultControllerName, $controllerName);
         }
         
         throw new \Exception('controller_not_found:' . $controllerName);
+    }
+    
+    /**
+     * Executes the controller action.
+     * 
+     * @param string $ctrlFile The filename of the controller.
+     * @param string $ctrlName The name of the controller
+     * @param string $action   The name of the action
+     * 
+     * @return \Alpha\Web\Response
+     */
+    public function execute($ctrlFile, $ctrlName, $action)
+    {
+        include_once $ctrlFile;
+        $controllerClass    = '\\' . $ctrlName . 'Controller';
+        $controllerInstance = new $controllerClass($this->uriHandler);
+        $controllerName     = str_replace('Controller', '', $ctrlName);
+        return $controllerInstance->execute($controllerName, $action);
     }
     
     /**
