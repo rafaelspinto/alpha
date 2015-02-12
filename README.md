@@ -32,15 +32,16 @@ Alpha is a lean framework for building WEB Applications/API's (*MVC* pattern).
   * Assign data in *Controller* by ```$this->data['property_name'] = 'data';```
   * Access data in *View/Html* by ```@{property_name}```
   * Iterate a list in *View/Html* :
-    ```@{foreach list_var}
-          @{element_property}
-       @{/foreach list_var}
-    ```
+```
+@{foreach list_var}
+   @{element_property}
+@{/foreach list_var}
+```
     
 * **Model** :
 
-```
-    class User extends \Alpha\Storage\BucketAbstract
+``` 
+class User extends \Alpha\Storage\BucketAbstract
 {
     /**
      * Returns the array containing the schema.
