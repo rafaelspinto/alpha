@@ -45,9 +45,9 @@ abstract class ControllerAbstract
      */
     public function execute($context, $actionName)
     {        
-        $actionName     = $this->buildActionMethodName($actionName);
-        $viewFile       = PATH_VIEW . strtolower($context) . DIRECTORY_SEPARATOR . $actionName . '.html';
-        $content        = '';
+        $actionName = $this->buildActionMethodName($actionName);
+        $viewFile   = PATH_VIEW . strtolower($context) . DIRECTORY_SEPARATOR . $actionName . '.html';
+        $content    = '';
         if(($hasView = file_exists($viewFile))){
             $content = file_get_contents($viewFile);
         }

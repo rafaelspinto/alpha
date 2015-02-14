@@ -25,7 +25,7 @@ class ArrayUtils
                 static::encodeToUtf8($item);
             } else if ($item instanceof \Iterator) {
                 $array = iterator_to_array($item);
-                $item = static::encodeToUtf8($array);
+                $item  = static::encodeToUtf8($array);
             } else if (!mb_detect_encoding($item, 'utf-8', true)) {
                 $item = utf8_encode($item);
             }

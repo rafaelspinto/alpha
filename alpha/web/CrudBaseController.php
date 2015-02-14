@@ -81,7 +81,8 @@ class CrudBaseController extends ControllerAbstract
     /**
      * Updates the element in the context.
      * 
-     * @param array $PARAM The array containing the parameters.
+     * @param int   $PATH_id The id of the element.
+     * @param array $PARAM   The array containing the parameters.
      * 
      * @return void
      */
