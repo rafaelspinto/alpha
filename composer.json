@@ -1,0 +1,9 @@
+{
+    "require-dev": {
+        "phpunit/php-timer": "~1.0",
+         "phpunit/phpunit": "4.5.*"
+    },
+    "require" : {
+        "php": ">=5.5.0"
+    }
+}
