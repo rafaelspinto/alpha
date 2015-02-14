@@ -4,10 +4,18 @@ namespace Alpha\Tests;
 require_once __DIR__.'/../core/Autoloader.php';
 
 /**
- * Test case for Autoloader.
+ * Test case for UriHandler.
  */
 class UriHandlerTestCase extends \Alpha\Core\TestCaseAbstract
 {
+    /**
+     * Constructs an UriHandlerTestCase. 
+     */
+    public function __construct()
+    {
+        parent::__construct('UriHandlerTestCase');
+    }
+    
     /**
      * Tests getComponent method.
      * 

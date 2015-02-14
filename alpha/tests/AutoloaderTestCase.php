@@ -9,17 +9,13 @@ require_once __DIR__.'/../core/Autoloader.php';
 class AutoloaderTestCase extends \Alpha\Core\TestCaseAbstract
 {
     /**
-     * Tests getNameOfFileFromClassName method.
-     * 
-     * @return void
+     * Constructs an AutoloaderTestCase.
      */
-    public function testGetNameOfFileFromClassName_ProjectFolderDoesNotExist_ShouldReturnPathWithoutProjectFolder()
+    public function __construct()
     {
-        $autoloader = new \Autoloader('MyProject', '/path/to/root');
-        $expected   = '/path/to/root/Xpto.php';
-        $this->assertEquals($expected, $autoloader->getNameOfFileFromClassName('MyProject\Xpto'));
+        parent::__construct('AutoloaderTestCase');
     }
-    
+
     /**
      * Tests getNameOfFileFromClassName method.
      * 
@@ -27,8 +23,8 @@ class AutoloaderTestCase extends \Alpha\Core\TestCaseAbstract
      */
     public function testGetNameOfFileFromClassName_ProjectFolderExists_ShouldReturnPathWithProjectFolder()
     {
-        $autoloader = new \Autoloader('Tmp', '/tmp');
-        $expected   = '/tmp/Xpto.php';
+        $autoloader = new \Alpha\Core\Autoloader('Tmp', '/tmp');
+        $expected   = PATH_ROOT .'/tmp/Xpto.php';
         $this->assertEquals($expected, $autoloader->getNameOfFileFromClassName('Tmp\Xpto'));
     }
 }
