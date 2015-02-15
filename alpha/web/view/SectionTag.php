@@ -20,7 +20,7 @@ class SectionTag extends ViewTagAbstract
      */
     public function __construct()
     {
-        parent::__construct('#@{section (.*?)}(.*)@{/section \1}#si');
+        parent::__construct('#@{section (.*?)}(.*?)@{/section \1}#si');
         $this->sections = array();
     }
 
@@ -36,9 +36,7 @@ class SectionTag extends ViewTagAbstract
      */
     protected function handleMatches($content, array $data, array $matches, $found)
     {
-        $innerContent = '';
         for ($i = 0; $i < $found; $i++) {            
-            $content                         = str_replace($matches[0][$i], $innerContent, $content);
             $this->sections[$matches[1][$i]] = array('content' => $matches[0][$i], 'innerContent' => $matches[2][$i]);  
         }
         return $content;

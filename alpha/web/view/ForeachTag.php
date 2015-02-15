@@ -19,7 +19,7 @@ class ForeachTag extends ViewTagAbstract
      */
     public function __construct()
     {
-        parent::__construct('#@{foreach (.*?)}(.*)@{/foreach \1}#si');
+        parent::__construct('#@{foreach (.*?)}(.*?)@{/foreach \1}#si');
     }
     
     /**

@@ -37,19 +37,17 @@ class UsesTag extends ViewTagAbstract
         for ($i = 0; $i < $found; $i++) {
             $viewFile = PATH_VIEW . $matches[1][$i];
             if (file_exists($viewFile)) {
-                $replaceContent = file_get_contents($viewFile);
+                $layoutContent = file_get_contents($viewFile);
             } else {
-                $replaceContent = 'layout_not_found:' . $viewFile;
+                $layoutContent = 'layout_not_found:' . $viewFile;
             }
-            $layoutContent = str_replace($matches[0][$i], $replaceContent, $content);
         }
-        
         $sections       = $this->getSectionsFromContent($content, $data);
         $layoutSections = $this->getSectionsFromContent($layoutContent, $data);
+        $content        = $layoutContent;
         foreach ($sections as $name => $section) {
             $content = str_replace($layoutSections[$name]['content'], $section['innerContent'], $layoutContent);
         }
-        
         return $content;
     }   
 
