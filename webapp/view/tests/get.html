@@ -26,9 +26,9 @@
                 @{foreach test}
                     <tr>
                         <td>@{name}</td>
-                        <td>@{status}</td>
+                        <td @{[status=OK]}class="success"@{/[status=OK]} @{[status!OK]}class="danger"@{/[status!OK]} >@{status}</td>
                         <td>@{message}</td>
-                    </tr>
+                    </tr>                    
                 @{/foreach test}
             </table>
         </div>
