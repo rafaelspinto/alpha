@@ -8,6 +8,7 @@ namespace Alpha\Web\View;
 
 use Alpha\Web\View\ViewTagAbstract;
 use Alpha\Web\View\PropertiesTag;
+use Alpha\Web\View\ConditionalPropertiesTag;
 
 /**
  * Handles Foreach tags.
@@ -34,13 +35,15 @@ class ForeachTag extends ViewTagAbstract
      */
     protected function handleMatches($content, array $data, array $matches, $found)
     {
-        $innerContent  = '';
-        $propertiesTag = new PropertiesTag();
+        $innerContent             = '';
+        $propertiesTag            = new PropertiesTag();
+        $conditionalPropertiesTag = new ConditionalPropertiesTag();
         for ($i = 0; $i < $found; $i++) {
             $list = $this->getValue(explode('.', $matches[1][$i]), $data);
             if (!empty($list)) {
                 foreach ($list as $item) {
-                    $innerContent .= $propertiesTag->render($matches[2][$i], $item);
+                    $itemContent   = $propertiesTag->render($matches[2][$i], $item);
+                    $innerContent .= $conditionalPropertiesTag->render($itemContent, $item);                    
                 }
             }
             $content = str_replace($matches[0][$i], $innerContent, $content);
