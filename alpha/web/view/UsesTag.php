@@ -43,13 +43,13 @@ class UsesTag extends ViewTagAbstract
             }
             $layoutContent = str_replace($matches[0][$i], $replaceContent, $content);
         }
-
+        
         $sections       = $this->getSectionsFromContent($content, $data);
         $layoutSections = $this->getSectionsFromContent($layoutContent, $data);
         foreach ($sections as $name => $section) {
             $content = str_replace($layoutSections[$name]['content'], $section['innerContent'], $layoutContent);
         }
-
+        
         return $content;
     }   
 

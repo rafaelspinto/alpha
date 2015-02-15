@@ -11,6 +11,7 @@ use Alpha\Web\View\ViewTagAbstract;
 use Alpha\Web\View\PropertiesTag;
 use Alpha\Web\View\ForeachTag;
 use Alpha\Web\View\LayoutTag;
+use Alpha\Web\View\UsesTag;
 
 /**
  * Base class for Views.
@@ -25,6 +26,7 @@ class View implements ViewConnectorInterface
     public function __construct()
     {
         $this->tags = array();
+        $this->registerTag(new UsesTag());
         $this->registerTag(new LayoutTag());
         $this->registerTag(new ForeachTag());
         $this->registerTag(new PropertiesTag());
