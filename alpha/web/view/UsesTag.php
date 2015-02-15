@@ -45,10 +45,12 @@ class UsesTag extends ViewTagAbstract
         $sections       = $this->getSectionsFromContent($content, $data);
         $layoutSections = $this->getSectionsFromContent($layoutContent, $data);
         $content        = $layoutContent;
-        foreach ($sections as $name => $section) {
-            $content = str_replace($layoutSections[$name]['content'], $section['innerContent'], $layoutContent);
+        foreach ($layoutSections as $name => $section) {
+            if(isset($section[$name])){
+                $layoutContent = str_replace($section['content'], $sections[$name]['innerContent'], $layoutContent);
+            }
         }
-        return $content;
+        return $layoutContent;
     }   
 
     /**
