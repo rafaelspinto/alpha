@@ -12,6 +12,7 @@ use Alpha\Web\View\PropertiesTag;
 use Alpha\Web\View\ForeachTag;
 use Alpha\Web\View\LayoutTag;
 use Alpha\Web\View\UsesTag;
+use Alpha\Web\View\ConditionalPropertiesTag;
 
 /**
  * Base class for Views.
@@ -30,6 +31,7 @@ class View implements ViewConnectorInterface
         $this->registerTag(new LayoutTag());
         $this->registerTag(new ForeachTag());
         $this->registerTag(new PropertiesTag());
+        $this->registerTag(new ConditionalPropertiesTag());
     }
 
     /**
