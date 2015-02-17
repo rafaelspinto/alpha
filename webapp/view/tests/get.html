@@ -19,18 +19,23 @@
               <div class="header">                
                 <h3 class="text-muted">Alpha - Tests</h3>
             </div>
-            <table class="table table-striped">
-                <th>Name</th>
-                <th>Status</th>
-                <th>Message</th>
-                @{foreach test}
-                    <tr>
-                        <td>@{name}</td>
-                        <td @{[status=OK]}class="success"@{/[status=OK]} @{[status!OK]}class="danger"@{/[status!OK]} >@{status}</td>
-                        <td>@{message}</td>
-                    </tr>                    
-                @{/foreach test}
-            </table>
+            
+            @{foreach testcase}
+                <h3>@{name}</h3>
+                <table class="table table-striped">
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Message</th>
+                        @{foreach test}
+                            <tr>
+                                <td>@{name}</td>
+                                <td @{[status=OK]}class="success"@{/[status=OK]} @{[status!OK]}class="danger"@{/[status!OK]} >@{status}</td>
+                                <td>@{message}</td>
+                            </tr>                    
+                        @{/foreach test}
+                </table>
+            @{/foreach testcase}
+            
         </div>
     </body>
 </html>

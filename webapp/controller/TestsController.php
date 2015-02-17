@@ -30,23 +30,25 @@ class TestsController extends \Alpha\Web\ControllerAbstract
         foreach($dirItrator as $file){
             $filename = $file->getFilename();
             if($file->isFile() && strpos($filename, 'TestCase') !== false) {
-                $test      = str_replace('.php', '', $filename);                
-                $testClass = "Alpha\Tests\\".$test;
+                $testName  = str_replace('.php', '', $filename);                
+                $testClass = "Alpha\Tests\\".$testName;
                 $testSuite = new Alpha\Core\TestSuite(new \ReflectionClass($testClass));
                 $result    = $testSuite->run();
-                foreach($testSuite->tests() as $t){
-                    $this->data['test'][$t->getName()] = array('name'=>  $t->getName(), 'status' => 'OK', 'message' => '');                        
+                $tests     = array();
+                foreach($testSuite->tests() as $test){
+                    $tests[$test->getName()] = array('name'=>  $test->getName(), 'status' => 'OK', 'message' => '');                        
                 }
                 foreach($result->errors() as $test){
-                    $this->data['test'][$test->failedTest()->getName()] = $this->makeErrorOrFailure($test, 'ERROR');
+                    $tests[$test->failedTest()->getName()] = $this->makeErrorOrFailure($test, 'ERROR');
                 }
                 foreach($result->failures() as $test){
-                    $this->data['test'][$test->failedTest()->getName()] = $this->makeErrorOrFailure($test, 'FAILURE');
+                    $tests[$test->failedTest()->getName()] = $this->makeErrorOrFailure($test, 'FAILURE');
                 }
+                $this->data['testcase'][] = array('name' => $testName, 'test' => $tests);
             }
         }
     }
-    
+       
     /**
      * Returns the array containing the error or failure structure.
      * 
