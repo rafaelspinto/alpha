@@ -1,6 +1,6 @@
 <?php
 /**
- * LayoutTag
+ * IncludeTag
  *
  * @author Rafael Pinto <santospinto.rafael@gmail.com>
  */
@@ -14,7 +14,7 @@ use Alpha\Web\View\ViewTagAbstract;
 class IncludeTag extends ViewTagAbstract
 {
     /**
-     * Constructs a LayoutTag.
+     * Constructs a IncludeTag.
      */
     public function __construct()
     {
