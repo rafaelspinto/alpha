@@ -1,9 +1,9 @@
-@{uses "/user/layout.html"}
-@{section content}
+@uses("/user/layout.html")
+@section(content)
     <h1>User</h1>
     <ul>
-        @{foreach user}
-        <li><a href="/User/edit/@{id}">@{id} - @{name}</a> <a href="/User/delete/@{id}" class="label label-danger">Delete</a></li>
-        @{/foreach user}
+        @foreach(user)
+        <li><a href="/User/edit/@(id)">@(id) - @(name)</a> <a href="/User/delete/@(id)" class="label label-danger">Delete</a></li>
+        @/foreach(user)
     </ul>    
-@{/section content}
+@/section(content)

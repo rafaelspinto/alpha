@@ -4,7 +4,7 @@
         <title>User</title>
         <meta charset="ISO-8859-1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        @{layout "/user/style.html"}
+        @include("/user/style.html")
     </head>
     <body>
         <div class="container">
@@ -12,6 +12,8 @@
                 <nav>
                     <ul class="nav nav-pills pull-right">
                         <li role="presentation" class="active"><a href="#">Home</a></li>
+                        <li role="presentation"><a href="/User/search">Search</a></li>
+                        <li role="presentation"><a href="/User/create">Create</a></li>
                     </ul>
                 </nav>
                 <h3 class="text-muted">Alpha</h3>
@@ -19,7 +21,7 @@
             </div>
             
             <div class="jumbotron">
-                @{section content}@{/section content}                
+                @section(content)@/section(content)
             </div>
         </div>
     </body>

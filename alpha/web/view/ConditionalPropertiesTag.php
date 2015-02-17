@@ -18,7 +18,7 @@ class ConditionalPropertiesTag extends ViewTagAbstract
      */
     public function __construct()
     {
-        parent::__construct('#@{\[(.*?)((!|=|<|>)(.*?))\]}(.*?)@{/\[\1\2\]}#si');
+        parent::__construct('#@\(\[(.*?)((!|=|<|>)(.*?))\]\)(.*?)@/\(\[\1\2\]\)#si');
     }
     
     /**

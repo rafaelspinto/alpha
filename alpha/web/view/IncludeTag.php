@@ -11,14 +11,14 @@ use Alpha\Web\View\ViewTagAbstract;
 /**
  * Handles Layout tags.
  */
-class LayoutTag extends ViewTagAbstract
+class IncludeTag extends ViewTagAbstract
 {
     /**
      * Constructs a LayoutTag.
      */
     public function __construct()
     {
-        parent::__construct('#@{layout "(.*?)"}#');
+        parent::__construct('#@include\("?(.*?)"?\)#');
     }
     
     /**
