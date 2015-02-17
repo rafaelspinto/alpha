@@ -40,7 +40,7 @@ class IncludeTag extends ViewTagAbstract
             } else {
                 $replaceContent = 'layout_not_found:' . $viewFile;
             }
-            $content = str_replace($matches[0][$i], $replaceContent, $content);
+            $content = $this->render(str_replace($matches[0][$i], $replaceContent, $content), $data);
         }
         return $content;
     }
