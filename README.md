@@ -30,12 +30,12 @@ Alpha is a lean framework for building WEB Applications/API's (*MVC* pattern).
 
 * **Views/Html** :
   * Assign data in *Controller* by ```$this->data['property_name'] = 'data';```
-  * Access data in *View/Html* by ```@{property_name}```
+  * Access data in *View/Html* by ```@(property_name)```
   * Iterate a list in *View/Html* :
 ```
-@{foreach list_var}
-   @{element_property}
-@{/foreach list_var}
+@foreach(list_var)
+   @(element_property)
+@/foreach(list_var)
 ```
     
 * **Model** :
