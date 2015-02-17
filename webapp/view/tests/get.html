@@ -1,41 +1,23 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Alpha - Tests</title>
-        <meta charset="ISO-8859-1">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+@uses("/tests/layout.html")
 
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+@section(content)
+    <div class="header">                
+        <h3 class="text-muted">Alpha - Tests</h3>
+    </div>
 
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    </head>
-    <body>
-        <div class="container">
-              <div class="header">                
-                <h3 class="text-muted">Alpha - Tests</h3>
-            </div>
-            
-            @{foreach testcase}
-                <h3>@{name}</h3>
-                <table class="table table-striped">
-                    <th>Name</th>
-                    <th>Status</th>
-                    <th>Message</th>
-                        @{foreach test}
-                            <tr>
-                                <td>@{name}</td>
-                                <td @{[status=OK]}class="success"@{/[status=OK]} @{[status!OK]}class="danger"@{/[status!OK]} >@{status}</td>
-                                <td>@{message}</td>
-                            </tr>                    
-                        @{/foreach test}
-                </table>
-            @{/foreach testcase}
-            
-        </div>
-    </body>
-</html>
+    @foreach(testcase)
+        <h3>@(name)</h3>
+        <table class="table table-striped">
+            <th>Name</th>
+            <th>Status</th>
+            <th>Message</th>
+                @foreach(test)
+                    <tr>
+                        <td>@(name)</td>
+                        <td @([status=OK])class="success"@(/[status=OK]) @([status!OK])class="danger"@(/[status!OK]) >@(status)</td>
+                        <td>@(message)</td>
+                    </tr>                    
+                @/foreach(test)
+        </table>
+    @/foreach(testcase)            
+@/section(content)
