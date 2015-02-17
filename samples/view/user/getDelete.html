@@ -1,12 +1,11 @@
-@{uses "/user/layout.html"}
-@{section content}
+@uses("/user/layout.html")
+@section(content)
     <h1>User Delete</h1>
     <ul>
         <form method="POST">
-            <input type="text" name="name" value="@{user.name}">
-            <input type="text" name="id" value="@{user.id}">
+            <input type="text" name="name" value="@(user.name)">
+            <input type="text" name="id" value="@(user.id)">
             <input type="submit">
         </form>
     </ul>
-@{/section content}
-
+@/section(content)
