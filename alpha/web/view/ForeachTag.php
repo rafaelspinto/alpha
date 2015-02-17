@@ -42,7 +42,7 @@ class ForeachTag extends ViewTagAbstract
             $list = $this->getValue(explode('.', $matches[1][$i]), $data);
             if (!empty($list)) {
                 foreach ($list as $item) {
-                    $itemContent   = $propertiesTag->render($matches[2][$i], $item);
+                    $itemContent   = $propertiesTag->render($this->render($matches[2][$i], $item), $item);
                     $innerContent .= $conditionalPropertiesTag->render($itemContent, $item);                    
                 }
             }
