@@ -2,19 +2,19 @@
 
 @section(content)
     <div class="header">                
-        <h3 class="text-muted">Alpha - Tests</h3>
+        <h3 class="text-muted">Alpha - @string(tests)</h3>
     </div>
 
     @foreach(testcase)
         <h3>@(name)</h3>
         <table class="table table-striped">
-            <th>Name</th>
-            <th>Status</th>
-            <th>Message</th>
+            <th>@string(name)</th>
+            <th>@string(status)</th>
+            <th>@string(message)</th>
                 @foreach(test)
                     <tr>
                         <td>@(name)</td>
-                        <td @([status=OK])class="success"@/([status=OK]) @([status!OK])class="danger"@/([status!OK]) >@(status)</td>
+                        <td @([status=OK])class="success"@/([status=OK]) @([status!OK])class="danger"@/([status!OK]) >@string(@(status))</td>
                         <td>@(message)</td>
                     </tr>                    
                 @/foreach(test)
