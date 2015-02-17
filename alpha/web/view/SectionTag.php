@@ -20,7 +20,7 @@ class SectionTag extends ViewTagAbstract
      */
     public function __construct()
     {
-        parent::__construct('#@{section (.*?)}(.*?)@{/section \1}#si');
+        parent::__construct('#@section\((.*?)\)(.*?)@/section\(\1\)#si');
         $this->sections = array();
     }
 

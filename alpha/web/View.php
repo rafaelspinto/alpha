@@ -10,7 +10,7 @@ use Alpha\Connector\ViewConnectorInterface;
 use Alpha\Web\View\ViewTagAbstract;
 use Alpha\Web\View\PropertiesTag;
 use Alpha\Web\View\ForeachTag;
-use Alpha\Web\View\LayoutTag;
+use Alpha\Web\View\IncludeTag;
 use Alpha\Web\View\UsesTag;
 use Alpha\Web\View\ConditionalPropertiesTag;
 
@@ -28,7 +28,7 @@ class View implements ViewConnectorInterface
     {
         $this->tags = array();
         $this->registerTag(new UsesTag());
-        $this->registerTag(new LayoutTag());
+        $this->registerTag(new IncludeTag());
         $this->registerTag(new ForeachTag());
         $this->registerTag(new PropertiesTag());
         $this->registerTag(new ConditionalPropertiesTag());

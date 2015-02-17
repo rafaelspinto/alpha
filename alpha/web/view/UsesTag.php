@@ -19,7 +19,7 @@ class UsesTag extends ViewTagAbstract
      */
     public function __construct()
     {
-        parent::__construct('#@{uses "(.*?)"}#');
+        parent::__construct('#@uses\("?(.*?)"?\)#');
     }
 
      /**
