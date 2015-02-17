@@ -112,6 +112,7 @@ class Connectors
     {
         $this->registerConnector('View', 'Alpha\Web\View');
         $this->registerConnector('Repo', 'Alpha\Storage\MySQLRepository');
+        $this->registerConnector('Language', 'Alpha\Language\LanguageRepository');
     }
     
     /**

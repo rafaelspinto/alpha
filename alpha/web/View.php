@@ -12,6 +12,7 @@ use Alpha\Web\View\PropertiesTag;
 use Alpha\Web\View\ForeachTag;
 use Alpha\Web\View\IncludeTag;
 use Alpha\Web\View\UsesTag;
+use Alpha\Web\View\StringTag;
 use Alpha\Web\View\ConditionalPropertiesTag;
 
 /**
@@ -32,6 +33,7 @@ class View implements ViewConnectorInterface
         $this->registerTag(new ForeachTag());
         $this->registerTag(new PropertiesTag());
         $this->registerTag(new ConditionalPropertiesTag());
+        $this->registerTag(new StringTag());
     }
 
     /**

@@ -22,7 +22,7 @@ class UsesTag extends ViewTagAbstract
         parent::__construct('#@uses\("?(.*?)"?\)#');
     }
 
-     /**
+    /**
      * Handles the matches found.
      * 
      * @param string $content The original content.
