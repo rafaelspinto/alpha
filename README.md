@@ -76,3 +76,10 @@ Alpha is a lean framework for building WEB Applications/API's (*MVC* pattern).
       ```
 	
   * Conditionally output the value of a property :
+   ```
+	      @([property_name=value])
+		      content
+	      @/([property_name=value])
+      ```
+    
+**Model**
