@@ -1,5 +1,6 @@
 # alpha 
-Alpha is a lean framework for building WEB Applications/API's (*MVC* pattern).
+
+Alpha is a lean framework for building WEB Applications/API's based on the *MVC* pattern. The main goal of this framework is to provide the developer to write as little code as possible, preferrably doing one line coding (ambitious right?).
 
 --
 ### Setup
@@ -86,7 +87,7 @@ Alpha is a lean framework for building WEB Applications/API's (*MVC* pattern).
 * **Models**
  
    * Must extend **\Alpha\Storage\BucketAbstract**
-   * Must implement the method *getSchema()*, e.g.:
+   * Must implement the method **getSchema()**, e.g.:
    
       ```
 public static function getSchema()
@@ -106,4 +107,6 @@ public static function getSchema()
 
 ### Do you still have questions?
 
-Please check the samples folder at : https://github.com/pintorafael/alpha/tree/master/samples
+Please check the samples folder at : https://github.com/pintorafael/alpha/tree/master/samples or send me an email to santospinto.rafael@gmail.com.
+
+Cheers!!!
