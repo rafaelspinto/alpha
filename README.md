@@ -28,36 +28,51 @@ Alpha is a lean framework for building WEB Applications/API's (*MVC* pattern).
       * e.g. : ```UserController->postEdit($PATH_id, $PARAM_name, $PARAM_age);```
       * e.g. : ```UserController->getSearch($QUERY_name);```
 
-* **Views/Html** :
-  * Assign data in *Controller* by ```$this->data['property_name'] = 'data';```
-  * Access data in *View/Html* by ```@(property_name)```
-  * Iterate a list in *View/Html* :
-```
-@foreach(list_var)
-   @(element_property)
-@/foreach(list_var)
-```
-    
-* **Model** :
+**Views**
 
-``` 
-class User extends \Alpha\Storage\BucketAbstract
-{
-    /**
-     * Returns the array containing the schema.
-     * 
-     * @return array
-     */
-    public static function getSchema()
-    {
-        return array(
-            'bucket' => 'user',
-            'key'    => 'id',
-            'fields' => array(
-                'id' => array('type' => 'integer'),
-                'name' => array('type' => 'string'),
-            )
-        );
-    }
-}
-```
+  * Assign data in *Controller* :
+
+      ```
+      $this->data['property_name'] = 'data';
+      ```
+
+  * Iterate a list :
+
+      ```
+	@foreach(list)
+		content
+	@/foreach(list)
+      ```
+  * Include a view inside another view :
+
+      ```
+      @include("/path/to/html/from/webapp/view")
+      ```
+	
+  * Use a view as a base for another view :
+
+      ```
+      @uses("/path/to/html/from/webapp/view")
+      ```
+
+  * Define/Override a section:
+
+      ```
+      @section(name)
+            content 
+      @/section(name)
+      ```
+	
+  * Output a translated key :
+
+      ```
+      @string(key)
+      ```
+	
+  * Output the value of a property :
+
+      ```
+      @(property_name)
+      ```
+	
+  * Conditionally output the value of a property :
