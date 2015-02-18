@@ -77,11 +77,11 @@ Alpha is a lean framework for building WEB Applications/API's (*MVC* pattern).
       ```
 	
   * Conditionally output the value of a property :
-   ```
-   @([property_name=value])
-        content
-    @/([property_name=value])
-    ```
+      ```
+      @([property_name=value])
+           content
+      @/([property_name=value])
+      ```
     
 * **Models**
  
@@ -101,3 +101,9 @@ public static function getSchema()
                   );
 }
 ```
+
+--
+
+### Do you still have questions?
+
+Please check the samples folder at : https://github.com/pintorafael/alpha/tree/master/samples
