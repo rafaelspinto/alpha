@@ -1,8 +1,16 @@
 # alpha 
 
+--
+
 Alpha is a lean framework for building WEB Applications/API's based on the *MVC* pattern. The main goal of this framework is to provide the developer to write as little code as possible, preferrably doing one line coding (ambitious right?).
 
+* Version : ?
+
+
+## Contents 
+
 --
+
  * [Setup](#setup)
  * [How does alpha work](#how-does-alpha-work)
  * [Controllers](#controllers-go-to-samples)
@@ -10,17 +18,20 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
  * [Models](#models-go-to-samples)
  * [Connectors](#connectors-go-to-sample)
  * [Localization/i18n](#localizationi18n-go-to-sample)
- 
---
+
+
 ## Setup
 
 --
+
 1. Create a virtual host based on the vhost.conf located in the samples folder.
 2. Download/clone the repository and define the webapp folder as the document root of the vhost.
 3. Create your controllers/models/views inside the webapp folder.
 
---
+
 ## How does alpha work?
+
+--
 
 * The *default routing* of the requests is http://example.com/{s:controller}/{s:action}/{i:id}.
 
@@ -42,9 +53,10 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
    
       e.g. ```webapp/view/user/getEdit.html```
 
---
 
 ## Controllers [(go to samples)](https://github.com/pintorafael/alpha/tree/master/samples/controller)
+
+--
 
    * Must be named like **User***Controller*.
     
@@ -93,8 +105,11 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
          ```
          $this->data['property_name'] = 'data';
          ```
+
          
 ## Views [(go to samples)](https://github.com/pintorafael/alpha/tree/master/samples/view)
+
+--
 
   * Iterate a list :
       ```
@@ -135,8 +150,11 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
            content
       @/([property_name=value])
       ```
+ 
     
 ## Models [(go to samples)](https://github.com/pintorafael/alpha/tree/master/samples/model)
+
+ --
  
    * Must extend **\Alpha\Storage\BucketAbstract**.
    * Must implement the method **getSchema()**, e.g.:
@@ -157,7 +175,10 @@ public static function getSchema()
 
 --
 
+
 ## Connectors [(go to sample)](https://github.com/pintorafael/alpha/blob/master/webapp/connectors.ini)
+
+--
 
 Connectors work like plugins, you have to configure them to use them.
 To configure them just fill in the connectors.ini in the webapp folder.
@@ -178,8 +199,10 @@ Examples of connectors :
    * MySQL repository
    * Language repository
 
---
+
 ## Localization/i18n [(go to sample)](https://github.com/pintorafael/alpha/blob/master/webapp/language.ini)
+
+--
 
 The strings that must be adjusted to the location(i18n) should be located at ```webapp/language.ini``` and must have the following structure :
 ```
@@ -189,9 +212,10 @@ The strings that must be adjusted to the location(i18n) should be located at ```
 * To use inside a *Controller* or other class just use ```Connectors::get('Language')->getString($key)```
 * To use inside a *View* just use ```@string(key)```
    
---
 
 ### Do you still have questions?
+
+--
 
 Please check the samples folder at : https://github.com/pintorafael/alpha/tree/master/samples or send me an email to santospinto.rafael@gmail.com.
 
