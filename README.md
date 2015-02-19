@@ -15,11 +15,11 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
 
 * The *default routing* of the requests is http://example.com/{s:controller}/{s:action}/{i:id}.
 
-   * e.g. http://example.com/User/edit/123
+      e.g. http://example.com/User/edit/123
 
 * Each *Controller* has a set of *Actions* which handle the requests.
  
-   * e.g. ```$UserController->getEdit(...);```
+      e.g. ```$UserController->getEdit(...);```
    
 * Each *Action* will result in a *Response*.
 
@@ -31,7 +31,7 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
 
 * The *Views* should be located in the following structure ```webapp/view/{controller}/{action}.html```
    
-   * e.g. ```webapp/view/user/getEdit.html```
+      e.g. ```webapp/view/user/getEdit.html```
 
 --
 
@@ -55,27 +55,27 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
   
        * Parameters from **URI path** : ```$PATH_parameter_name```
         
-          * e.g. : ```$UserController->getEdit($PATH_id);```
+          e.g. : ```$UserController->getEdit($PATH_id);```
           
        * Parameters from **QueryString** : ```$QUERY_parameter_name```
          
-          * e.g. : ```$UserController->getSearch($QUERY_name);```
+          e.g. : ```$UserController->getSearch($QUERY_name);```
        
        * Parameters from **Request** : ```$PARAM_parameter_name```
        
-          * e.g. : ```$UserController->postEdit($PATH_id, $PARAM_name, $PARAM_age);``` 
+          e.g. : ```$UserController->postEdit($PATH_id, $PARAM_name, $PARAM_age);``` 
        
        * Parameters from **Session** : ```$SESSION_parameter_name```
          
-          * e.g. : ```$UserController->getLogin($SESSION_userid);```
+          e.g. : ```$UserController->getLogin($SESSION_userid);```
        
        * Parameters from **Cookie** : ```$COOKIE_parameter_name```
        
-          * e.g. : ```$UserController->getOther($COOKIE_userid);```
+          e.g. : ```$UserController->getOther($COOKIE_userid);```
          
        * To retrieve all parameters from the context use simply the ${CONTEXT} without the parameter_name.
         
-          * e.g. : ```$PATH``` or ```$QUERY``` or ```$PARAM``` or ```$SESSION``` or ```$COOKIE```
+          e.g. : ```$PATH``` or ```$QUERY``` or ```$PARAM``` or ```$SESSION``` or ```$COOKIE```
        
          
          
