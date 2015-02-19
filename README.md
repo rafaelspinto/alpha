@@ -13,7 +13,23 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
 --
 ### How does alpha work?
 
-* The default routing of the requests is : http://example.com/{s:controller}/{s:action}/{i:id}
+* The *default routing* of the requests is http://example.com/{s:controller}/{s:action}/{i:id}.
+
+   * e.g. http://example.com/User/edit/123
+
+* Each *Controller* has a set of *Actions* which handle the requests.
+ 
+   * e.g. ```$UserController->getEdit(...);```
+   
+* Each *Action* will result in a *Response*.
+
+* The *Response* can be a *View* or any other type of a representation (e.g. json).
+
+* If no *View* exists for the *Action* nor a specified *Response*, the default will be a *Json Response*.
+
+* The *Views* should be located in the following structure ```webapp/view/{controller}/{action}.html```
+   
+   * e.g. ```webapp/view/user/getEdit.html```
 
 * **Controllers**
  
