@@ -25,7 +25,7 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
 
        * **GET** http://example.com/User/edit/123 --> ```UserController->getEdit(...);```
        * **GET** http://example.com/User/search?name=john --> ```UserController->getSearch(...);```
-       * **POST** http://example.com/User/edit/123 --> ```UserController->getEdit(...);```
+       * **POST** http://example.com/User/edit/123 --> ```UserController->postEdit(..);```
        * **DELETE** http://example.com/User/delete/123 --> ```UserController->delete(...);```
 
    * Context data is captured and injected into the Actions :
