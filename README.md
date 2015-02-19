@@ -148,6 +148,29 @@ public static function getSchema()
 
 --
 
+### Connectors
+
+Connectors work like plugins, you have to configure them to use them.
+To configure them just fill the connectors.ini in the webapp folder.
+
+    e.g.: 
+    ```
+    [Repo]
+    host     = "localhost"
+    port     = 3306
+    user     = "root"
+    password = "password"
+    database = "tests"
+
+    [Language]
+    language = pt
+```
+
+For the time being only two connectors are configured :
+   * MySQL connector 
+   * Language connector
+   
+
 ### Do you still have questions?
 
 Please check the samples folder at : https://github.com/pintorafael/alpha/tree/master/samples or send me an email to santospinto.rafael@gmail.com.
