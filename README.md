@@ -3,19 +3,19 @@
 Alpha is a lean framework for building WEB Applications/API's based on the *MVC* pattern. The main goal of this framework is to provide the developer to write as little code as possible, preferrably doing one line coding (ambitious right?).
 
 --
- [Setup](#Setup)
+ [Setup](#setup)
  
- [How does alpha work](#How does alpha work)
+ [How does alpha work](#how-does-alpha-work)
  
- [Controllers](#Controllers)
+ [Controllers](#controllers-go-to-sample)
  
- [Views](Views)
+ [Views](#views-go-to-sample)
  
- [Models](Models)
+ [Models](#models-go-to-sample)
  
- [Connectors](Connectors)
+ [Connectors](#connectors-go-to-sample)
  
- [Localization](Localization)
+ [Localization/i18n](#localizationi18n-go-to-sample)
  
 --
 ## Setup
