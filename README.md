@@ -27,15 +27,19 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
 
 * If no *View* exists for the *Action* nor a specified *Response*, the default will be a *Json Response*.
 
+* *Views* are html files with special tags that allow data binding from the *Controllers*.
+
 * The *Views* should be located in the following structure ```webapp/view/{controller}/{action}.html```
    
    * e.g. ```webapp/view/user/getEdit.html```
 
-* **Controllers**
- 
-   * Must be named like **User***Controller*
+--
+
+### Controllers [(go to samples)](https://github.com/pintorafael/alpha/tree/master/samples/controller)
+
+   * Must be named like **User***Controller*.
     
-   * Must extend **\Alpha\Web\ControllerAbstract** or **\Alpha\Web\CrudBaseController**
+   * Must extend **\Alpha\Web\ControllerAbstract** or **\Alpha\Web\CrudBaseController**.
    
    * Actions must be prefixed by the HTTP method it handles, e.g. :
 
@@ -51,6 +55,7 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
        * Parameters from **Request** : ```$PARAM_parameter_name```
        * Parameters from **Session** : ```$SESSION_parameter_name```
        * Parameters from **Cookie** : ```$COOKIE_parameter_name```
+       
          * e.g. : ```$UserController->postEdit($PATH_id, $PARAM_name, $PARAM_age);```
          * e.g. : ```$UserController->getSearch($QUERY_name);```
 
@@ -59,7 +64,7 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
          $this->data['property_name'] = 'data';
          ```
          
-* **Views**
+### Views [(go to samples)](https://github.com/pintorafael/alpha/tree/master/samples/view)
    * Iterate a list :
      ```
      @foreach(list)
@@ -100,9 +105,9 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
       @/([property_name=value])
       ```
     
-* **Models**
+### Models [(go to samples)](https://github.com/pintorafael/alpha/tree/master/samples/model)
  
-   * Must extend **\Alpha\Storage\BucketAbstract**
+   * Must extend **\Alpha\Storage\BucketAbstract**.
    * Must implement the method **getSchema()**, e.g.:
    
       ```
