@@ -65,9 +65,10 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
          ```
          
 ### Views [(go to samples)](https://github.com/pintorafael/alpha/tree/master/samples/view)
-   * Iterate a list :
-     ```
-     @foreach(list)
+
+  * Iterate a list :
+      ```
+      @foreach(list)
             content 
       @/foreach(list)
       ```
