@@ -165,9 +165,9 @@ To configure them just fill the connectors.ini in the webapp folder.
     language = pt
 ```
 
-For the time being only two connectors are configured :
-   * MySQL connector 
-   * Language connector
+Examples of connectors :
+   * MySQL repository
+   * Language repository
    
 
 ### Do you still have questions?
