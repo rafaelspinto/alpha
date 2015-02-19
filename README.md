@@ -154,7 +154,7 @@ Connectors work like plugins, you have to configure them to use them.
 To configure them just fill the connectors.ini in the webapp folder.
 
     e.g.: 
-    ```
+```
     [Repo]
     host     = "localhost"
     port     = 3306
