@@ -151,7 +151,7 @@ public static function getSchema()
 ### Connectors [(go to sample)](https://github.com/pintorafael/alpha/blob/master/webapp/connectors.ini)
 
 Connectors work like plugins, you have to configure them to use them.
-To configure them just fill the connectors.ini in the webapp folder.
+To configure them just fill in the connectors.ini in the webapp folder.
 
 ```
     [Repo]
@@ -168,7 +168,19 @@ To configure them just fill the connectors.ini in the webapp folder.
 Examples of connectors :
    * MySQL repository
    * Language repository
+
+--
+### Localization/i18n [(go to sample)](https://github.com/pintorafael/alpha/blob/master/webapp/language.ini)
+
+The strings that must be adjusted to the location(i18n) should be located at ```webapp/language.ini``` and must have the following structure :
+```
+[language_code]
+    key=value
+```
+* TO use inside a *Controller* or other class just use ```Connectors::get('Language')->getString($key)```
+* To use inside a *View* just use ```@string(key)```
    
+--
 
 ### Do you still have questions?
 
