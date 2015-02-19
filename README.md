@@ -7,11 +7,11 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
  
  [How does alpha work](#how-does-alpha-work)
  
- [Controllers](#controllers-go-to-sample)
+ [Controllers](#controllers-go-to-samples)
  
- [Views](#views-go-to-sample)
+ [Views](#views-go-to-samples)
  
- [Models](#models-go-to-sample)
+ [Models](#models-go-to-samples)
  
  [Connectors](#connectors-go-to-sample)
  
