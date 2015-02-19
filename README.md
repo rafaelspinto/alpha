@@ -2,8 +2,6 @@
 
 Alpha is a lean framework for building WEB Applications/API's based on the *MVC* pattern. The main goal of this framework is to provide the developer to write as little code as possible, preferrably doing one line coding (ambitious right?).
 
-* Version : ?
-
 
 ## Contents 
 
