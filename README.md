@@ -12,7 +12,6 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
  * [Models](#models-go-to-samples)
  * [Connectors](#connectors-go-to-sample)
  * [Localization/i18n](#localizationi18n-go-to-sample)
- * [Do you still have any questions?](#do-you-still-have-questions)
 
 
 ## Setup
