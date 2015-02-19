@@ -176,8 +176,9 @@ To configure them just fill in the connectors.ini in the webapp folder.
 ```
 
 Examples of connectors :
-   * MySQL repository
-   * Language repository
+   * MySQL repository *(Repo)*
+   * Language repository *(Language)*
+   * View *(View)*
 
 
 ## Localization/i18n [(go to sample)](https://github.com/pintorafael/alpha/blob/master/webapp/language.ini)
