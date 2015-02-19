@@ -51,9 +51,13 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
    * Context data is captured and injected into the Actions :
   
        * Parameters from **URI path** : ```$PATH_parameter_name```
+       
        * Parameters from **QueryString** : ```$QUERY_parameter_name```
+       
        * Parameters from **Request** : ```$PARAM_parameter_name```
+       
        * Parameters from **Session** : ```$SESSION_parameter_name```
+       
        * Parameters from **Cookie** : ```$COOKIE_parameter_name```
        
          * e.g. : ```$UserController->postEdit($PATH_id, $PARAM_name, $PARAM_age);```
