@@ -44,24 +44,41 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
    * Actions must be prefixed by the HTTP method it handles, e.g. :
 
        * **GET** http://example.com/User/edit/123 --> ```UserController->getEdit(...);```
+       
        * **GET** http://example.com/User/search?name=john --> ```UserController->getSearch(...);```
+       
        * **POST** http://example.com/User/edit/123 --> ```UserController->postEdit(..);```
+       
        * **DELETE** http://example.com/User/delete/123 --> ```UserController->delete(...);```
 
    * Context data is captured and injected into the Actions :
   
        * Parameters from **URI path** : ```$PATH_parameter_name```
-       
+        
+          * e.g. : ```$UserController->getEdit($PATH_id);```
+          
        * Parameters from **QueryString** : ```$QUERY_parameter_name```
+         
+          * e.g. : ```$UserController->getSearch($QUERY_name);```
        
        * Parameters from **Request** : ```$PARAM_parameter_name```
        
+          * e.g. : ```$UserController->postEdit($PATH_id, $PARAM_name, $PARAM_age);``` 
+       
        * Parameters from **Session** : ```$SESSION_parameter_name```
+         
+          * e.g. : ```$UserController->getLogin($SESSION_userid);```
        
        * Parameters from **Cookie** : ```$COOKIE_parameter_name```
        
-         * e.g. : ```$UserController->postEdit($PATH_id, $PARAM_name, $PARAM_age);```
-         * e.g. : ```$UserController->getSearch($QUERY_name);```
+          * e.g. : ```$UserController->getOther($COOKIE_userid);```
+         
+       * To retrieve all parameters from the context use simply the ${CONTEXT} without the parameter_name.
+        
+          * e.g. : ```$PATH``` or ```$QUERY``` or ```$PARAM``` or ```$SESSION``` or ```$COOKIE```
+       
+         
+         
 
    * Passing data from Actions into the views :
          ```
