@@ -12,6 +12,7 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
  * [Models](#models-go-to-samples)
  * [Connectors](#connectors-go-to-sample)
  * [Localization/i18n](#localizationi18n-go-to-sample)
+ * [Do you still have any questions?](#do-you-still-have-questions)
 
 
 ## Setup
@@ -192,7 +193,7 @@ The strings that must be adjusted to the location(i18n) should be located at ```
 * To use inside a *View* just use ```@string(key)```
    
 
-## Do you still have questions?
+## Do you still have any questions?
 
 Please check the samples folder at : https://github.com/pintorafael/alpha/tree/master/samples or send me an email to santospinto.rafael@gmail.com.
 
