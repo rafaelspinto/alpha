@@ -148,7 +148,7 @@ public static function getSchema()
 
 --
 
-### Connectors
+### Connectors [(go to sample)](https://github.com/pintorafael/alpha/blob/master/webapp/connectors.ini)
 
 Connectors work like plugins, you have to configure them to use them.
 To configure them just fill the connectors.ini in the webapp folder.
