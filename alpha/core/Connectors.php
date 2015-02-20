@@ -9,11 +9,8 @@ namespace Alpha\Core;
 /**
  * Class that manages connectors.
  */
-class Connectors
+class Connectors extends SingletonAbstract
 {
-    // singleton 
-    static $instance;
-    
     /**
      * Returns the instance of the Connector.
      * 
@@ -24,20 +21,6 @@ class Connectors
     public static function get($name)
     {
         return static::getInstance()->getConnector($name);
-    }
-    
-    /**
-     * Returns the instance of the Connectors.
-     * 
-     * @return \Alpha\Connector\Connectors
-     */
-    protected static function getInstance()
-    {
-        if(static::$instance == null) {
-            return static::$instance = new Connectors();
-        }
-        
-        return static::$instance;
     }
     
     // instance
