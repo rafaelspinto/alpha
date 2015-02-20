@@ -40,9 +40,9 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
 
 * *Views* are html files with special tags that allow data binding from the *Controllers*.
 
-* The *Views* should be located in the following structure ```webapp/view/{controller}/{action}.html```
+* The *Views* should be located in the following structure ```webapp/views/{controller}/{action}.html```
    
-      e.g. ```webapp/view/user/getEdit.html```
+      e.g. ```webapp/views/user/getEdit.html```
 
 
 ## Controllers [(go to samples)](https://github.com/pintorafael/alpha/tree/master/samples/controller)
@@ -107,12 +107,12 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
       
   * Include a view inside another view :
       ```
-      @include("/path/to/html/from/webapp/view")
+      @include("/path/to/html/from/webapp/views")
       ```
 	
   * Use a view as a base for another view :
       ```
-      @uses("/path/to/html/from/webapp/view")
+      @uses("/path/to/html/from/webapp/views")
       ```
   * Define/override a section from a view:
       ```
