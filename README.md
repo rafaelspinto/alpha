@@ -196,9 +196,13 @@ Examples of connectors :
 
 ## Localization/i18n [(go to sample)](https://github.com/pintorafael/alpha/blob/master/webapp/language.ini)
 
-The strings that must be adjusted to the location(i18n) should be located at ```webapp/language.ini``` and must have the following structure :
+The strings that must be adjusted to the location(i18n) should be located at ```webapp/language.{country_code}``` and must have the following structure :
 ```
-[language_code]
+    key=value
+```
+or if you prefer to use a single file to include all strings simply create a file ```webapp/language``` that must have the following structure :
+```
+    [country_code]
     key=value
 ```
 * To use inside a *Controller* or other class just use ```Connectors::get('Language')->getString($key)```
