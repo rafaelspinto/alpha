@@ -6,6 +6,7 @@
  */
 namespace Alpha\Web;
 
+use Alpha\Core\Config;
 use Alpha\Http\UriHandler;
 
 /**
@@ -67,7 +68,7 @@ class Router
         }
         
         // check if exists model
-        $modelFile = PATH_MODEL . $controllerName . '.php';
+        $modelFile = Config::getModelsPath() . $controllerName . '.php';
         if(file_exists($modelFile)) {
             $controller = new CrudBaseController($this->uriHandler, $controllerName);
             return $controller->execute($controllerName, $actionName);

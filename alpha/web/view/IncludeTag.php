@@ -6,6 +6,7 @@
  */
 namespace Alpha\Web\View;
 
+use Alpha\Core\Config;
 use Alpha\Web\View\ViewTagAbstract;
 
 /**
@@ -34,7 +35,7 @@ class IncludeTag extends ViewTagAbstract
     protected function handleMatches($content, array $data, array $matches, $found)
     {
         for ($i = 0; $i < $found; $i++) {
-            $viewFile = PATH_VIEW . $matches[1][$i];
+            $viewFile = Config::getViewsPath() . $matches[1][$i];
             if (file_exists($viewFile)) {
                 $replaceContent = file_get_contents($viewFile);
             } else {

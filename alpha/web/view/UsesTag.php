@@ -6,6 +6,7 @@
  */
 namespace Alpha\Web\View;
 
+use Alpha\Core\Config;
 use Alpha\Web\View\ViewTagAbstract;
 use Alpha\Web\View\SectionTag;
 
@@ -35,7 +36,7 @@ class UsesTag extends ViewTagAbstract
     protected function handleMatches($content, array $data, array $matches, $found)
     {
         for ($i = 0; $i < $found; $i++) {
-            $viewFile = PATH_VIEW . $matches[1][$i];
+            $viewFile = Config::getViewsPath() . $matches[1][$i];
             if (file_exists($viewFile)) {
                 $layoutContent = file_get_contents($viewFile);
             } else {

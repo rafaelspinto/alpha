@@ -6,6 +6,7 @@
  */
 namespace Alpha;
 
+use Alpha\Core\Config;
 use Alpha\Http\UriHandler;
 use Alpha\Web\Router;
 
@@ -23,7 +24,7 @@ class Beta
     {
         $uriHandler = new UriHandler();
         $uriHandler->setPattern('/{s:controller}/{s:action}/{i:id}');
-        $router   = new Router($uriHandler, PATH_CONTROLLER, 'Index');
+        $router   = new Router($uriHandler, Config::getControllersPath(), 'Index');
         $response = $router->go(filter_input(INPUT_SERVER, 'REQUEST_URI'));        
         print $response->getContent();
         header('Content-type: '.$response->getContentType(), true, $response->getStatusCode());

@@ -12,6 +12,7 @@ use Alpha\Http\StatusCode;
 use Alpha\Http\ContentType;
 use Alpha\Utils\ArrayUtils;
 use Alpha\Http\Header;
+use Alpha\Core\Config;
 
 /**
  * Base class for Controllers.
@@ -46,7 +47,7 @@ abstract class ControllerAbstract
     public function execute($context, $actionName)
     {        
         $actionName = $this->buildActionMethodName($actionName);
-        $viewFile   = PATH_VIEW . strtolower($context) . DIRECTORY_SEPARATOR . $actionName . '.html';
+        $viewFile   = Config::getViewsPath() . strtolower($context) . DIRECTORY_SEPARATOR . $actionName . '.html';
         $content    = '';
         if(($hasView = file_exists($viewFile))){
             $content = file_get_contents($viewFile);
@@ -55,7 +56,7 @@ abstract class ControllerAbstract
         if (($hasMethod = method_exists($this, $actionName))) {
             $otherView = call_user_func_array(array($this, $actionName), $this->buildParameters($actionName));
             if($otherView) {                
-                $otherView = PATH_VIEW . $otherView;
+                $otherView = Config::getViewsPath() . $otherView;
                 if(file_exists($otherView)) {
                     $content = file_get_contents($otherView);
                 }
