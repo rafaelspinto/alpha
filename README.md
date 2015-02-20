@@ -126,6 +126,11 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
       @string(key)
       ```
 	
+  * Output a key from the configuration file:
+      ```
+      @config(section,key)
+      ```
+	
   * Output the value of a property :
       ```
       @(property_name)
@@ -202,6 +207,7 @@ The configuration file should be located at ```webapp/configuration.ini``` and m
 ```
 
 * To use inside a *Class* simply call ```Config::get($section, $key);```.
+* To use inside a *View* just use ```@config(section,key)```
 
 ## Do you still have any questions?
 
