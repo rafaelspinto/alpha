@@ -34,7 +34,6 @@ class Connectors extends SingletonAbstract
     public function __construct()
     {
         $this->repository = array();
-        $this->initDefaults();
         $this->init();
     }
 
@@ -94,16 +93,6 @@ class Connectors extends SingletonAbstract
                 }
             }
         }
-    }
-
-    /**
-     * Initializes the default connectors.
-     * 
-     * @return void
-     */
-    protected function initDefaults()
-    {
-        $this->registerConnector('View', 'Alpha\Web\View');
     }
     
     /**
