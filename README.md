@@ -12,6 +12,7 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
  * [Models](#models-go-to-samples)
  * [Connectors](#connectors-go-to-sample)
  * [Localization/i18n](#localizationi18n-go-to-sample)
+ * [Configuration](#configuration)
 
 
 ## Setup
@@ -191,6 +192,16 @@ The strings that must be adjusted to the location(i18n) should be located at ```
 * To use inside a *Controller* or other class just use ```Connectors::get('Language')->getString($key)```
 * To use inside a *View* just use ```@string(key)```
    
+
+## Configuration 
+
+The configuration file should be located at ```webapp/configuration.ini``` and must have the following structure :
+```
+[section]
+    key=value
+```
+
+* To use inside a *Class* simply call ```Config::get($section, $key);```.
 
 ## Do you still have any questions?
 
