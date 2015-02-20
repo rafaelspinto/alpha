@@ -104,7 +104,6 @@ class Connectors extends SingletonAbstract
     protected function initDefaults()
     {
         $this->registerConnector('View', 'Alpha\Web\View');
-        $this->registerConnector('Language', 'Alpha\Language\LanguageRepository');
     }
     
     /**

@@ -1,6 +1,6 @@
 <?php
 /**                                                                                                                                                                                                                                                                            
- * MySQLRepository
+ * MySQLConnector
  *                                                                                                                                                                                                                                                                             
  * @author Rafael Pinto <santospinto.rafael@gmail.com>                                                                                                                                                                                                                         
  */
