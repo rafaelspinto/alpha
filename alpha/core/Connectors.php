@@ -6,6 +6,8 @@
  */
 namespace Alpha\Core;
 
+use Alpha\Core\Config;
+
 /**
  * Class that manages connectors.
  */
@@ -77,7 +79,7 @@ class Connectors extends SingletonAbstract
      */
     protected function init()
     {
-        $connectorsFile = PATH_PROJECT . 'connectors.ini';
+        $connectorsFile = Config::getProjectPath() . 'connectors.ini';
         if(file_exists($connectorsFile)) {
             $connectors = parse_ini_file($connectorsFile, true);
             foreach($connectors as $name => $connectorProperties){

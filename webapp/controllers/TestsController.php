@@ -1,4 +1,5 @@
 <?php
+use Alpha\Core\Config;
 use Alpha\Http\UriHandler;
 
 /**
@@ -16,7 +17,7 @@ class TestsController extends \Alpha\Web\ControllerAbstract
     public function __construct(UriHandler $uriHandler)
     {
         parent::__construct($uriHandler);
-        $this->testsPath = PATH_ROOT .DIRECTORY_SEPARATOR . 'alpha' . DIRECTORY_SEPARATOR . 'tests';
+        $this->testsPath = Config::getRootPath() .DIRECTORY_SEPARATOR . 'alpha' . DIRECTORY_SEPARATOR . 'tests';
     }
 
     /**

@@ -6,6 +6,7 @@
  */
 namespace Alpha\Language;
 
+use Alpha\Core\Config;
 use Alpha\Connector\LanguageRepositoryInterface;
 
 /**
@@ -76,7 +77,7 @@ class LanguageRepository implements LanguageRepositoryInterface
      */
     protected function loadLanguage()
     {
-        $languageFile = PATH_PROJECT . $this->languageFilename;
+        $languageFile = Config::getProjectPath() . $this->languageFilename;
         if(file_exists($languageFile)) {
             $this->strings          = parse_ini_file($languageFile, true);
             $this->isLanguageLoaded = true;
