@@ -45,7 +45,7 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
       e.g. ```webapp/views/user/getEdit.html```
 
 
-## Controllers [(go to samples)](https://github.com/pintorafael/alpha/tree/master/samples/controller)
+## Controllers [(go to samples)](https://github.com/pintorafael/alpha/tree/master/samples/controllers)
 
    * Must be named like **User***Controller*.
     
@@ -96,7 +96,7 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
          ```
 
          
-## Views [(go to samples)](https://github.com/pintorafael/alpha/tree/master/samples/view)
+## Views [(go to samples)](https://github.com/pintorafael/alpha/tree/master/samples/views)
 
   * Iterate a list :
       ```
@@ -144,7 +144,7 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
       ```
  
     
-## Models [(go to samples)](https://github.com/pintorafael/alpha/tree/master/samples/model)
+## Models [(go to samples)](https://github.com/pintorafael/alpha/tree/master/samples/models)
 
    * Must extend **\Alpha\Storage\BucketAbstract**.
    * Must implement the method **getSchema()**, e.g.:
@@ -164,7 +164,7 @@ public static function getSchema()
 ```
 
 
-## Connectors [(go to sample)](https://github.com/pintorafael/alpha/blob/master/webapp/connectors.ini)
+## Connectors [(go to sample)](https://github.com/pintorafael/alpha/blob/master/webapp/connectors)
 
 Connectors work like plugins, you have to configure them to use them.
 To configure them just fill in the connectors.ini in the webapp folder.
