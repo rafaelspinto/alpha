@@ -194,7 +194,7 @@ Examples of connectors :
    * View *(View)*
 
 
-## Localization/i18n [(go to sample)](https://github.com/pintorafael/alpha/blob/master/webapp/language.ini)
+## Localization/i18n [(go to samples)](https://github.com/pintorafael/alpha/blob/master/webapp)
 
 The strings that must be adjusted to the location(i18n) should be located at ```webapp/language.{country_code}``` and must have the following structure :
 ```
