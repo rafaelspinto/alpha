@@ -4,7 +4,7 @@
  *                                                                                                                                                                                                                                                                             
  * @author Rafael Pinto <santospinto.rafael@gmail.com>                                                                                                                                                                                                                         
  */
-namespace Alpha\Storage;
+namespace Alpha\Connectors;
 
 use Alpha\Storage\MySQLResultIterator;
 use Alpha\Storage\MySQLUtils;
@@ -12,7 +12,7 @@ use Alpha\Storage\MySQLUtils;
 /**
  * MySQL repository.
  */
-class MySQLRepository implements \Alpha\Connector\RepositoryInterface
+class MySQLConnector implements \Alpha\Connector\RepositoryInterface
 {
     /**
      * @var \mysqli
@@ -30,12 +30,12 @@ class MySQLRepository implements \Alpha\Connector\RepositoryInterface
      */
     public function setup(array $configuration)
     {
-        $this->host     = isset($configuration['host']) ? $configuration['host'] : null;
-        $this->port     = isset($configuration['port']) ? $configuration['port'] : null;
-        $this->user     = isset($configuration['user']) ? $configuration['user'] : null;
-        $this->password = isset($configuration['password']) ? $configuration['password'] : null;
-        $this->database = isset($configuration['database']) ? $configuration['database'] : null;
-        $this->socket   = isset($configuration['socket']) ? $configuration['socket'] : null;
+        $this->host     = isset($configuration['server']['host']) ? $configuration['server']['host'] : null;
+        $this->port     = isset($configuration['server']['port']) ? $configuration['server']['port'] : null;
+        $this->user     = isset($configuration['server']['user']) ? $configuration['server']['user'] : null;
+        $this->password = isset($configuration['server']['password']) ? $configuration['server']['password'] : null;
+        $this->database = isset($configuration['server']['database']) ? $configuration['server']['database'] : null;
+        $this->socket   = isset($configuration['server']['socket']) ? $configuration['server']['socket'] : null;
     }
     
     /**

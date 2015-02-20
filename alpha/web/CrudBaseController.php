@@ -131,7 +131,7 @@ class CrudBaseController extends ControllerAbstract
         if($className == null) {
             $className = str_replace('Controller', '', get_called_class());
         }
-        $this->context  = "Webapp\Model\\" .$className;
+        $this->context  = "Webapp\Models\\" .$className;
         $this->modelVar = strtolower($className);
     }
 }

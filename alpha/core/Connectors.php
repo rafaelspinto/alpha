@@ -79,11 +79,20 @@ class Connectors extends SingletonAbstract
      */
     protected function init()
     {
-        $connectorsFile = Config::getProjectPath() . 'connectors.ini';
-        if(file_exists($connectorsFile)) {
-            $connectors = parse_ini_file($connectorsFile, true);
-            foreach($connectors as $name => $connectorProperties){
-                $this->repository[$name]['properties'] = $connectorProperties;               
+        $connectorsPath = Config::getConnectorsPath();
+        if(file_exists($connectorsPath)) {
+            $directoryIterator = new \DirectoryIterator($connectorsPath);
+            foreach($directoryIterator as $file){
+                if($file->isFile() && strpos($file->getExtension(), 'plug')!== false) {
+                    $connector                             = str_replace('.plug', '', $file->getFilename());
+                    $classname                             = 'Alpha\\Connectors\\' . $connector . 'Connector';
+                    $configuration                         = parse_ini_file($file->getRealPath(), true);
+                    $name                                  = isset($configuration['target']['name']) ? $configuration['target']['name'] : $connector;
+                    $this->repository[$name]['className']  = $classname;
+                    $this->repository[$name]['properties'] = $configuration;
+                    $this->repository[$name]['instance']   = null;
+                    var_dump($name);
+                }
             }
         }
     }
@@ -96,7 +105,6 @@ class Connectors extends SingletonAbstract
     protected function initDefaults()
     {
         $this->registerConnector('View', 'Alpha\Web\View');
-        $this->registerConnector('Repo', 'Alpha\Storage\MySQLRepository');
         $this->registerConnector('Language', 'Alpha\Language\LanguageRepository');
     }
     
