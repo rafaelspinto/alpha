@@ -1,6 +1,6 @@
 <?php
 /**
- * StringTag
+ * ConfigTag
  *
  * @author Rafael Pinto <santospinto.rafael@gmail.com>
  */
