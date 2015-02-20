@@ -21,7 +21,7 @@ class LanguageConnector implements LanguageRepositoryInterface
      */
     public function __construct()
     {
-        $this->languageFilename = 'language.ini';
+        $this->languageFilename = 'language';
         $this->languageCode     = 'en';
         $this->strings          = array();
         $this->isLanguageLoaded = false;
@@ -81,7 +81,14 @@ class LanguageConnector implements LanguageRepositoryInterface
         if(file_exists($languageFile)) {
             $this->strings          = parse_ini_file($languageFile, true);
             $this->isLanguageLoaded = true;
-        }       
+            return;
+        }
+        
+        $suffixedFile = Config::getProjectPath() . $this->languageFilename . '.' . $this->languageCode;
+        if(file_exists($suffixedFile)) {
+            $this->strings[$this->languageCode] = parse_ini_file($suffixedFile);
+            $this->isLanguageLoaded             = true;
+        }
     }
 }
 

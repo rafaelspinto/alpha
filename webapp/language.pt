@@ -1,0 +1,4 @@
+name    = "Nome"
+status  = "Estado"
+message = "Mensagem"
+tests   = "Testes"
