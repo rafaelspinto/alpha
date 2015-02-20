@@ -1,5 +1,5 @@
 <?php
-namespace Webapp\Model;
+namespace Webapp\Models;
 
 class User extends \Alpha\Storage\BucketAbstract
 {
