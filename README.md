@@ -195,7 +195,7 @@ The strings that must be adjusted to the location(i18n) should be located at ```
 
 ## Configuration 
 
-The configuration file should be locatedt at ```webapp/configuration.ini``` and must have the following structure :
+The configuration file should be located at ```webapp/configuration.ini``` and must have the following structure :
 ```
 [section]
     key=value
