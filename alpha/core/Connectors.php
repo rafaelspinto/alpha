@@ -90,8 +90,7 @@ class Connectors extends SingletonAbstract
                     $name                                  = isset($configuration['target']['name']) ? $configuration['target']['name'] : $connector;
                     $this->repository[$name]['className']  = $classname;
                     $this->repository[$name]['properties'] = $configuration;
-                    $this->repository[$name]['instance']   = null;
-                    var_dump($name);
+                    $this->repository[$name]['instance']   = null;                    
                 }
             }
         }
