@@ -31,7 +31,7 @@ class ConfigurationHandler
      * 
      * @return string|array|null
      */
-    public function getConfig($section = null, $key = null)
+    public function get($section = null, $key = null)
     {
         if(!$this->loadedConfig) {
             $this->load();
@@ -57,7 +57,7 @@ class ConfigurationHandler
      * 
      * @return void
      */
-    public function setConfig($section, $key, $value)
+    public function set($section, $key, $value)
     {
         $this->configuration[$section][$key] = $value;
     }
