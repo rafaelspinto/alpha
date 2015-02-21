@@ -7,6 +7,10 @@
 namespace Alpha\Test\Unit;
 
 $found = false;
+if(stream_resolve_include_path(PATH_ROOT. '/vendor/autoload.php') !== false) {
+    include PATH_ROOT . '/vendor/autoload.php';
+    $found = true;
+}
 if(stream_resolve_include_path('PHPUnit/Autoload.php') !== false) {
     require_once 'PHPUnit/Autoload.php';
     $found = true;
