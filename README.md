@@ -26,10 +26,9 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
 
 * The *default routing* of the requests is http://example.com/{s:controller}/{s:action}/{i:id} or http://example.com/{s:controller}/{i:id}.
 
-      e.g. :
-            http://example.com/User/edit/123
+      e.g. : http://example.com/User/edit/123
             
-            http://example.com/User/123
+      e.g. : http://example.com/User/123
 
 * Each *Controller* has a set of *Actions* which handle the requests.
  
@@ -155,12 +154,12 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
       ```
 public static function getSchema()
 {
-    return [
-                'bucket' => 'user',
-                'key'    => 'id',
-                'fields' => [ 'id'   => ['type' => 'integer'],
-                              'name' => ['type' => 'string'],
-                ]
+        return [
+                       'bucket' => 'user',
+                       'key'    => 'id',
+                        'fields' => [  'id'   => ['type' => 'integer'],
+                                       'name' => ['type' => 'string'],
+                        ]
 	];
 }
 ```
