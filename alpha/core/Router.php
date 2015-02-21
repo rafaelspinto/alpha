@@ -27,7 +27,7 @@ class Router
      * 
      * @param \Alpha\Handler\UriHandler $uriHandler            The uri handler.
      * @param string                    $controllerPath        The path of the controllers.
-     * @param string                    $defaultControllerName The path of the controllers.
+     * @param string                    $defaultControllerName The default controller name.
      */
     public function __construct(UriHandler $uriHandler, $controllerPath, $defaultControllerName)
     {
