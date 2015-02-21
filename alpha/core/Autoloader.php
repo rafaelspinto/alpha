@@ -6,12 +6,21 @@
  */
 namespace Alpha\Core;
 
-spl_autoload_register(array('\Alpha\Core\Autoloader', 'load'));
+use Alpha\Singleton\SingletonAbstract;
+use Alpha\Handler\AutoloaderHandler;
+
+require_once PATH_ROOT . DIRECTORY_SEPARATOR . 'alpha' . DIRECTORY_SEPARATOR . 'handler' . DIRECTORY_SEPARATOR . 'AutoloaderHandler.php';
+require_once PATH_ROOT . DIRECTORY_SEPARATOR . 'alpha' . DIRECTORY_SEPARATOR . 'singleton' . DIRECTORY_SEPARATOR . 'SingletonFactoryInterface.php';
+require_once PATH_ROOT . DIRECTORY_SEPARATOR . 'alpha' . DIRECTORY_SEPARATOR . 'singleton' . DIRECTORY_SEPARATOR . 'SingletonAbstract.php';
+
+spl_autoload_register(function($className){
+    return Autoloader::load($className);
+});
 
 /**
  * Class Autoloader for Alpha Framework.
  */
-class Autoloader
+class Autoloader extends SingletonAbstract
 {
     /**
      * Includes the specified class.
@@ -22,14 +31,7 @@ class Autoloader
      */
     public static function load($className)
     {      
-        $file = static::getNameOfFileFromClassName($className);
-        
-        if(!file_exists($file)) {
-            return false;
-        }
-        
-        include $file;
-        return true;
+        return static::getInstance()->load($className);
     }
     
     /**
@@ -41,11 +43,28 @@ class Autoloader
      */
     public static function getNameOfFileFromClassName($className)
     {       
-        $className = str_replace('\\', '/', $className);        
-        $file      = PATH_ROOT . DIRECTORY_SEPARATOR . $className . '.php';
-        $dir       = strtolower(dirname($file));
-        $file      = basename($file);
-        $file      = $dir . DIRECTORY_SEPARATOR . $file;
-        return $file;
+        return static::getInstance()->getNameOfFileFromClassName($className);
+    }
+    
+    /**
+     * Returns the namespace from a directory.
+     * 
+     * @param string $directory The full path of the directory.
+     * 
+     * @return string
+     */
+    public static function getNamespaceFromDirectory($directory)
+    {
+        return static::getInstance()->getNamespaceFromDirectory($directory);
+    }
+
+    /**
+     * Returns the AutoloaderHandler instance that should be used as a singleton.
+     * 
+     * @return static
+     */
+    public static function make()
+    {        
+        return new AutoloaderHandler(PATH_ROOT);
     }
 }

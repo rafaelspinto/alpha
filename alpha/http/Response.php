@@ -4,7 +4,7 @@
  *
  * @author Rafael Pinto <santospinto.rafael@gmail.com>
  */
-namespace Alpha\Web;
+namespace Alpha\Http;
 
 use Alpha\Http\StatusCode;
 use Alpha\Http\ContentType;

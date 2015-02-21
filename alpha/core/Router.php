@@ -4,10 +4,11 @@
  *
  * @author Rafael Pinto <santospinto.rafael@gmail.com>
  */
-namespace Alpha\Web;
+namespace Alpha\Core;
 
 use Alpha\Core\Config;
 use Alpha\Http\UriHandler;
+use Alpha\Controller\CrudBaseController;
 
 /**
  * Class that handles request routing.
@@ -90,7 +91,7 @@ class Router
      * @param string $ctrlName The name of the controller
      * @param string $action   The name of the action
      * 
-     * @return \Alpha\Web\Response
+     * @return \Alpha\Http\Response
      */
     public function execute($ctrlFile, $ctrlName, $action)
     {

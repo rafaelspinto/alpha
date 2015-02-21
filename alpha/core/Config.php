@@ -6,6 +6,9 @@
  */
 namespace Alpha\Core;
 
+use Alpha\Singleton\SingletonAbstract;
+use Alpha\Handler\ConfigurationHandler;
+
 /**
  * Class for handling configuration.
  */
@@ -21,7 +24,7 @@ class Config extends SingletonAbstract
      */
     public static function get($section = null, $key = null)
     {
-        return static::getInstance()->getConfig($section, $key);
+        return static::getInstance()->get($section, $key);
     }
     
     /**
@@ -31,7 +34,7 @@ class Config extends SingletonAbstract
      */
     public static function getRootPath()
     {
-        return static::getInstance()->getPath('root');
+        return static::getInstance()->get('path', 'root');
     }
     
     /**
@@ -41,7 +44,7 @@ class Config extends SingletonAbstract
      */
     public static function getProjectPath()
     {
-        return static::getInstance()->getPath('project');
+        return static::getInstance()->get('path', 'project');
     }
     
     /**
@@ -51,7 +54,7 @@ class Config extends SingletonAbstract
      */
     public static function getControllersPath()
     {
-        return static::getInstance()->getPath('controllers');
+        return static::getInstance()->get('path', 'controllers');
     }
     
     /**
@@ -61,7 +64,7 @@ class Config extends SingletonAbstract
      */
     public static function getViewsPath()
     {
-        return static::getInstance()->getPath('views');
+        return static::getInstance()->get('path', 'views');
     }
     
     /**
@@ -71,7 +74,7 @@ class Config extends SingletonAbstract
      */
     public static function getModelsPath()
     {
-        return static::getInstance()->getPath('models');
+        return static::getInstance()->get('path', 'models');
     }
     
     /**
@@ -81,116 +84,36 @@ class Config extends SingletonAbstract
      */
     public static function getConnectorsPath()
     {
-        return static::getInstance()->getPath('connectors');
-    }
-    
-    // instance
-    protected $configuration, $configurationFile, $loadedConfig;
-    
-    /**
-     * Constructs a Config.
-     */
-    public function __construct()
-    {
-        $this->configuration = array();
-        $this->loadedConfig  = false;
-        $this->initPaths();        
+        return static::getInstance()->get('path', 'connectors');
     }
     
     /**
-     * Returns the configuration for the section and key,
-     * 
-     * @param string $section The section of the configuration.
-     * @param string $key     The key of the property.
-     * 
-     * @return string|array|null
-     */
-    public function getConfig($section = null, $key = null)
-    {
-        if(!$this->loadedConfig) {
-            $this->load();
-        }
-        
-        if($section == null) {
-            return $this->configuration;
-        }
-        
-        if($key == null) {
-            return isset($this->configuration[$section]) ? $this->configuration[$section] : null;
-        }
-        
-        return isset($this->configuration[$section][$key]) ? $this->configuration[$section][$key] : null;
-    }
-    
-    /**
-     * Sets the configuration of the section of the key.
-     * 
-     * @param string $section The section of the configuration.
-     * @param string $key     The key of the property.
-     * @param mixed  $value   The value of the property.
-     * 
-     * @return void
-     */
-    public function setConfig($section, $key, $value)
-    {
-        $this->configuration[$section][$key] = $value;
-    }
-    
-    /**
-     * Returns the path.
-     * 
-     * @param string $key The key of the path.
+     * Returns the connectors path.
      * 
      * @return string
      */
-    public function getPath($key)
+    public static function getPlugsPath()
     {
-        return $this->configuration['path'][$key];
+        return static::getInstance()->get('path', 'plugs');
     }
-    
+
     /**
-     * Sets the path.
+     * Returns the ConfigurationHandler instance that should be used as a singleton.
      * 
-     * @param string $key   The key of the path.
-     * @param string $value The value of the path.
-     * 
-     * @return void
+     * @return static
      */
-    public function setPath($key, $value)
+    public static function make()
     {
-        $this->configuration['path'][$key] = $value;
-    }
-    
-    /**
-     * Initializes the configuration data.
-     * 
-     * @return void
-     * 
-     * @throws \Exception
-     */
-    protected function load()
-    {
-        if(!file_exists($this->configurationFile)) {
-            throw new \Exception('configuration_file_does_not_exist:'.$this->configurationFile);
-        }
-        $this->configuration = parse_ini_file($this->configurationFile, true);
-    }
-    
-    /**
-     * Initializes the paths.
-     * 
-     * @return void
-     */
-    protected function initPaths()
-    {
-        $projectPath             = PATH_ROOT . DIRECTORY_SEPARATOR . 'webapp' . DIRECTORY_SEPARATOR;
-        $this->configurationFile = $projectPath . 'configuration.ini';
-        $this->setPath('root', PATH_ROOT);
-        $this->setPath('project', $projectPath);
-        $this->setPath('models', $projectPath . 'models' . DIRECTORY_SEPARATOR);
-        $this->setPath('views', $projectPath . 'views' . DIRECTORY_SEPARATOR);
-        $this->setPath('controllers', $projectPath . 'controllers' . DIRECTORY_SEPARATOR);
-        $this->setPath('connectors', $projectPath . 'connectors' . DIRECTORY_SEPARATOR);
+        $projectPath          = PATH_ROOT . DIRECTORY_SEPARATOR . 'webapp' . DIRECTORY_SEPARATOR;
+        $configurationFile    = $projectPath . 'configuration.ini';
+        $configurationHandler = new ConfigurationHandler($configurationFile);        
+        $configurationHandler->set('path', 'root', PATH_ROOT);
+        $configurationHandler->set('path', 'project', $projectPath);
+        $configurationHandler->set('path', 'models', $projectPath . 'models' . DIRECTORY_SEPARATOR);
+        $configurationHandler->set('path', 'views', $projectPath . 'views' . DIRECTORY_SEPARATOR);
+        $configurationHandler->set('path', 'controllers', $projectPath . 'controllers' . DIRECTORY_SEPARATOR);
+        $configurationHandler->set('path', 'connectors', PATH_ROOT . DIRECTORY_SEPARATOR . 'connectors' . DIRECTORY_SEPARATOR); 
+        $configurationHandler->set('path', 'plugs', $projectPath . 'plugs' . DIRECTORY_SEPARATOR); 
+        return $configurationHandler;
     }
 }
-

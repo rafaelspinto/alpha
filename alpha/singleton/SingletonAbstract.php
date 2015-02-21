@@ -4,17 +4,17 @@
  *
  * @author Rafael Pinto <santospinto.rafael@gmail.com>
  */
-namespace Alpha\Core;
+namespace Alpha\Singleton;
 
 /**
  * Base class for Singletons.
  */
-abstract class SingletonAbstract
+abstract class SingletonAbstract implements SingletonFactoryInterface
 {
     static protected $instances = array();
         
     /**
-     * Returns the instance of the called class.
+     * Returns the instance that should be used as a singleton.
      * 
      * @return static
      */
@@ -22,9 +22,8 @@ abstract class SingletonAbstract
     {
         $className = get_called_class();
         if(!isset(self::$instances[$className])) {
-            self::$instances[$className] = new $className;
+            self::$instances[$className] = static::make();
         }
         return self::$instances[$className];
     }
 }
-
