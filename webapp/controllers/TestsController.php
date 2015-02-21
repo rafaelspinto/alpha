@@ -5,7 +5,7 @@ use Alpha\Http\UriHandler;
 /**
  * Controller for handling requests to Tests.
  */
-class TestsController extends \Alpha\Web\ControllerAbstract
+class TestsController extends \Alpha\Controller\ControllerAbstract
 {
     protected $testsPath;
 
@@ -17,7 +17,7 @@ class TestsController extends \Alpha\Web\ControllerAbstract
     public function __construct(UriHandler $uriHandler)
     {
         parent::__construct($uriHandler);
-        $this->testsPath = Config::getRootPath() .DIRECTORY_SEPARATOR . 'alpha' . DIRECTORY_SEPARATOR . 'tests';
+        $this->testsPath = Config::getRootPath() .DIRECTORY_SEPARATOR . 'tests';
     }
 
     /**
@@ -32,8 +32,8 @@ class TestsController extends \Alpha\Web\ControllerAbstract
             $filename = $file->getFilename();
             if($file->isFile() && strpos($filename, 'TestCase') !== false) {
                 $testName  = str_replace('.php', '', $filename);                
-                $testClass = "Alpha\Tests\\".$testName;
-                $testSuite = new Alpha\Core\TestSuite(new \ReflectionClass($testClass));
+                $testClass = "\\Tests\\".$testName;
+                $testSuite = new Alpha\Test\Unit\TestSuite(new \ReflectionClass($testClass));
                 $result    = $testSuite->run();
                 $tests     = array();
                 foreach($testSuite->tests() as $test){
