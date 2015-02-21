@@ -1,6 +1,6 @@
 # alpha 
 
-Alpha is a lean framework for building WEB Applications/API's based on the *MVC* pattern. The main goal of this framework is to provide the developer to write as little code as possible, preferrably doing one line coding (ambitious right?).
+Alpha is a lean framework for building Web Applications / REST API's based on the *MVC* pattern. The main goal of this framework is to provide the developer to write as little code as possible, preferrably doing one line coding (ambitious right?).
 
 
 ## Contents 
@@ -9,7 +9,7 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
  * [How does alpha work](#how-does-alpha-work)
  * [Controllers](#controllers-go-to-samples)
  * [Views](#views-go-to-samples)
- * [Models](#models-go-to-samples)
+ * [Models/Buckets](#modelsbuckets-go-to-samples)
  * [Connectors](#connectors-go-to-sample)
  * [Localization/i18n](#localizationi18n-go-to-samples)
  * [Configuration](#configuration)
@@ -144,9 +144,12 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
            content
       @/([property_name=value])
       ```
- 
+**Note:** To use Views you must plug **View** Connector. [check connectors section](#connectors-go-to-sample)
     
-## Models [(go to samples)](https://github.com/pintorafael/alpha/tree/master/samples/models)
+    
+## Models/Buckets [(go to samples)](https://github.com/pintorafael/alpha/tree/master/samples/models)
+
+A Repository (Repo) is where you store data. A Bucket is where you store data for a specific Model. For example, if you are using a database Repository (using MySQLConnector), then a Bucket corresponds to a Table.
 
    * Must extend **\Alpha\Storage\BucketAbstract**.
    * Must implement the method **getSchema()**, e.g.:
@@ -163,6 +166,15 @@ public static function getSchema()
 	];
 }
 ```
+   * Repositories must implement the following CRUD operations :
+      
+       * Bucket::create(...);
+       * Bucket::update(...);
+       * Bucket::delete(...);
+       * Bucket::find(...);
+       * Bucket::findByKey(...);
+
+**Note:** To use Models/Buckets you must plug a **Repo** connector (e.g. MySQL). [check connectors section](#connectors-go-to-sample)
 
 
 ## Connectors [(go to sample)](https://github.com/pintorafael/alpha/blob/master/webapp/plugs)
@@ -206,6 +218,8 @@ or if you prefer to use a single file to include all strings simply create a fil
 * To use inside a *Controller* or other class just use ```Connectors::get('Language')->getString($key)```
 * To use inside a *View* just use ```@string(key)```
    
+**Note:** To use Localization/i18n you must plug **Language** connector. [check connectors section](#connectors-go-to-sample)
+
 
 ## Configuration 
 
