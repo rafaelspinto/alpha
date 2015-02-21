@@ -24,7 +24,7 @@ class Config extends SingletonAbstract
      */
     public static function get($section = null, $key = null)
     {
-        return static::getInstance()->getConfig($section, $key);
+        return static::getInstance()->get($section, $key);
     }
     
     /**
@@ -34,7 +34,7 @@ class Config extends SingletonAbstract
      */
     public static function getRootPath()
     {
-        return static::getInstance()->getConfig('path', 'root');
+        return static::getInstance()->get('path', 'root');
     }
     
     /**
@@ -44,7 +44,7 @@ class Config extends SingletonAbstract
      */
     public static function getProjectPath()
     {
-        return static::getInstance()->getConfig('path', 'project');
+        return static::getInstance()->get('path', 'project');
     }
     
     /**
@@ -54,7 +54,7 @@ class Config extends SingletonAbstract
      */
     public static function getControllersPath()
     {
-        return static::getInstance()->getConfig('path', 'controllers');
+        return static::getInstance()->get('path', 'controllers');
     }
     
     /**
@@ -64,7 +64,7 @@ class Config extends SingletonAbstract
      */
     public static function getViewsPath()
     {
-        return static::getInstance()->getConfig('path', 'views');
+        return static::getInstance()->get('path', 'views');
     }
     
     /**
@@ -74,7 +74,7 @@ class Config extends SingletonAbstract
      */
     public static function getModelsPath()
     {
-        return static::getInstance()->getConfig('path', 'models');
+        return static::getInstance()->get('path', 'models');
     }
     
     /**
@@ -84,7 +84,7 @@ class Config extends SingletonAbstract
      */
     public static function getConnectorsPath()
     {
-        return static::getInstance()->getConfig('path', 'connectors');
+        return static::getInstance()->get('path', 'connectors');
     }
     
     /**
@@ -94,7 +94,7 @@ class Config extends SingletonAbstract
      */
     public static function getPlugsPath()
     {
-        return static::getInstance()->getConfig('path', 'plugs');
+        return static::getInstance()->get('path', 'plugs');
     }
 
     /**
@@ -107,13 +107,13 @@ class Config extends SingletonAbstract
         $projectPath          = PATH_ROOT . DIRECTORY_SEPARATOR . 'webapp' . DIRECTORY_SEPARATOR;
         $configurationFile    = $projectPath . 'configuration.ini';
         $configurationHandler = new ConfigurationHandler($configurationFile);        
-        $configurationHandler->setConfig('path', 'root', PATH_ROOT);
-        $configurationHandler->setConfig('path', 'project', $projectPath);
-        $configurationHandler->setConfig('path', 'models', $projectPath . 'models' . DIRECTORY_SEPARATOR);
-        $configurationHandler->setConfig('path', 'views', $projectPath . 'views' . DIRECTORY_SEPARATOR);
-        $configurationHandler->setConfig('path', 'controllers', $projectPath . 'controllers' . DIRECTORY_SEPARATOR);
-        $configurationHandler->setConfig('path', 'connectors', PATH_ROOT . DIRECTORY_SEPARATOR . 'connectors' . DIRECTORY_SEPARATOR); 
-        $configurationHandler->setConfig('path', 'plugs', $projectPath . 'plugs' . DIRECTORY_SEPARATOR); 
+        $configurationHandler->set('path', 'root', PATH_ROOT);
+        $configurationHandler->set('path', 'project', $projectPath);
+        $configurationHandler->set('path', 'models', $projectPath . 'models' . DIRECTORY_SEPARATOR);
+        $configurationHandler->set('path', 'views', $projectPath . 'views' . DIRECTORY_SEPARATOR);
+        $configurationHandler->set('path', 'controllers', $projectPath . 'controllers' . DIRECTORY_SEPARATOR);
+        $configurationHandler->set('path', 'connectors', PATH_ROOT . DIRECTORY_SEPARATOR . 'connectors' . DIRECTORY_SEPARATOR); 
+        $configurationHandler->set('path', 'plugs', $projectPath . 'plugs' . DIRECTORY_SEPARATOR); 
         return $configurationHandler;
     }
 }
