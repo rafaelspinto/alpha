@@ -38,10 +38,11 @@ class IncludeTag extends ViewTagAbstract
             $viewFile = Config::getViewsPath() . $matches[1][$i];
             if (file_exists($viewFile)) {
                 $replaceContent = file_get_contents($viewFile);
+                $content        = $this->render(str_replace($matches[0][$i], $replaceContent, $content), $data);
             } else {
                 $replaceContent = 'layout_not_found:' . $viewFile;
+                $content        = str_replace($matches[0][$i], $replaceContent, $content);
             }
-            $content = $this->render(str_replace($matches[0][$i], $replaceContent, $content), $data);
         }
         return $content;
     }
