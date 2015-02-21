@@ -165,7 +165,7 @@ public static function getSchema()
 	];
 }
 ```
-   * They must implement the following CRUD operations :
+   * Repositories must implement the following CRUD operations :
       
        * Bucket::create(...);
        * Bucket::update(...);
