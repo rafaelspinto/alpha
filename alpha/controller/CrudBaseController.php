@@ -8,13 +8,14 @@ namespace Alpha\Controller;
 
 use Alpha\Controller\ControllerAbstract;
 use Alpha\Http\UriHandler;
+use Alpha\Core\Buckets;
 
 /**
  * Base controller for CRUD operations.
  */
 class CrudBaseController extends ControllerAbstract
 {
-    protected $context, $modelVar;
+    protected $modelVar, $bucket;
        
     /**
      * Constructs a CrudBaseController.
@@ -56,8 +57,7 @@ class CrudBaseController extends ControllerAbstract
      */
     public function getById($PATH_id)
     {
-        $context                     = $this->context;
-        $this->data[$this->modelVar] = $context::findByKey($PATH_id);
+        $this->data[$this->modelVar] = Buckets::get($this->bucket)->findByKey($PATH_id);
     }
     
     /**
@@ -67,8 +67,7 @@ class CrudBaseController extends ControllerAbstract
      */
     public function get()
     {
-        $context                     = $this->context;
-        $this->data[$this->modelVar] = $context::find();
+        $this->data[$this->modelVar] = Buckets::get($this->bucket)->find();
     }
     
     /**
@@ -80,8 +79,7 @@ class CrudBaseController extends ControllerAbstract
      */
     public function postCreate($PARAM)
     {
-        $context                     = $this->context;
-        $this->data[$this->modelVar] = $context::create($PARAM);
+        $this->data[$this->modelVar] = Buckets::get($this->bucket)->create($PARAM);
     }
 
     /**
@@ -93,8 +91,7 @@ class CrudBaseController extends ControllerAbstract
      */
     public function postSearch($PARAM)
     {
-        $context                     = $this->context;
-        $this->data[$this->modelVar] = $context::find($PARAM);
+        $this->data[$this->modelVar] = Buckets::get($this->bucket)->find($PARAM);
     }
     
     /**
@@ -106,8 +103,7 @@ class CrudBaseController extends ControllerAbstract
      */
     public function getEdit($PATH_id)
     {
-        $context                     = $this->context;
-        $this->data[$this->modelVar] = $context::findByKey($PATH_id);
+        $this->data[$this->modelVar] = Buckets::get($this->bucket)->findByKey($PATH_id);
     }
     
     /**
@@ -121,8 +117,7 @@ class CrudBaseController extends ControllerAbstract
     public function postEdit($PATH_id, $PARAM)
     {
         $PARAM['id']                 = $PATH_id;
-        $context                     = $this->context;
-        $this->data[$this->modelVar] = $context::update($PARAM);
+        $this->data[$this->modelVar] = Buckets::get($this->bucket)->update($PARAM);
     }
     
     /**
@@ -134,8 +129,7 @@ class CrudBaseController extends ControllerAbstract
      */
     public function getDelete($PATH_id)
     {
-        $context                     = $this->context;
-        $this->data[$this->modelVar] = $context::findByKey($PATH_id);
+        $this->data[$this->modelVar] = Buckets::get($this->bucket)->findByKey($PATH_id);
     }
     
     /**
@@ -147,8 +141,7 @@ class CrudBaseController extends ControllerAbstract
      */
     public function postDelete($PATH_id)
     {
-        $context                     = $this->context;
-        $this->data[$this->modelVar] = $context::delete($PATH_id);
+        $this->data[$this->modelVar] = Buckets::get($this->bucket)->delete($PATH_id);
     }
     
     /**
@@ -163,7 +156,7 @@ class CrudBaseController extends ControllerAbstract
         if($className == null) {
             $className = str_replace('Controller', '', get_called_class());
         }
-        $this->context  = "Webapp\Models\\" .$className;
+        $this->bucket   = $className;
         $this->modelVar = strtolower($className);
     }
 }

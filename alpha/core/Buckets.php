@@ -22,11 +22,11 @@ class Buckets
      */
     public static function get($bucket)
     {
-        $className = "Webapp\Models\\" .$bucket;
-        $filename  = Autoloader::getNameOfFileFromClassName($className);
+        $filename = Config::getModelsPath() . $bucket . '.php';
         if(!file_exists($filename)) {
             throw new \Exception('bucket_does_not_exist:'.$bucket);
         }
+        $className = Autoloader::getNamespaceFromDirectory(Config::getModelsPath()) . $bucket;
         return new $className;
     }
 }
