@@ -144,7 +144,7 @@ Alpha is a lean framework for building Web Applications / REST API's based on th
            content
       @/([property_name=value])
       ```
-**Note:** To use Views you must plug **View** Connector. [check connectors](#connectors-go-to-sample)
+**Note:** To use Views you must plug **View** Connector. [Connectors](#connectors-go-to-sample)
     
     
 ## Models/Buckets [(go to samples)](https://github.com/pintorafael/alpha/tree/master/samples/models)
@@ -174,7 +174,7 @@ public static function getSchema()
        * Bucket::find(...);
        * Bucket::findByKey(...);
 
-**Note:** To use Models/Buckets you must plug a **Repo** connector (e.g. MySQL). [check connectors](#connectors-go-to-sample)
+**Note:** To use Models/Buckets you must plug a **Repo** connector (e.g. MySQL). [Connectors](#connectors-go-to-sample)
 
 
 ## Connectors [(go to sample)](https://github.com/pintorafael/alpha/blob/master/webapp/plugs)
@@ -218,7 +218,7 @@ or if you prefer to use a single file to include all strings simply create a fil
 * To use inside a *Controller* or other class just use ```Connectors::get('Language')->getString($key)```
 * To use inside a *View* just use ```@string(key)```
    
-**Note:** To use Localization/i18n you must plug **Language** connector. [check connectors](#connectors-go-to-sample)
+**Note:** To use Localization/i18n you must plug **Language** connector. [Connectors](#connectors-go-to-sample)
 
 
 ## Configuration 
