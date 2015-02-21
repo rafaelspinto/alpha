@@ -1,10 +1,10 @@
 <?php
 /**
- * TestCaseAbstract
+ * TestSuite
  *
  * @author Rafael Pinto <santospinto.rafael@gmail.com>
  */
-namespace Alpha\Core;
+namespace Alpha\Test\Unit;
 
 $found = false;
 if(stream_resolve_include_path('PHPUnit/Autoload.php') !== false) {
@@ -21,9 +21,9 @@ if(!$found) {
 }
 
 /**
- * Base class for Unit Test Case.
+ * Base class for Unit Test Suite.
  */
-abstract class TestCaseAbstract extends \PHPUnit_Framework_TestCase
+class TestSuite extends \PHPUnit_Framework_TestSuite
 {
-    // void as intended
+    // void
 }

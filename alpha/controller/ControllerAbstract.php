@@ -4,7 +4,7 @@
  *
  * @author Rafael Pinto <rafael.pinto@fixeads.com>
  */
-namespace Alpha\Web;
+namespace Alpha\Controller;
 
 use Alpha\Http\UriHandler;
 use Alpha\Core\Connectors;
@@ -12,6 +12,7 @@ use Alpha\Http\StatusCode;
 use Alpha\Http\ContentType;
 use Alpha\Utils\ArrayUtils;
 use Alpha\Http\Header;
+use Alpha\Http\Response;
 use Alpha\Core\Config;
 
 /**
@@ -40,7 +41,7 @@ abstract class ControllerAbstract
      * @param string $context    The context.
      * @param string $actionName The name of the action.
      * 
-     * @return \Alpha\Web\Response
+     * @return \Alpha\Http\Response
      * 
      * @throws \Exception
      */
@@ -213,7 +214,7 @@ abstract class ControllerAbstract
      * 
      * @param string $content The content of the response.
      * 
-     * @return \Alpha\Web\Response
+     * @return \Alpha\Http\Response
      */
     protected function makeResponse($content)
     {

@@ -1,14 +1,12 @@
 <?php
-namespace Alpha\Tests;
-
-require_once __DIR__.'/../core/Autoloader.php';
+namespace Tests;
 
 use Alpha\Core\Config;
 
 /**
  * Test case for Autoloader.
  */
-class AutoloaderTestCase extends \Alpha\Core\TestCaseAbstract
+class AutoloaderTestCase extends \Alpha\Test\Unit\TestCaseAbstract
 {
     /**
      * Constructs an AutoloaderTestCase.

@@ -1,12 +1,10 @@
 <?php
-namespace Alpha\Tests;
-
-require_once __DIR__.'/../core/Autoloader.php';
+namespace Tests;
 
 /**
  * Test case for UriHandler.
  */
-class UriHandlerTestCase extends \Alpha\Core\TestCaseAbstract
+class UriHandlerTestCase extends \Alpha\Test\Unit\TestCaseAbstract
 {
     /**
      * Constructs an UriHandlerTestCase. 

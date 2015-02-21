@@ -4,9 +4,9 @@
  *
  * @author Rafael Pinto <santospinto.rafael@gmail.com>
  */
-namespace Alpha\Web;
+namespace Alpha\Controller;
 
-use Alpha\Web\ControllerAbstract;
+use Alpha\Controller\ControllerAbstract;
 use Alpha\Http\UriHandler;
 
 /**
