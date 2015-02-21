@@ -1,5 +1,5 @@
 <?php
-class ExampleController extends \Alpha\Web\ControllerAbstract
+class ExampleController extends \Alpha\Controller\ControllerAbstract
 {       
     public function getSearch($QUERY_name)
     {

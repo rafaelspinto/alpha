@@ -1,5 +1,5 @@
 <?php
-class UserController extends \Alpha\Web\CrudBaseController
+class UserController extends \Alpha\Controller\CrudBaseController
 {    
     public function postOtherAction($PARAM_name)
     {

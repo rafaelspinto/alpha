@@ -10,14 +10,13 @@ class User extends \Alpha\Storage\BucketAbstract
      */
     public static function getSchema()
     {
-        return array(
-            'bucket' => 'user',
-            'key'    => 'id',
-            'fields' => array(
-                'id' => array('type' => 'integer'),
-                'name' => array('type' => 'string'),
-            )
-        );
+        return [
+                'bucket' => 'user',
+                'key'    => 'id',
+                'fields' => [ 'id'   => ['type' => 'integer'],
+                              'name' => ['type' => 'string'],
+                ]
+        ];
     }
 }
 
