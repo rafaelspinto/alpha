@@ -9,7 +9,7 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
  * [How does alpha work](#how-does-alpha-work)
  * [Controllers](#controllers-go-to-samples)
  * [Views](#views-go-to-samples)
- * [Models](#models-go-to-samples)
+ * [Models/Buckets](#models-go-to-samples)
  * [Connectors](#connectors-go-to-sample)
  * [Localization/i18n](#localizationi18n-go-to-samples)
  * [Configuration](#configuration)
@@ -146,7 +146,9 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
       ```
  
     
-## Models [(go to samples)](https://github.com/pintorafael/alpha/tree/master/samples/models)
+## Models/Buckets [(go to samples)](https://github.com/pintorafael/alpha/tree/master/samples/models)
+
+A Repository (Repo) is where you store data. A Bucket is where you store data for a specific Model. For example, if you are using a database Repository (using MySQLConnector), then a Bucket corresponds to a Table.
 
    * Must extend **\Alpha\Storage\BucketAbstract**.
    * Must implement the method **getSchema()**, e.g.:
@@ -163,7 +165,13 @@ public static function getSchema()
 	];
 }
 ```
-
+   * They must implement the following CRUD operations :
+      
+       * Bucket::create(...);
+       * Bucket::update(...);
+       * Bucket::delete(...);
+       * Bucket::find(...);
+       * Bucket::findByKey(...);
 
 ## Connectors [(go to sample)](https://github.com/pintorafael/alpha/blob/master/webapp/plugs)
 
