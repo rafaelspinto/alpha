@@ -4,10 +4,10 @@
  *
  * @author Rafael Pinto <santospinto.rafael@gmail.com>
  */
-namespace Alpha\Http;
+namespace Alpha\Handler;
 
 /**
- * Handles URI components.
+ * Class that handles URI components.
  */
 class UriHandler
 {

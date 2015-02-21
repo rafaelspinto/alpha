@@ -7,7 +7,7 @@
 namespace Alpha\Core;
 
 use Alpha\Core\Config;
-use Alpha\Http\UriHandler;
+use Alpha\Handler\UriHandler;
 use Alpha\Controller\CrudBaseController;
 
 /**
@@ -18,16 +18,16 @@ class Router
     protected $controllerPath, $defaultControllerName;
 
     /**
-     * @var \Alpha\Http\UriHandler 
+     * @var \Alpha\Handler\UriHandler 
      */
     protected $uriHandler;
 
     /**
      * Constructs a Router.
      * 
-     * @param \Alpha\Http\UriHandler $uriHandler            The uri handler.
-     * @param string                 $controllerPath        The path of the controllers.
-     * @param string                 $defaultControllerName The path of the controllers.
+     * @param \Alpha\Handler\UriHandler $uriHandler            The uri handler.
+     * @param string                    $controllerPath        The path of the controllers.
+     * @param string                    $defaultControllerName The path of the controllers.
      */
     public function __construct(UriHandler $uriHandler, $controllerPath, $defaultControllerName)
     {

@@ -6,7 +6,7 @@
  */
 namespace Alpha\Controller;
 
-use Alpha\Http\UriHandler;
+use Alpha\Handler\UriHandler;
 use Alpha\Core\Connectors;
 use Alpha\Http\StatusCode;
 use Alpha\Http\ContentType;
@@ -25,7 +25,7 @@ abstract class ControllerAbstract
     /**
      * Constructs a ControllerAbstract.
      * 
-     * @param \Alpha\Http\UriHandler $uriHandler The uri handler.
+     * @param \Alpha\Handler\UriHandler $uriHandler The uri handler.
      */
     public function __construct(UriHandler $uriHandler)
     {

@@ -1,6 +1,6 @@
 <?php
 use Alpha\Core\Config;
-use Alpha\Http\UriHandler;
+use Alpha\Handler\UriHandler;
 
 /**
  * Controller for handling requests to Tests.

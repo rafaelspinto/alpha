@@ -7,8 +7,8 @@
 namespace Alpha\Controller;
 
 use Alpha\Controller\ControllerAbstract;
-use Alpha\Http\UriHandler;
 use Alpha\Core\Buckets;
+use Alpha\Handler\UriHandler;
 
 /**
  * Base controller for CRUD operations.
@@ -20,8 +20,8 @@ class CrudBaseController extends ControllerAbstract
     /**
      * Constructs a CrudBaseController.
      * 
-     * @param UriHandler $uriHandler The uri handler.
-     * @param string     $className  The name of the class.
+     * @param \Alpha\Handler\UriHandler $uriHandler The uri handler.
+     * @param string                    $className  The name of the class.
      */
     public function __construct(UriHandler $uriHandler, $className = null)
     {

@@ -1,6 +1,8 @@
 <?php
 namespace Tests;
 
+use Alpha\Handler\UriHandler;
+
 /**
  * Test case for UriHandler.
  */
@@ -21,7 +23,7 @@ class UriHandlerTestCase extends \Alpha\Test\Unit\TestCaseAbstract
      */
     public function testGetComponent_UriHasTwoComponents_ShouldAssertEquals()
     {
-        $uriHandler = new \Alpha\Http\UriHandler();
+        $uriHandler = new UriHandler();
         $uriHandler->setPattern('/{s:context}/{i:id}');
         $uriHandler->setUri('/users/123');
         $this->assertEquals('users', $uriHandler->getComponent('context'));
@@ -35,7 +37,7 @@ class UriHandlerTestCase extends \Alpha\Test\Unit\TestCaseAbstract
      */
     public function testGetComponent_UriHasOneFullComponentAndOnePartialComponent_ShouldAssertEquals()
     {
-        $uriHandler = new \Alpha\Http\UriHandler();
+        $uriHandler = new UriHandler();
         $uriHandler->setPattern('/{s:context}/id-{i:id}');
         $uriHandler->setUri('/users/id-123');
         $this->assertEquals('users', $uriHandler->getComponent('context'));
@@ -49,7 +51,7 @@ class UriHandlerTestCase extends \Alpha\Test\Unit\TestCaseAbstract
      */
     public function testGetComponent_UriHasTwoPartialComponent_ShouldAssertEquals()
     {
-        $uriHandler = new \Alpha\Http\UriHandler();
+        $uriHandler = new UriHandler();
         $uriHandler->setPattern('/my-{s:context}/id-{i:id}');
         $uriHandler->setUri('/my-users/id-123');
         $this->assertEquals('users', $uriHandler->getComponent('context'));
@@ -65,7 +67,7 @@ class UriHandlerTestCase extends \Alpha\Test\Unit\TestCaseAbstract
      */
     public function testGetComponent_ComponentDoesNotExist_ShouldThrowException()
     {
-        $uriHandler = new \Alpha\Http\UriHandler();
+        $uriHandler = new UriHandler();
         $uriHandler->setPattern('/my-{s:context}/id-{i:id}');
         $uriHandler->setUri('/my-users/id-123');
         $uriHandler->getComponent('other');
