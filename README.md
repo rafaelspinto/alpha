@@ -24,9 +24,11 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
 
 ## How does alpha work?
 
-* The *default routing* of the requests is http://example.com/{s:controller}/{s:action}/{i:id}.
+* The *default routing* of the requests is http://example.com/{s:controller}/{s:action}/{i:id} or http://example.com/{s:controller}/{i:id}.
 
-      e.g. http://example.com/User/edit/123
+      e.g. :
+            http://example.com/User/edit/123
+            http://example.com/User/123
 
 * Each *Controller* has a set of *Actions* which handle the requests.
  
@@ -49,7 +51,7 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
 
    * Must be named like **User***Controller*.
     
-   * Must extend **\Alpha\Web\ControllerAbstract** or **\Alpha\Web\CrudBaseController**.
+   * Must extend **\Alpha\Controller\ControllerAbstract** or **\Alpha\Controller\CrudBaseController**.
    
    * Actions must be prefixed by the HTTP method it handles, e.g. :
 
@@ -152,14 +154,13 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
       ```
 public static function getSchema()
 {
-            return array(
-                  'bucket' => 'user',
-                  'key'    => 'id',
-                  'fields' => array(
-                              'id' => array('type' => 'integer'),
-                              'name' => array('type' => 'string'),
-                             )
-                  );
+    return [
+                'bucket' => 'user',
+                'key'    => 'id',
+                'fields' => [ 'id'   => ['type' => 'integer'],
+                              'name' => ['type' => 'string'],
+                ]
+	];
 }
 ```
 
@@ -169,7 +170,7 @@ public static function getSchema()
 Connectors work like plugins, you have to configure them to use them.
 To configure them just create a file like ```MySQL.plug``` in the folder ```webapp/plugs```. 
 
-For this connector to be *plugged* a class named *MySQLConnector* that implements a *ConnectorInterface* should exist inside the folder in the root called ```connectors```.
+For this connector to be *plugged* a class named *MySQLConnector* that implements a *ConnectorInterface* should exist inside the folder in the root called ```connectors```. [(go to available connectors)](https://github.com/pintorafael/alpha/blob/master/connectors)
 
 If you want to override an existing/default connector, just specify in the *.plug* file a section named *[target]* with a key *name* and the value of the connector to override/define (this name will be used to obtain the connector from the Connectors class. e.g.: ```Connectors::get('Repo');```
 
