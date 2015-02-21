@@ -48,23 +48,17 @@ abstract class ControllerAbstract
     public function execute($context, $actionName)
     {        
         $actionName = $this->buildActionMethodName($actionName);
-        $viewFile   = Config::getViewsPath() . strtolower($context) . DIRECTORY_SEPARATOR . $actionName . '.html';
-        $content    = '';
-        if(($hasView = file_exists($viewFile))){
-            $content = file_get_contents($viewFile);
-        }
-        
-        if (($hasMethod = method_exists($this, $actionName))) {
+        $content    = $this->getContentForView($this->getViewFilename($context, $actionName));
+                
+        if(($hasMethod = method_exists($this, $actionName))) {
             $otherView = call_user_func_array(array($this, $actionName), $this->buildParameters($actionName));
             if($otherView) {                
                 $otherView = Config::getViewsPath() . $otherView;
-                if(file_exists($otherView)) {
-                    $content = file_get_contents($otherView);
-                }
+                $content   = $this->getContentForView($otherView);
             }
         }
 
-        if($hasView || $hasMethod) {
+        if($content|| $hasMethod) {
             return $this->makeResponse($content);    
         }
         
@@ -223,5 +217,33 @@ abstract class ControllerAbstract
             return new Response(json_encode(ArrayUtils::encodeToUtf8($this->data)), $this->getStatusCode(), ContentType::APPLICATION_JSON);
         }      
         return new Response(Connectors::get('View')->render($content, $this->data), $this->getStatusCode(), $this->getContentType());
+    }
+    
+    /**
+     * Returns the filename for the view.
+     * 
+     * @param string $context    The context.
+     * @param string $actionName The name of the action.
+     * 
+     * @return string
+     */
+    protected function getViewFilename($context, $actionName)
+    {
+        return Config::getViewsPath() . strtolower($context) . DIRECTORY_SEPARATOR . $actionName . '.html';
+    }
+    
+    /**
+     * Returns the content for the given filename.
+     * 
+     * @param string $filename The filename of the view.
+     * 
+     * @return string | null
+     */
+    protected function getContentForView($filename)
+    {
+        if(file_exists($filename)) {
+            return file_get_contents($filename);
+        }
+        return null;
     }
 }

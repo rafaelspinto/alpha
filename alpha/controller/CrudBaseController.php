@@ -14,7 +14,7 @@ use Alpha\Http\UriHandler;
  */
 class CrudBaseController extends ControllerAbstract
 {
-    protected $context, $modelVar, $className;
+    protected $context, $modelVar;
        
     /**
      * Constructs a CrudBaseController.
@@ -26,6 +26,38 @@ class CrudBaseController extends ControllerAbstract
     {
         parent::__construct($uriHandler);        
         $this->initFromModel($className);
+    }
+    
+    /**
+     * Executes the controller action.
+     * 
+     * @param string $context    The context.
+     * @param string $actionName The name of the action.
+     * 
+     * @return \Alpha\Http\Response
+     * 
+     * @throws \Exception
+     */
+    public function execute($context, $actionName)
+    {
+        if(intval($actionName)) {
+            $this->getById($actionName);     
+            return $this->makeResponse($this->getContentForView($this->getViewFilename($this->modelVar, 'get' . ucfirst($this->modelVar))));
+        }
+        return parent::execute($context, $actionName);        
+    }
+    
+    /**
+     * Returns the item.
+     * 
+     * @param int $PATH_id The id of the item.
+     * 
+     * @return void
+     */
+    public function getById($PATH_id)
+    {
+        $context                     = $this->context;
+        $this->data[$this->modelVar] = $context::findByKey($PATH_id);
     }
     
     /**
