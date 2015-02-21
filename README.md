@@ -28,6 +28,7 @@ Alpha is a lean framework for building WEB Applications/API's based on the *MVC*
 
       e.g. :
             http://example.com/User/edit/123
+            
             http://example.com/User/123
 
 * Each *Controller* has a set of *Actions* which handle the requests.
