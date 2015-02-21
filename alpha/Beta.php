@@ -8,7 +8,7 @@ namespace Alpha;
 
 use Alpha\Core\Config;
 use Alpha\Http\UriHandler;
-use Alpha\Web\Router;
+use Alpha\Core\Router;
 
 /**
  * Class that bootstraps the Alpha Framework.
