@@ -11,5 +11,6 @@ namespace Alpha\Http;
  */
 class StatusCode
 {
-    const OK = 200;
+    const OK        = 200;
+    const NOT_FOUND = 404;
 }

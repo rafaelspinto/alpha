@@ -7,6 +7,9 @@
 namespace Alpha\Handler;
 
 use Alpha\Core\Autoloader;
+use Alpha\Connector\ConnectorInterface;
+use Alpha\Exception\ConnectorNotFoundException;
+use Alpha\Exception\InterfaceNotImplementedException;
 
 /**
  * Class that handles connectors.
@@ -41,7 +44,7 @@ class ConnectorHandler
     public function getConnector($name)
     {
         if(!array_key_exists($name, $this->repository)) {
-            throw new \Exception('connector_not_found:'.$name);
+            throw new ConnectorNotFoundException($name);
         }
         if($this->repository[$name]['instance'] == null) {
             $this->repository[$name]['instance'] = $this->initConnector($this->repository[$name]);
@@ -52,15 +55,17 @@ class ConnectorHandler
     /**
      * Registers a connector in the Connectors repository.
      * 
-     * @param string $name      The name of the connector identifier.
-     * @param string $className The fully qualified class name.
+     * @param string $name          The name of the connector identifier.
+     * @param string $className     The fully qualified class name.
+     * @param array  $configuration The array containing the configuration.
      * 
      * @return void
      */
-    public function registerConnector($name, $className)
+    public function registerConnector($name, $className, array $configuration)
     {
-        $this->repository[$name]['className'] = $className;
-        $this->repository[$name]['instance']  = null;
+        $this->repository[$name]['className']  = $className;
+        $this->repository[$name]['properties'] = $configuration;
+        $this->repository[$name]['instance']   = null;
     }
     
     /**
@@ -74,14 +79,12 @@ class ConnectorHandler
             $directoryIterator = new \DirectoryIterator($this->plugsPath);
             foreach($directoryIterator as $file){
                 if($file->isFile() && strpos($file->getExtension(), 'plug')!== false) {
-                    $connector                             = str_replace('.plug', '', $file->getFilename());
-                    $connectorNamespace                    = Autoloader::getNamespaceFromDirectory($this->connectorsPath);
-                    $classname                             = $connectorNamespace . $connector . 'Connector';
-                    $configuration                         = parse_ini_file($file->getRealPath(), true);
-                    $name                                  = isset($configuration['target']['name']) ? $configuration['target']['name'] : $connector;
-                    $this->repository[$name]['className']  = $classname;
-                    $this->repository[$name]['properties'] = $configuration;
-                    $this->repository[$name]['instance']   = null;                    
+                    $connector          = str_replace('.plug', '', $file->getFilename());
+                    $connectorNamespace = Autoloader::getNamespaceFromDirectory($this->connectorsPath);
+                    $className          = $connectorNamespace . $connector . 'Connector';
+                    $configuration      = parse_ini_file($file->getRealPath(), true);
+                    $name               = isset($configuration['target']['name']) ? $configuration['target']['name'] : $connector;
+                    $this->registerConnector($name, $className, $configuration);                    
                 }
             }
         }
@@ -98,7 +101,12 @@ class ConnectorHandler
     {
         $className = $connector['className'];
         $instance  = new $className();
-        if(method_exists($instance, 'setup') && isset($connector['properties'])) {                
+        
+        if (!$instance instanceof ConnectorInterface) {
+            throw new InterfaceNotImplementedException($className, 'ConnectorInterface');
+        }
+
+        if(isset($connector['properties'])) {                
             $instance->setup($connector['properties']);
         }
         return $instance;
