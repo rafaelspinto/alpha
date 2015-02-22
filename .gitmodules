@@ -1,0 +1,3 @@
+[submodule "connectors"]
+	path = connectors
+	url = https://github.com/pintorafael/alpha_connectors.git
