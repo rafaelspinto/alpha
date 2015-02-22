@@ -1,6 +1,5 @@
 <?php
 use Alpha\Core\Config;
-use Alpha\Handler\UriHandler;
 
 /**
  * Controller for handling requests to Tests.
@@ -12,11 +11,11 @@ class TestsController extends \Alpha\Controller\ControllerAbstract
     /**
      * Constructs a TestsController.
      * 
-     * @param \Alpha\Http\UriHandler $uriHandler The uri handler.
+     * @param string $viewsPath The path of the views.
      */
-    public function __construct(UriHandler $uriHandler)
+    public function __construct($viewsPath)
     {
-        parent::__construct($uriHandler);
+        parent::__construct($viewsPath);
         $this->testsPath = Config::getRootPath() .DIRECTORY_SEPARATOR . 'tests';
     }
 

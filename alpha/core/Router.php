@@ -7,35 +7,15 @@
 namespace Alpha\Core;
 
 use Alpha\Core\Config;
+use Alpha\Singleton\SingletonAbstract;
+use Alpha\Handler\RouteHandler;
 use Alpha\Handler\UriHandler;
-use Alpha\Controller\CrudBaseController;
 
 /**
  * Class that handles request routing.
  */
-class Router
+class Router extends SingletonAbstract
 {
-    protected $controllerPath, $defaultControllerName;
-
-    /**
-     * @var \Alpha\Handler\UriHandler 
-     */
-    protected $uriHandler;
-
-    /**
-     * Constructs a Router.
-     * 
-     * @param \Alpha\Handler\UriHandler $uriHandler            The uri handler.
-     * @param string                    $controllerPath        The path of the controllers.
-     * @param string                    $defaultControllerName The default controller name.
-     */
-    public function __construct(UriHandler $uriHandler, $controllerPath, $defaultControllerName)
-    {
-        $this->uriHandler            = $uriHandler;
-        $this->controllerPath        = $controllerPath;
-        $this->defaultControllerName = $defaultControllerName;
-    }
-
     /**
      * Routes the request to the Controller Action.
      * 
@@ -45,72 +25,20 @@ class Router
      * 
      * @throws \Exception
      */
-    public function go($uri)
-    {
-        $this->uriHandler->setUri($uri);
-        return $this->findController($this->uriHandler->getComponent('controller'), $this->uriHandler->getComponent('action'));
-    }
-
-    /**
-     * Returns the filename and name of the controller and the action.
-     * 
-     * @param string $controllerName The name of the controller.
-     * @param string $actionName     The name of the action.
-     * 
-     * @return array
-     * 
-     * @throws \Exception
-     */
-    public function findController($controllerName, $actionName)
-    {
-        $controllerFilename = $this->makeControllerFilename($controllerName);
-        if (file_exists($controllerFilename)) {
-            return $this->execute($controllerFilename, $controllerName, $actionName);
-        }
-        
-        // check if exists model
-        $modelFile = Config::getModelsPath() . $controllerName . '.php';
-        if(file_exists($modelFile)) {
-            $controller = new CrudBaseController($this->uriHandler, $controllerName);
-            return $controller->execute($controllerName, $actionName);
-        }
-        
-        // could be the default controller
-        $indexControllerFilename = $this->makeControllerFilename($this->defaultControllerName);
-        if(file_exists($indexControllerFilename)) {
-            return $this->execute($indexControllerFilename, $this->defaultControllerName, $controllerName);
-        }
-        
-        throw new \Exception('controller_not_found:' . $controllerName);
+    public static function go($uri)
+    {        
+        return static::getInstance()->go($uri);
     }
     
     /**
-     * Executes the controller action.
+     * Returns the RouteHandler instance that should be used as a singleton.
      * 
-     * @param string $ctrlFile The filename of the controller.
-     * @param string $ctrlName The name of the controller
-     * @param string $action   The name of the action
-     * 
-     * @return \Alpha\Http\Response
-     */
-    public function execute($ctrlFile, $ctrlName, $action)
+     * @return static
+     */ 
+    public static function make()
     {
-        include_once $ctrlFile;
-        $controllerClass    = '\\' . $ctrlName . 'Controller';
-        $controllerInstance = new $controllerClass($this->uriHandler);
-        $controllerName     = str_replace('Controller', '', $ctrlName);
-        return $controllerInstance->execute($controllerName, $action);
-    }
-    
-    /**
-     * Returns the filename for the controller.
-     * 
-     * @param string $controllerName The name of the controller.
-     * 
-     * @return string
-     */
-    public function makeControllerFilename($controllerName)
-    {
-        return $this->controllerPath . $controllerName . 'Controller.php';
+        $uriHandler = new UriHandler();
+        $uriHandler->setPattern('/{s:controller}/{s:action}/{i:id}');
+        return new RouteHandler($uriHandler, Config::getControllersPath(), Config::getModelsPath(), Config::getViewsPath(), 'Index');
     }
 }

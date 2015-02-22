@@ -8,7 +8,6 @@ namespace Alpha\Controller;
 
 use Alpha\Controller\ControllerAbstract;
 use Alpha\Core\Buckets;
-use Alpha\Handler\UriHandler;
 
 /**
  * Base controller for CRUD operations.
@@ -20,34 +19,35 @@ class CrudBaseController extends ControllerAbstract
     /**
      * Constructs a CrudBaseController.
      * 
-     * @param \Alpha\Handler\UriHandler $uriHandler The uri handler.
-     * @param string                    $className  The name of the class.
+     * @param string $viewsPath The path of the views.
+     * @param string $className The name of the class.
      */
-    public function __construct(UriHandler $uriHandler, $className = null)
+    public function __construct($viewsPath, $className = null)
     {
-        parent::__construct($uriHandler);        
+        parent::__construct($viewsPath);        
         $this->initFromModel($className);
     }
-    
+
     /**
      * Executes the controller action.
      * 
      * @param string $context    The context.
      * @param string $actionName The name of the action.
+     * @param array  $parameters The parameters.
      * 
      * @return \Alpha\Http\Response
      * 
      * @throws \Exception
      */
-    public function execute($context, $actionName)
-    {
-        if(intval($actionName)) {
-            $this->getById($actionName);     
+    public function execute($context, $actionName, array $parameters)
+    {            
+        if(filter_var($actionName, FILTER_VALIDATE_INT) !== false) {
+            $this->getById($actionName);
             return $this->makeResponse($this->getContentForView($this->getViewFilename($this->modelVar, 'get' . ucfirst($this->modelVar))));
         }
-        return parent::execute($context, $actionName);        
+        return parent::execute($context, $actionName, $parameters);
     }
-    
+
     /**
      * Returns the item.
      * 

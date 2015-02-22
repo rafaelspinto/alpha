@@ -6,84 +6,33 @@
  */
 namespace Alpha\Controller;
 
-use Alpha\Handler\UriHandler;
 use Alpha\Core\Connectors;
 use Alpha\Http\StatusCode;
 use Alpha\Http\ContentType;
 use Alpha\Utils\ArrayUtils;
 use Alpha\Http\Header;
 use Alpha\Http\Response;
-use Alpha\Core\Config;
 
 /**
  * Base class for Controllers.
  */
 abstract class ControllerAbstract
 {
-    protected $uriHandler, $data, $statusCode, $contentType;
+    protected $data, $statusCode, $contentType, $viewsPath;
     
     /**
      * Constructs a ControllerAbstract.
      * 
-     * @param \Alpha\Handler\UriHandler $uriHandler The uri handler.
+     * @param string $viewsPath The path of the views.
      */
-    public function __construct(UriHandler $uriHandler)
+    public function __construct($viewsPath)
     {
-        $this->uriHandler  = $uriHandler;
+        $this->viewsPath   = $viewsPath;
         $this->data        = array();
         $this->statusCode  = StatusCode::OK;
         $this->contentType = ContentType::TEXT_HTML;
     }
           
-    /**
-     * Executes the controller action.
-     * 
-     * @param string $context    The context.
-     * @param string $actionName The name of the action.
-     * 
-     * @return \Alpha\Http\Response
-     * 
-     * @throws \Exception
-     */
-    public function execute($context, $actionName)
-    {        
-        $actionName = $this->buildActionMethodName($actionName);
-        $content    = $this->getContentForView($this->getViewFilename($context, $actionName));
-                
-        if(($hasMethod = method_exists($this, $actionName))) {
-            $otherView = call_user_func_array(array($this, $actionName), $this->buildParameters($actionName));
-            if($otherView) {                
-                $otherView = Config::getViewsPath() . $otherView;
-                $content   = $this->getContentForView($otherView);
-            }
-        }
-
-        if($content|| $hasMethod) {
-            return $this->makeResponse($content);    
-        }
-        
-        throw new \Exception('action_not_found:' . $actionName);
-    }
-    
-    /**
-     * Builds the parameters required for the action.
-     * 
-     * @param string $actionName The name of the action.
-     * 
-     * @return array
-     * 
-     * @throws \Exception
-     */
-    public function buildParameters($actionName)
-    {
-        $ref        = new \ReflectionMethod($this, $actionName);
-        $parameters = array();
-        foreach($ref->getParameters() as $parameter) {
-            $parameters[$parameter->getName()] = $this->makeParameterValue($parameter);
-        }
-        return $parameters;
-    }
-    
     /**
      * Sets the HTTP status code.
      * 
@@ -142,65 +91,32 @@ abstract class ControllerAbstract
     }
     
     /**
-     * Returns the name of the method for the given action.
+     * Executes the controller action.
      * 
+     * @param string $context    The context.
      * @param string $actionName The name of the action.
+     * @param array  $parameters The parameters.
      * 
-     * @return string
+     * @return \Alpha\Http\Response
+     * 
+     * @throws \Exception
      */
-    protected function buildActionMethodName($actionName)
-    {
-        $type   = 'get';
-        $method = filter_input(INPUT_SERVER, 'REQUEST_METHOD');
-        switch($method){
-            case 'PUT' :
-            case 'DELETE' :
-            case 'POST' :
-            case 'GET'  :
-                $type = strtolower($method);
-                break;
-        }
-        return $type . ucfirst($actionName);
-    }
-    
-    /**
-     * Returns the parameter value.
-     * 
-     * @param \ReflectionParameter $parameter The parameter of the action.
-     * 
-     * @return mixed
-     */
-    protected function makeParameterValue(\ReflectionParameter $parameter)
-    {
-        $param = $parameter->getName();
-        if(strpos($param, '_') == false){
-            switch ($param){
-                case 'QUERY' :
-                    return $_GET;
-                case 'PARAM' :
-                    return $_POST;
-                case 'COOKIE' :
-                    return $_COOKIE;
-                case 'SESSION' :
-                    return $_SESSION;
+    public function execute($context, $actionName, array $parameters)
+    {        
+        $content = $this->getContentForView($this->getViewFilename($context, $actionName));                
+        if(($hasMethod = method_exists($this, $actionName))) {
+            $otherView = call_user_func_array(array($this, $actionName), $parameters);
+            if($otherView) {                
+                $otherView = $this->viewsPath . $otherView;
+                $content   = $this->getContentForView($otherView);
             }
         }
-        $separatorPos = stripos($param, '_');
-        $paramType    = substr($param, 0, $separatorPos);
-        $paramName    = substr($param, $separatorPos + 1);
-        
-        switch($paramType) {
-            case 'PATH' :
-                return $this->uriHandler->getComponent($paramName);
-            case 'QUERY' :
-                return filter_input(INPUT_GET, $paramName);
-            case 'PARAM' :
-                return filter_input(INPUT_POST, $paramName);
-            case 'COOKIE' :
-                return filter_input(INPUT_COOKIE, $paramName);
-            case 'SESSION' :
-                return filter_input(INPUT_SESSION, $paramName);
+
+        if($content|| $hasMethod) {
+            return $this->makeResponse($content);    
         }
+        
+        throw new \Exception('action_not_found:' . $actionName);
     }
     
     /**
@@ -210,13 +126,28 @@ abstract class ControllerAbstract
      * 
      * @return \Alpha\Http\Response
      */
-    protected function makeResponse($content)
+    public function makeResponse($content)
     {
         // json response
         if(empty($content) && !empty ($this->data)){            
             return new Response(json_encode(ArrayUtils::encodeToUtf8($this->data)), $this->getStatusCode(), ContentType::APPLICATION_JSON);
         }      
         return new Response(Connectors::get('View')->render($content, $this->data), $this->getStatusCode(), $this->getContentType());
+    }
+    
+    /**
+     * Returns the content for the given filename.
+     * 
+     * @param string $filename The filename of the view.
+     * 
+     * @return string | null
+     */
+    public function getContentForView($filename)
+    {
+        if(file_exists($filename)) {
+            return file_get_contents($filename);
+        }
+        return null;
     }
     
     /**
@@ -227,23 +158,8 @@ abstract class ControllerAbstract
      * 
      * @return string
      */
-    protected function getViewFilename($context, $actionName)
+    public function getViewFilename($context, $actionName)
     {
-        return Config::getViewsPath() . strtolower($context) . DIRECTORY_SEPARATOR . $actionName . '.html';
-    }
-    
-    /**
-     * Returns the content for the given filename.
-     * 
-     * @param string $filename The filename of the view.
-     * 
-     * @return string | null
-     */
-    protected function getContentForView($filename)
-    {
-        if(file_exists($filename)) {
-            return file_get_contents($filename);
-        }
-        return null;
+        return $this->viewsPath . strtolower($context) . DIRECTORY_SEPARATOR . $actionName . '.html';
     }
 }
