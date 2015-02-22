@@ -7,6 +7,7 @@
 namespace Alpha\Handler;
 
 use Alpha\Controller\CrudBaseController;
+use Alpha\Exception\ControllerNotFoundException;
 
 /**
  * Class that handles routes.
@@ -85,10 +86,12 @@ class RouteHandler
         // could be the default controller
         $indexControllerFilename = $this->makeControllerFilename($this->defaultControllerName);
         if(file_exists($indexControllerFilename)) {
-            return new $this->defaultControllerName($this->viewsPath);
+            include_once $indexControllerFilename;
+            $controllerClass = '\\' . $this->defaultControllerName . 'Controller';
+            return new $controllerClass($this->viewsPath);
         }
         
-        throw new \Exception('controller_not_found:' . $controllerName);
+        throw new ControllerNotFoundException($controllerFilename);
     }
     
     /**
