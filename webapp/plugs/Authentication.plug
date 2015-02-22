@@ -1,0 +1,4 @@
+[entity]
+bucket = "user"
+search = "email"
+check  = "pwd"
