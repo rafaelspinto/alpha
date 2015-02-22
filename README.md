@@ -18,7 +18,7 @@ Alpha is a lean framework for building Web Applications / REST API's based on th
 ## Setup
 
 1. Create a virtual host based on the vhost.conf located in the samples folder.
-2. Download/clone the repository and define the webapp folder as the document root of the vhost.
+2. Download/clone the repository and define the **htdocs** folder as the document root of the vhost.
 3. Create your controllers/models/views inside the webapp folder.
 
 
