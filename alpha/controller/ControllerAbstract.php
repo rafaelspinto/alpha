@@ -12,6 +12,7 @@ use Alpha\Http\ContentType;
 use Alpha\Utils\ArrayUtils;
 use Alpha\Http\Header;
 use Alpha\Http\Response;
+use Alpha\Exception\ControllerActionNotFoundException;
 
 /**
  * Base class for Controllers.
@@ -78,6 +79,16 @@ abstract class ControllerAbstract
     }
     
     /**
+     * Returns the array of data.
+     * 
+     * @return array
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+        
+    /**
      * Redirects the request to the given url.
      * 
      * @param string $url The url.
@@ -116,7 +127,7 @@ abstract class ControllerAbstract
             return $this->makeResponse($content);    
         }
         
-        throw new \Exception('action_not_found:' . $actionName);
+        throw new ControllerActionNotFoundException($actionName);
     }
     
     /**
