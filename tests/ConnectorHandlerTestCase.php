@@ -3,25 +3,47 @@ namespace Tests;
 
 use Alpha\Handler\ConnectorHandler;
 
+/**
+ * Dummy class.
+ */
 class DummyClassDoesNotImplementConnectorInterface
 {
     // void
 }
 
-class DummyImplementsConnectorInterface implements \Alpha\Connector\ConnectorInterface
+/**
+ * Dummy class.
+ */
+class StubImplementsConnectorInterface implements \Alpha\Connector\ConnectorInterface
 {
     protected $value;
+    
+    /**
+     * The setup method.
+     * 
+     * @param array $configuration configuration.
+     * 
+     * @return void
+     */
     public function setup(array $configuration)
     {
         $this->value = $configuration['value'];
     }
     
+    /**
+     * Does stuff.
+     * 
+     * @return string
+     */
     public function doStuff()
     {
         return $this->value;
     }
 }
 
+/**
+ * Test case for ConnectorHandler.
+ */
 class ConnectorHandlerTestCase extends \Alpha\Test\Unit\TestCaseAbstract
 {
      /**
@@ -67,7 +89,7 @@ class ConnectorHandlerTestCase extends \Alpha\Test\Unit\TestCaseAbstract
     public function testGetConnector_ConnectorImplementsInterface_ShouldThrowInterfaceNotImplementedException()
     {
         $connectorHandler = new ConnectorHandler(null, null);
-        $connectorHandler->registerConnector('xpto', 'Tests\DummyImplementsConnectorInterface', array('value' => 'Peter Griffin'));
+        $connectorHandler->registerConnector('xpto', 'Tests\StubImplementsConnectorInterface', array('value' => 'Peter Griffin'));
         $connector = $connectorHandler->getConnector('xpto');
         $this->assertEquals('Peter Griffin', $connector->doStuff());
     }
