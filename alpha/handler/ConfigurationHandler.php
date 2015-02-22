@@ -6,6 +6,8 @@
  */
 namespace Alpha\Handler;
 
+use Alpha\Exception\FileNotFoundException;
+
 /**
  * Class for handling configuration.
  */
@@ -21,6 +23,7 @@ class ConfigurationHandler
     public function __construct($configurationFile)
     {
         $this->configurationFile = $configurationFile;
+        $this->configuration     = array();
     }
     
     /**
@@ -72,7 +75,7 @@ class ConfigurationHandler
     protected function load()
     {
         if(!file_exists($this->configurationFile)) {
-            throw new \Exception('configuration_file_does_not_exist:'.$this->configurationFile);
+            throw new FileNotFoundException($this->configurationFile);
         }
         $config              = parse_ini_file($this->configurationFile, true);
         $this->configuration = array_merge($this->configuration, $config);
