@@ -147,7 +147,7 @@ Alpha is a lean framework for building Web Applications / REST API's based on th
 **Note:** To use Views you must plug **View** Connector. [check connectors section](#connectors-go-to-sample)
     
     
-## Models/Buckets [(go to samples)](https://github.com/pintorafael/alpha/tree/master/samples/models)
+## Buckets/Repositories [(go to samples)](https://github.com/pintorafael/alpha/tree/master/samples/models)
 
 A Repository (Repo) is where you store data. A Bucket is where you store data for a specific Model. For example, if you are using a database Repository (using MySQLConnector), then a Bucket corresponds to a Table.
 
@@ -168,11 +168,11 @@ public function getSchema()
 ```
    * Repositories must implement the following CRUD operations :
       
-       * Bucket::create(...);
-       * Bucket::update(...);
-       * Bucket::delete(...);
-       * Bucket::find(...);
-       * Bucket::findByKey(...);
+       * create(...);
+       * update(...);
+       * delete(...);
+       * find(...);
+       * findByKey(...);
 
 **Note:** To use Models/Buckets you must plug a **Repo** connector (e.g. MySQL). [check connectors section](#connectors-go-to-sample)
 
