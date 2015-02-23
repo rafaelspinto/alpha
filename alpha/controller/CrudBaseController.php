@@ -6,26 +6,32 @@
  */
 namespace Alpha\Controller;
 
+use Alpha\Storage\BucketInterface;
 use Alpha\Controller\ControllerAbstract;
-use Alpha\Core\Buckets;
 
 /**
  * Base controller for CRUD operations.
  */
 class CrudBaseController extends ControllerAbstract
 {
-    protected $modelVar, $bucket;
+    /**
+     * @var BucketInterface
+     */
+    protected $bucket;
+
+    protected $modelVar; 
        
     /**
      * Constructs a CrudBaseController.
      * 
-     * @param string $viewsPath The path of the views.
-     * @param string $className The name of the class.
+     * @param Alpha\Storage\BucketInterface $bucket    Bucket to use.
+     * @param string                        $viewsPath The path of the views.
      */
-    public function __construct($viewsPath, $className = null)
+    public function __construct(BucketInterface $bucket, $viewsPath)
     {
         parent::__construct($viewsPath);        
-        $this->initFromModel($className);
+        $this->bucket   = $bucket;
+        $this->modelVar = strtolower(get_class($bucket));
     }
 
     /**
@@ -57,7 +63,7 @@ class CrudBaseController extends ControllerAbstract
      */
     public function getById($PATH_id)
     {
-        $this->data[$this->modelVar] = Buckets::get($this->bucket)->findByKey($PATH_id);
+        $this->data[$this->modelVar] = $this->bucket->findByKey($PATH_id);
     }
     
     /**
@@ -67,7 +73,7 @@ class CrudBaseController extends ControllerAbstract
      */
     public function get()
     {
-        $this->data[$this->modelVar] = Buckets::get($this->bucket)->find();
+        $this->data[$this->modelVar] = $this->bucket->find();
     }
     
     /**
@@ -79,7 +85,7 @@ class CrudBaseController extends ControllerAbstract
      */
     public function postCreate($PARAM)
     {
-        $this->data[$this->modelVar] = Buckets::get($this->bucket)->create($PARAM);
+        $this->data[$this->modelVar] = $this->bucket->create($PARAM);
     }
 
     /**
@@ -91,7 +97,7 @@ class CrudBaseController extends ControllerAbstract
      */
     public function postSearch($PARAM)
     {
-        $this->data[$this->modelVar] = Buckets::get($this->bucket)->find($PARAM);
+        $this->data[$this->modelVar] = $this->bucket->find($PARAM);
     }
     
     /**
@@ -103,7 +109,7 @@ class CrudBaseController extends ControllerAbstract
      */
     public function getEdit($PATH_id)
     {
-        $this->data[$this->modelVar] = Buckets::get($this->bucket)->findByKey($PATH_id);
+        $this->data[$this->modelVar] = $this->bucket->findByKey($PATH_id);
     }
     
     /**
@@ -117,7 +123,7 @@ class CrudBaseController extends ControllerAbstract
     public function postEdit($PATH_id, $PARAM)
     {
         $PARAM['id']                 = $PATH_id;
-        $this->data[$this->modelVar] = Buckets::get($this->bucket)->update($PARAM);
+        $this->data[$this->modelVar] = $this->bucket->update($PARAM);
     }
     
     /**
@@ -129,7 +135,7 @@ class CrudBaseController extends ControllerAbstract
      */
     public function getDelete($PATH_id)
     {
-        $this->data[$this->modelVar] = Buckets::get($this->bucket)->findByKey($PATH_id);
+        $this->data[$this->modelVar] = $this->bucket->findByKey($PATH_id);
     }
     
     /**
@@ -141,22 +147,6 @@ class CrudBaseController extends ControllerAbstract
      */
     public function postDelete($PATH_id)
     {
-        $this->data[$this->modelVar] = Buckets::get($this->bucket)->delete($PATH_id);
-    }
-    
-    /**
-     * Initializes the controller.
-     * 
-     * @param string $className The name of the class.
-     * 
-     * @return void
-     */
-    protected function initFromModel($className = null)
-    {
-        if($className == null) {
-            $className = str_replace('Controller', '', get_called_class());
-        }
-        $this->bucket   = $className;
-        $this->modelVar = strtolower($className);
-    }
+        $this->data[$this->modelVar] = $this->bucket->delete($PATH_id);
+    }   
 }

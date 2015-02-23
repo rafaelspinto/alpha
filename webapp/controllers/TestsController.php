@@ -62,7 +62,7 @@ class TestsController extends \Alpha\Controller\ControllerAbstract
         return array( 
             'name' => $test->failedTest()->getName(),
             'status' => $type,
-            'message' => $test->exceptionMessage()
+            'message' => $test->exceptionMessage() . $test->thrownException()
         );                        
     }
 }

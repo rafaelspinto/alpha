@@ -6,6 +6,8 @@
  */
 namespace Alpha\Handler;
 
+use Alpha\Core\Buckets;
+use Alpha\Core\Connectors;
 use Alpha\Controller\CrudBaseController;
 use Alpha\Exception\ControllerNotFoundException;
 
@@ -79,8 +81,10 @@ class RouteHandler
         
         // check if exists model
         $modelFile = $this->modelsPath . $controllerName . '.php';
-        if(file_exists($modelFile)) {
-            return new CrudBaseController($this->viewsPath, $controllerName);
+        if(file_exists($modelFile)) {            
+            include_once $modelFile;
+            $bucket = new $controllerName(Connectors::get('Repo'));
+            return new CrudBaseController($bucket, $this->viewsPath);
         }
         
         // could be the default controller
