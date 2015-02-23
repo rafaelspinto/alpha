@@ -7,6 +7,7 @@
 namespace Alpha\Core;
 
 use Alpha\Core\Autoloader;
+use Alpha\Core\Connectors;
 use Alpha\Exception\BucketNotFoundException;
 
 /**
@@ -28,6 +29,6 @@ class Buckets
             throw new BucketNotFoundException($bucket);
         }
         $className = Autoloader::getNamespaceFromDirectory(Config::getModelsPath()) . $bucket;
-        return new $className;
+        return new $className(Connectors::get('Repo'));
     }
 }

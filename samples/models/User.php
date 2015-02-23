@@ -8,7 +8,7 @@ class User extends \Alpha\Storage\BucketAbstract
      * 
      * @return array
      */
-    public static function getSchema()
+    public function getSchema()
     {
         return [
                 'bucket' => 'user',

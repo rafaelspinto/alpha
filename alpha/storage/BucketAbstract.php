@@ -6,7 +6,8 @@
  */
 namespace Alpha\Storage;
 
-use Alpha\Core\Connectors;
+use Alpha\Storage\BucketInterface;
+use Alpha\Connector\RepositoryInterface;
 use Alpha\Exception\BucketNameUndefinedException;
 use Alpha\Exception\BucketKeyUndefinedException;
 use Alpha\Exception\BucketFieldsUndefinedException;
@@ -16,15 +17,23 @@ use Alpha\Exception\BucketFieldTypeUndefinedException;
 /**
  * Base class for Buckets.
  */
-abstract class BucketAbstract
+abstract class BucketAbstract implements BucketInterface
 {
     /**
-     * Returns the array containing the schema.
-     * 
-     * @return array
+     * @var \Alpha\Connector\RepositoryInterface
      */
-    abstract static function getSchema();
+    protected $repository;
 
+    /**
+     * Constructs a BucketAbstract.
+     * 
+     * @param \Alpha\Connector\RepositoryInterface $repository The repository.
+     */
+    public function __construct(RepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+    
     /**
      * Creates an entry in the bucket and returns its key. 
      * 
@@ -32,9 +41,9 @@ abstract class BucketAbstract
      * 
      * @return int
      */
-    public static function create(array $fieldsAndValues)
+    public function create(array $fieldsAndValues)
     {
-        return Connectors::get('Repo')->create(static::getSchema(), $fieldsAndValues);
+        return $this->repository->create(static::getSchema(), $fieldsAndValues);
     }
     
     /**
@@ -46,9 +55,9 @@ abstract class BucketAbstract
      * 
      * @throws \Exception
      */
-    public static function update(array $fieldsAndValues)
+    public function update(array $fieldsAndValues)
     {        
-        return Connectors::get('Repo')->update(static::getSchema(), $fieldsAndValues);
+        return $this->repository->update(static::getSchema(), $fieldsAndValues);
     }
     
     /**
@@ -60,9 +69,9 @@ abstract class BucketAbstract
      * 
      * @throws \Exception
      */
-    public static function delete($key)
+    public function delete($key)
     {
-        return Connectors::get('Repo')->delete(static::getSchema(), $key);
+        return $this->repository->delete(static::getSchema(), $key);
     }
     
     /**
@@ -72,9 +81,9 @@ abstract class BucketAbstract
      * 
      * @return MySQLResultIterator
      */
-    public static function find(array $fieldsAndValues = array())
+    public function find(array $fieldsAndValues = array())
     {
-        return Connectors::get('Repo')->findByFields(static::getSchema(), $fieldsAndValues);
+        return $this->repository->findByFields(static::getSchema(), $fieldsAndValues);
     }
     
     /**
@@ -84,9 +93,9 @@ abstract class BucketAbstract
      * 
      * @return MySQLResultIterator
      */
-    public static function findByKey($key)
+    public function findByKey($key)
     {
-        return Connectors::get('Repo')->findByKey(static::getSchema(), $key);
+        return $this->repository->findByKey(static::getSchema(), $key);
     }
     
     /**
