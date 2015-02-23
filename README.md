@@ -182,7 +182,7 @@ public function getSchema()
 Connectors work like plugins, you have to configure them to use them.
 To configure them just create a file like ```MySQL.plug``` in the folder ```webapp/plugs```. 
 
-For this connector to be *plugged* a class named *MySQLConnector* that implements a *ConnectorInterface* should exist inside the folder in the root called ```connectors/{connector_folder}/{connector_name}```, e.g. : ```connectors/mysql/MySQLConnector.php``` [(go to available connectors)](https://github.com/pintorafael/alpha_connectors)
+For this connector to be *plugged*, a class named *MySQLConnector* that implements a *ConnectorInterface*, should exist inside the folder in the root called ```connectors/{connector_folder}/{connector_name}```, e.g. : ```connectors/mysql/MySQLConnector.php``` [(go to available connectors)](https://github.com/pintorafael/alpha_connectors)
 
 If you want to override an existing/default connector, just specify in the *.plug* file a section named *[target]* with a key *name* and the value of the connector to override/define (this name will be used to obtain the connector from the Connectors class. e.g.: ```Connectors::get('Repo');```
 
