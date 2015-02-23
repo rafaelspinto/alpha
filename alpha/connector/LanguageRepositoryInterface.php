@@ -1,4 +1,9 @@
 <?php
+/**                                                                                                                                                                                                                                                                            
+ * LanguageRepositoryInterface
+ *                                                                                                                                                                                                                                                                             
+ * @author Rafael Pinto <santospinto.rafael@gmail.com>                                                                                                                                                                                                                         
+ */
 namespace Alpha\Connector;
 
 use Alpha\Connector\ConnectorInterface;
