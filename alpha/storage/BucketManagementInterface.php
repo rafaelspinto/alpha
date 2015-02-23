@@ -19,6 +19,8 @@ interface BucketManagementInterface
      * @param \Alpha\Connector\RepositoryInterface $repo The repository.
      * 
      * @return void
+     * 
+     * @throws \Exception
      */
     function onCreate(RepositoryInterface $repo);
     
@@ -28,6 +30,8 @@ interface BucketManagementInterface
      * @param \Alpha\Connector\RepositoryInterface $repo The repository.
      * 
      * @return void
+     * 
+     * @throws \Exception
      */
     function onDestroy(RepositoryInterface $repo);
     
@@ -39,6 +43,8 @@ interface BucketManagementInterface
      * @param int                                  $newVersion The id of the new version.
      * 
      * @return void
+     * 
+     * @throws \Exception
      */
     function onUpgrade(RepositoryInterface $repo, $oldVersion, $newVersion);
     
@@ -50,6 +56,8 @@ interface BucketManagementInterface
      * @param int                                  $newVersion The id of the new version.
      * 
      * @return void
+     * 
+     * @throws \Exception
      */
     function onDowngrade(RepositoryInterface $repo, $oldVersion, $newVersion);
 }
