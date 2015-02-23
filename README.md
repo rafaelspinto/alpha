@@ -9,7 +9,7 @@ Alpha is a lean framework for building Web Applications / REST API's based on th
  * [How does alpha work](#how-does-alpha-work)
  * [Controllers](#controllers-go-to-samples)
  * [Views](#views-go-to-samples)
- * [Models/Buckets](#modelsbuckets-go-to-samples)
+ * [Buckets/Repositories](#bucketsrepositories-go-to-samples)
  * [Connectors](#connectors-go-to-sample)
  * [Localization/i18n](#localizationi18n-go-to-samples)
  * [Configuration](#configuration)
