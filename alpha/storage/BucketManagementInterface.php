@@ -23,7 +23,7 @@ interface BucketManagementInterface
     function onCreate(RepositoryInterface $repo);
     
     /**
-     * Called when the Bucket is being destroy.
+     * Called when the Bucket is being destroyed.
      * 
      * @param \Alpha\Connector\RepositoryInterface $repo The repository.
      * 
