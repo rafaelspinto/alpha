@@ -56,6 +56,8 @@ interface RepositoryInterface extends ConnectorInterface
      * @param mixed $key    The key of the entry.
      * 
      * @return \Traversable
+     * 
+     * @throws \Exception
      */
     function findByKey(array $schema, $key);
     
@@ -66,6 +68,8 @@ interface RepositoryInterface extends ConnectorInterface
      * @param mixed $fieldsAndValues The array containing the fields and values to search.
      * 
      * @return \Traversable
+     * 
+     * @throws \Exception
      */
     function findByFields(array $schema, $fieldsAndValues);
 }

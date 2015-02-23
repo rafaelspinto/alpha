@@ -40,6 +40,8 @@ abstract class BucketAbstract implements BucketInterface
      * @param array $fieldsAndValues The array containing the fields and values.
      * 
      * @return int
+     * 
+     * @throws \Exception
      */
     public function create(array $fieldsAndValues)
     {
@@ -80,6 +82,8 @@ abstract class BucketAbstract implements BucketInterface
      * @param mixed $fieldsAndValues The array containing the fields and values to search.
      * 
      * @return MySQLResultIterator
+     * 
+     * @throws \Exception
      */
     public function find(array $fieldsAndValues = array())
     {
@@ -92,6 +96,8 @@ abstract class BucketAbstract implements BucketInterface
      * @param mixed $key The key of the entry.
      * 
      * @return MySQLResultIterator
+     * 
+     * @throws \Exception
      */
     public function findByKey($key)
     {
@@ -105,7 +111,12 @@ abstract class BucketAbstract implements BucketInterface
      * 
      * @return array
      * 
-     * @throws \Exception
+     * 
+     * @throws BucketNameUndefinedException
+     * @throws BucketKeyUndefinedException
+     * @throws BucketFieldsUndefinedException
+     * @throws BucketFieldsEmptyException
+     * @throws BucketFieldTypeUndefinedException
      */
     public static function validateSchemaDefinition(array $schema)
     {        
