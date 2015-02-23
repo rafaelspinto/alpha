@@ -155,7 +155,7 @@ A Repository (Repo) is where you store data. A Bucket is where you store data fo
    * Must implement the method **getSchema()**, e.g.:
    
       ```
-public static function getSchema()
+public function getSchema()
 {
         return [
                        'bucket' => 'user',
