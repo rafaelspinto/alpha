@@ -7,6 +7,7 @@
 namespace Alpha\Core;
 
 use Alpha\Core\Autoloader;
+use Alpha\Exception\BucketNotFoundException;
 
 /**
  * Class that handles buckets.
@@ -24,7 +25,7 @@ class Buckets
     {
         $filename = Config::getModelsPath() . $bucket . '.php';
         if(!file_exists($filename)) {
-            throw new \Exception('bucket_does_not_exist:'.$bucket);
+            throw new BucketNotFoundException($bucket);
         }
         $className = Autoloader::getNamespaceFromDirectory(Config::getModelsPath()) . $bucket;
         return new $className;

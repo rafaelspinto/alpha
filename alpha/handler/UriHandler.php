@@ -6,6 +6,8 @@
  */
 namespace Alpha\Handler;
 
+use Alpha\Exception\ComponentNotFoundException;
+
 /**
  * Class that handles URI components.
  */
@@ -65,7 +67,7 @@ class UriHandler
         }
         
         if(!isset($this->components[$componentName])){
-            throw new \Exception('component_does_not_exist:'.$componentName);
+            throw new ComponentNotFoundException($componentName);
         }
         
         return $this->components[$componentName]['value'];

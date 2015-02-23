@@ -61,7 +61,7 @@ class UriHandlerTestCase extends \Alpha\Test\Unit\TestCaseAbstract
     /**
      * Tests getComponent method.
      * 
-     * @expectedException \Exception
+     * @expectedException \Alpha\Exception\ComponentNotFoundException
      * 
      * @return void
      */
