@@ -93,5 +93,16 @@ class ConnectorHandlerTestCase extends \Alpha\Test\Unit\TestCaseAbstract
         $connector = $connectorHandler->getConnector('xpto');
         $this->assertEquals('Peter Griffin', $connector->doStuff());
     }
+    
+    /**
+     * Tests getNamespaceForConnector method.
+     * 
+     * @return void
+     */
+    public function testGetNamespaceForConnector_ShouldAssertEquals()
+    {
+        $connectorHandler = new ConnectorHandler('/path/to/connectors/', null);
+        $this->assertEquals('\Path\To\Connectors\Xpto\\', $connectorHandler->getNamespaceForConnector('Xpto'));
+    }
 }
 

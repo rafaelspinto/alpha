@@ -69,6 +69,18 @@ class ConnectorHandler
     }
     
     /**
+     * Returns the namespace for a connector.
+     * 
+     * @param string $connector The name of the Connector.
+     * 
+     * @return string
+     */
+    public function getNamespaceForConnector($connector)
+    {
+        return Autoloader::getNamespaceFromDirectory($this->connectorsPath . strtolower($connector) . DIRECTORY_SEPARATOR);
+    }
+    
+    /**
      * Initializes the connectors in the connectors.ini file.
      * 
      * @return void
@@ -80,7 +92,7 @@ class ConnectorHandler
             foreach($directoryIterator as $file){
                 if($file->isFile() && strpos($file->getExtension(), 'plug')!== false) {
                     $connector          = str_replace('.plug', '', $file->getFilename());
-                    $connectorNamespace = Autoloader::getNamespaceFromDirectory($this->connectorsPath);
+                    $connectorNamespace = $this->getNamespaceForConnector($connector);
                     $className          = $connectorNamespace . $connector . 'Connector';
                     $configuration      = parse_ini_file($file->getRealPath(), true);
                     $name               = isset($configuration['target']['name']) ? $configuration['target']['name'] : $connector;
