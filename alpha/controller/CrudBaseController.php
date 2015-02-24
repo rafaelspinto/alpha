@@ -31,7 +31,7 @@ class CrudBaseController extends ControllerAbstract
     {
         parent::__construct($viewsPath);        
         $this->bucket   = $bucket;
-        $this->modelVar = strtolower(get_class($bucket));
+        $this->modelVar = strtolower($this->getModelVar(get_class($bucket)));
     }
 
     /**
@@ -148,5 +148,18 @@ class CrudBaseController extends ControllerAbstract
     public function postDelete($PATH_id)
     {
         $this->data[$this->modelVar] = $this->bucket->delete($PATH_id);
-    }   
+    }
+    
+    /**
+     * Returns the model var.
+     * 
+     * @param type $className The name of the class.
+     * 
+     * @return string
+     */
+    protected function getModelVar($className)
+    {
+        $parts = explode('\\', $className);
+        return $parts[count($parts) - 1];
+    }
 }

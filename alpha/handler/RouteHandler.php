@@ -82,7 +82,8 @@ class RouteHandler
         $modelFile = $this->modelsPath . $controllerName . '.php';
         if(file_exists($modelFile)) {            
             include_once $modelFile;
-            $bucket = new $controllerName(Connectors::get('Repo'));
+            $bucketClass = Autoloader::getFullyQualifiedClassNameForFilename($modelFile);
+            $bucket      = new $bucketClass(Connectors::get('Repo'));
             return new CrudBaseController($bucket, $this->viewsPath);
         }
         
