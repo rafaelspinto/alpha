@@ -1,6 +1,6 @@
 <?php
 /**                                                                                                                                                                                                                                                                            
- * LanguageRepositoryInterface
+ * LanguageConnectorInterface
  *                                                                                                                                                                                                                                                                             
  * @author Rafael Pinto <santospinto.rafael@gmail.com>                                                                                                                                                                                                                         
  */
@@ -11,7 +11,7 @@ use Alpha\Connector\ConnectorInterface;
 /**
  * Defines the interface that the Language Repositories must implement.
  */
-interface LanguageRepositoryInterface extends ConnectorInterface
+interface LanguageConnectorInterface extends ConnectorInterface
 {
     /**
      * Returns the value for the string identified by a key.
