@@ -59,6 +59,18 @@ class Autoloader extends SingletonAbstract
     }
 
     /**
+     * Returns the fully qualified class name for a filename.
+     * 
+     * @param string $filename the name of the file.
+     * 
+     * @return string
+     */
+    public static function getFullyQualifiedClassNameForFilename($filename)
+    {
+        return  static::getInstance()->getFullyQualifiedClassNameForFilename($filename);
+    }
+    
+    /**
      * Returns the AutoloaderHandler instance that should be used as a singleton.
      * 
      * @return static

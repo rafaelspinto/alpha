@@ -1,4 +1,6 @@
 <?php
+namespace Webapp\Controllers;
+
 class ExampleController extends \Alpha\Controller\ControllerAbstract
 {       
     public function getSearch($QUERY_name)

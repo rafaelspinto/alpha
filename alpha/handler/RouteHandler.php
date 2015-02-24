@@ -6,7 +6,7 @@
  */
 namespace Alpha\Handler;
 
-use Alpha\Core\Buckets;
+use Alpha\Core\Autoloader;
 use Alpha\Core\Connectors;
 use Alpha\Controller\CrudBaseController;
 use Alpha\Exception\ControllerNotFoundException;
@@ -74,8 +74,7 @@ class RouteHandler
     {
         $controllerFilename = $this->makeControllerFilename($controllerName);
         if (file_exists($controllerFilename)) {
-            include_once $controllerFilename;
-            $controllerClass = '\\' . $controllerName . 'Controller';
+            $controllerClass = Autoloader::getFullyQualifiedClassNameForFilename($controllerFilename);
             return new $controllerClass($this->viewsPath);            
         }
         
@@ -88,10 +87,9 @@ class RouteHandler
         }
         
         // could be the default controller
-        $indexControllerFilename = $this->makeControllerFilename($this->defaultControllerName);
-        if(file_exists($indexControllerFilename)) {
-            include_once $indexControllerFilename;
-            $controllerClass = '\\' . $this->defaultControllerName . 'Controller';
+        $defaultControllerFilename = $this->makeControllerFilename($this->defaultControllerName);
+        if(file_exists($defaultControllerFilename)) {
+            $controllerClass = Autoloader::getFullyQualifiedClassNameForFilename($defaultControllerFilename);
             return new $controllerClass($this->viewsPath);
         }
         

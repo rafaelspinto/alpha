@@ -60,6 +60,18 @@ class AutoloaderHandler
     }
     
     /**
+     * Returns the fully qualified class name for a filename.
+     * 
+     * @param string $filename the name of the file.
+     * 
+     * @return string
+     */
+    public function getFullyQualifiedClassNameForFilename($filename)
+    {
+        return str_replace('.php', '', $this->getNamespaceFromDirectory($filename));
+    }
+    
+    /**
      * Returns the namespace from a directory.
      * 
      * @param string $directory The full path of the directory.

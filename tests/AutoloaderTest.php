@@ -39,5 +39,16 @@ class AutoloaderTest extends \Alpha\Test\Unit\TestCaseAbstract
         $expected   = '/Path/to/Root/tmp/Xpto.php';
         $this->assertEquals($expected, $autoloader->getNameOfFileFromClassName('Tmp\Xpto'));
     }
+    
+    /**
+     * Tests getFullyQualifiedClassNameForFilename
+     * 
+     * @return void
+     */
+    public function testGetFullyQualifiedClassNameForFilename_IsFilename_ShouldAssertEquals()
+    {
+        $autoloader = new AutoloaderHandler('/Path/to/Root');
+        $this->assertEquals('\Tmp\Xpto', $autoloader->getFullyQualifiedClassNameForFilename('/Path/to/Root/tmp/Xpto.php'));
+    }
 }
 

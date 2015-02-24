@@ -72,7 +72,7 @@ class RouteHandlerTest extends \Alpha\Test\Unit\TestCaseAbstract
     {
         $mocksDir     = __DIR__ . DIRECTORY_SEPARATOR . 'mocks' . DIRECTORY_SEPARATOR;
         $routeHandler = new RouteHandler(new UriHandler(), $mocksDir, null, null, null);        
-        $this->assertTrue($routeHandler->makeController('Mock') instanceof \MockController);
+        $this->assertTrue($routeHandler->makeController('Mock') instanceof \Tests\Mocks\MockController);
     }
     
     /**
@@ -84,7 +84,7 @@ class RouteHandlerTest extends \Alpha\Test\Unit\TestCaseAbstract
     {
         $mocksDir     = __DIR__ . DIRECTORY_SEPARATOR . 'mocks' . DIRECTORY_SEPARATOR;
         $routeHandler = new RouteHandler(new UriHandler(), $mocksDir, null, null, 'MockDefault');
-        $this->assertTrue($routeHandler->makeController('Mock2') instanceof \MockDefaultController);
+        $this->assertTrue($routeHandler->makeController('Mock2') instanceof \Tests\Mocks\MockDefaultController);
     }
     
     /**
@@ -97,5 +97,20 @@ class RouteHandlerTest extends \Alpha\Test\Unit\TestCaseAbstract
         $mocksDir     = __DIR__ . DIRECTORY_SEPARATOR . 'mocks' . DIRECTORY_SEPARATOR;
         $routeHandler = new RouteHandler(new UriHandler(), $mocksDir, $mocksDir, null, 'MockDefault');
         $this->assertTrue($routeHandler->makeController('MockBucket') instanceof \Alpha\Controller\CrudBaseController);
+    }
+    
+    /**
+     * Tests execute method.
+     * 
+     * @return void
+     */
+    public function testExecute_ControllerIsStub_ShouldReturnJsonResponseOne()
+    {
+        $mocksDir     = __DIR__ . DIRECTORY_SEPARATOR . 'mocks' . DIRECTORY_SEPARATOR;
+        $stubsDir     = __DIR__ . DIRECTORY_SEPARATOR . 'stubs' . DIRECTORY_SEPARATOR;
+        $uriHandler   = new UriHandler();
+        $uriHandler->setPattern('/{s:controller}/{s:action}/{i:id}');
+        $routeHandler = new RouteHandler($uriHandler, $stubsDir, $mocksDir, null, 'MockDefault');        
+        $this->assertEquals(json_encode(array('stub' => 'one')), $routeHandler->go('/Stub/one')->getContent());
     }
 }
