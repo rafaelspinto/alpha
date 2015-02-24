@@ -9,7 +9,7 @@ use Alpha\Controller\CrudBaseController;
 class CrudBaseControllerTestCase extends \Alpha\Test\Unit\TestCaseAbstract
 {
     /**
-     * Constructs a RouteHandlerTestCase. 
+     * Constructs a CrudBaseControllerTestCase. 
      */
     public function __construct()
     {
