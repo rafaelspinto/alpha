@@ -6,7 +6,7 @@
  */
 namespace Alpha\Storage;
 
-use Alpha\Connector\RepositoryInterface;
+use Alpha\Connector\RepositoryConnectorInterface;
 
 /**
  * Defines the interface of the operations from Bucket to Repository.
@@ -16,48 +16,48 @@ interface BucketManagementInterface
     /**
      * Called when the Bucket is being created.
      * 
-     * @param \Alpha\Connector\RepositoryInterface $repo The repository.
+     * @param \Alpha\Connector\RepositoryConnectorInterface $repo The repository.
      * 
      * @return void
      * 
      * @throws \Exception
      */
-    function onCreate(RepositoryInterface $repo);
+    function onCreate(RepositoryConnectorInterface $repo);
     
     /**
      * Called when the Bucket is being destroyed.
      * 
-     * @param \Alpha\Connector\RepositoryInterface $repo The repository.
+     * @param \Alpha\Connector\RepositoryConnectorInterface $repo The repository.
      * 
      * @return void
      * 
      * @throws \Exception
      */
-    function onDestroy(RepositoryInterface $repo);
+    function onDestroy(RepositoryConnectorInterface $repo);
     
     /**
      * Called when the Bucket is being upgraded.
      * 
-     * @param \Alpha\Connector\RepositoryInterface $repo       The repository.
-     * @param int                                  $oldVersion The id of the old version.
-     * @param int                                  $newVersion The id of the new version.
+     * @param \Alpha\Connector\RepositoryConnectorInterface $repo       The repository.
+     * @param int                                           $oldVersion The id of the old version.
+     * @param int                                           $newVersion The id of the new version.
      * 
      * @return void
      * 
      * @throws \Exception
      */
-    function onUpgrade(RepositoryInterface $repo, $oldVersion, $newVersion);
+    function onUpgrade(RepositoryConnectorInterface $repo, $oldVersion, $newVersion);
     
     /**
      * Called when the Bucket is being downgraded.
      * 
-     * @param \Alpha\Connector\RepositoryInterface $repo       The repository.
-     * @param int                                  $oldVersion The id of the old version.
-     * @param int                                  $newVersion The id of the new version.
+     * @param \Alpha\Connector\RepositoryConnectorInterface $repo       The repository.
+     * @param int                                           $oldVersion The id of the old version.
+     * @param int                                           $newVersion The id of the new version.
      * 
      * @return void
      * 
      * @throws \Exception
      */
-    function onDowngrade(RepositoryInterface $repo, $oldVersion, $newVersion);
+    function onDowngrade(RepositoryConnectorInterface $repo, $oldVersion, $newVersion);
 }

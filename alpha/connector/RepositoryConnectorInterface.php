@@ -1,6 +1,6 @@
 <?php
 /**                                                                                                                                                                                                                                                                            
- * RepositoryInterface
+ * RepositoryConnectorInterface
  *                                                                                                                                                                                                                                                                             
  * @author Rafael Pinto <santospinto.rafael@gmail.com>                                                                                                                                                                                                                         
  */
@@ -11,7 +11,7 @@ use Alpha\Connector\ConnectorInterface;
 /**
  * Defines the interface that the Repositories must implement.
  */
-interface RepositoryInterface extends ConnectorInterface
+interface RepositoryConnectorInterface extends ConnectorInterface
 {
     /**
      * Creates an entry in the repository and returns its key.

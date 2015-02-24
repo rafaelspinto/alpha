@@ -7,7 +7,7 @@
 namespace Alpha\Storage;
 
 use Alpha\Storage\BucketInterface;
-use Alpha\Connector\RepositoryInterface;
+use Alpha\Connector\RepositoryConnectorInterface;
 use Alpha\Exception\BucketNameUndefinedException;
 use Alpha\Exception\BucketKeyUndefinedException;
 use Alpha\Exception\BucketFieldsUndefinedException;
@@ -20,16 +20,16 @@ use Alpha\Exception\BucketFieldTypeUndefinedException;
 abstract class BucketAbstract implements BucketInterface
 {
     /**
-     * @var \Alpha\Connector\RepositoryInterface
+     * @var \Alpha\Connector\RepositoryConnectorInterface
      */
     protected $repository;
 
     /**
      * Constructs a BucketAbstract.
      * 
-     * @param \Alpha\Connector\RepositoryInterface $repository The repository.
+     * @param \Alpha\Connector\RepositoryConnectorInterface $repository The repository.
      */
-    public function __construct(RepositoryInterface $repository)
+    public function __construct(RepositoryConnectorInterface $repository)
     {
         $this->repository = $repository;
     }
