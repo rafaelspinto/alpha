@@ -7,14 +7,14 @@ use Alpha\Handler\UriHandler;
 /**
  * Test case for RouteHandler.
  */
-class RouteHandlerTestCase extends \Alpha\Test\Unit\TestCaseAbstract
+class RouteHandlerTest extends \Alpha\Test\Unit\TestCaseAbstract
 {
     /**
      * Constructs a RouteHandlerTestCase. 
      */
     public function __construct()
     {
-        parent::__construct('RouteHandlerTestCase');
+        parent::__construct('RouteHandlerTest');
     }
     
     /**

@@ -6,14 +6,14 @@ use Alpha\Handler\AutoloaderHandler;
 /**
  * Test case for Autoloader.
  */
-class AutoloaderTestCase extends \Alpha\Test\Unit\TestCaseAbstract
+class AutoloaderTest extends \Alpha\Test\Unit\TestCaseAbstract
 {
     /**
      * Constructs an AutoloaderTestCase.
      */
     public function __construct()
     {
-        parent::__construct('AutoloaderTestCase');
+        parent::__construct('AutoloaderTest');
     }
 
     /**

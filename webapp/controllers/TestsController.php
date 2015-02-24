@@ -29,7 +29,7 @@ class TestsController extends \Alpha\Controller\ControllerAbstract
         $dirItrator = new DirectoryIterator($this->testsPath);
         foreach($dirItrator as $file){
             $filename = $file->getFilename();
-            if($file->isFile() && strpos($filename, 'TestCase') !== false) {
+            if($file->isFile() && strpos($filename, 'Test.php') !== false) {
                 $testName  = str_replace('.php', '', $filename);                
                 $testClass = "\\Tests\\".$testName;
                 $testSuite = new Alpha\Test\Unit\TestSuite(new \ReflectionClass($testClass));

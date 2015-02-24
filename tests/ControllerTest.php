@@ -4,14 +4,14 @@ namespace Tests;
 /**
  * Test case for Controller.
  */
-class ControllerTestCase extends \Alpha\Test\Unit\TestCaseAbstract
+class ControllerTest extends \Alpha\Test\Unit\TestCaseAbstract
 {
     /**
      * Constructs a ControllerTestCase. 
      */
     public function __construct()
     {
-        parent::__construct('ControllerTestCase');
+        parent::__construct('ControllerTest');
     }
     
     /**

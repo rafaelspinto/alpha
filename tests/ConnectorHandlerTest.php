@@ -44,14 +44,14 @@ class StubImplementsConnectorInterface implements \Alpha\Connector\ConnectorInte
 /**
  * Test case for ConnectorHandler.
  */
-class ConnectorHandlerTestCase extends \Alpha\Test\Unit\TestCaseAbstract
+class ConnectorHandlerTest extends \Alpha\Test\Unit\TestCaseAbstract
 {
      /**
      * Constructs a ConnectorHandlerTestCase. 
      */
     public function __construct()
     {
-        parent::__construct('ConnectorHandlerTestCase');
+        parent::__construct('ConnectorHandlerTest');
     }
     
     /**

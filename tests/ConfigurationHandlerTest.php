@@ -6,14 +6,14 @@ use Alpha\Handler\ConfigurationHandler;
 /**
  * Test case for ConfigurationHandler.
  */
-class ConfigurationHandlerTestCase extends \Alpha\Test\Unit\TestCaseAbstract
+class ConfigurationHandlerTest extends \Alpha\Test\Unit\TestCaseAbstract
 {
     /**
      * Constructs an UriHandlerTestCase. 
      */
     public function __construct()
     {
-        parent::__construct('ConfigurationHandlerTestCase');
+        parent::__construct('ConfigurationHandlerTest');
     }
     
     /**

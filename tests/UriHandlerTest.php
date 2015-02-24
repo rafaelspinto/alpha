@@ -6,14 +6,14 @@ use Alpha\Handler\UriHandler;
 /**
  * Test case for UriHandler.
  */
-class UriHandlerTestCase extends \Alpha\Test\Unit\TestCaseAbstract
+class UriHandlerTest extends \Alpha\Test\Unit\TestCaseAbstract
 {
     /**
      * Constructs an UriHandlerTestCase. 
      */
     public function __construct()
     {
-        parent::__construct('UriHandlerTestCase');
+        parent::__construct('UriHandlerTest');
     }
     
     /**

@@ -6,14 +6,14 @@ use Alpha\Controller\CrudBaseController;
 /**
  * Test case for CrudBaseController.
  */
-class CrudBaseControllerTestCase extends \Alpha\Test\Unit\TestCaseAbstract
+class CrudBaseControllerTest extends \Alpha\Test\Unit\TestCaseAbstract
 {
     /**
      * Constructs a CrudBaseControllerTestCase. 
      */
     public function __construct()
     {
-        parent::__construct('CrudBaseControllerTestCase');
+        parent::__construct('CrudBaseControllerTest');
     }
     
     /**
