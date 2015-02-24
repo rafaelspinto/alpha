@@ -1,4 +1,6 @@
 <?php
+namespace Webapp\Controllers;
+
 use Alpha\Core\Config;
 
 /**
@@ -26,13 +28,13 @@ class TestsController extends \Alpha\Controller\ControllerAbstract
      */
     public function get()
     {
-        $dirItrator = new DirectoryIterator($this->testsPath);
+        $dirItrator = new \DirectoryIterator($this->testsPath);
         foreach($dirItrator as $file){
             $filename = $file->getFilename();
             if($file->isFile() && strpos($filename, 'Test.php') !== false) {
                 $testName  = str_replace('.php', '', $filename);                
                 $testClass = "\\Tests\\".$testName;
-                $testSuite = new Alpha\Test\Unit\TestSuite(new \ReflectionClass($testClass));
+                $testSuite = new \Alpha\Test\Unit\TestSuite(new \ReflectionClass($testClass));
                 $result    = $testSuite->run();
                 $tests     = array();
                 foreach($testSuite->tests() as $test){
