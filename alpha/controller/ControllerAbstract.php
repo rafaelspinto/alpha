@@ -90,19 +90,6 @@ abstract class ControllerAbstract
     }
         
     /**
-     * Redirects the request to the given url.
-     * 
-     * @param string $url The url.
-     * 
-     * @return void
-     */
-    public static function redirectTo($url)
-    {        
-        header(Header::LOCATION.': '.$url);
-        exit;
-    }
-    
-    /**
      * Executes the controller action.
      * 
      * @param string $context    The context.

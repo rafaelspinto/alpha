@@ -47,7 +47,7 @@ class RouteHandler
      * 
      * @param string $uri The uri of the request.
      * 
-     * @return Response
+     * @return \Alpha\Http\Response
      * 
      * @throws \Exception
      */
@@ -60,6 +60,21 @@ class RouteHandler
         $actionName     = $this->buildActionMethodName($action);
         $parameters     = Parameters::get($controller, $actionName);        
         return $controller->execute($controllerName, $actionName, $parameters);        
+    }
+    
+    /**
+     * Routes the request to the Controller Action.
+     * 
+     * @param string $controllerName The name of the controller.
+     * @param string $actionName     The name of the action.
+     * @param array  $parameters     The array of the parameters.
+     * 
+     * @return \Alpha\Http\Response
+     */
+    public function goToAction($controllerName, $actionName, array $parameters = array())
+    {
+        $controller = $this->makeController($controllerName);
+        return $controller->execute($controllerName, $actionName, $parameters);
     }
     
     /**
