@@ -160,7 +160,7 @@ $this->filter(function() {
                             if(User::isNotLoggedIn()){
                                 // redirect to login page
                             }
-                        }); // applies to all actions in the controller
+                        }); // executed before all actions in the controller
 ```
         
    * Executed immediatly **after** the Controller Action is executed, e.g. Data validation filters.
@@ -170,7 +170,7 @@ $this->filter(function($data) {
                     if(!isset($data['some_value'])){
                         // do stuff
                     }
-                }, 'after', 'postEdit'); // applies only after postEdit action
+                }, 'after', 'postEdit'); // executed only after postEdit action
 ```
     
 ## Buckets/Repositories [(go to samples)](https://github.com/pintorafael/alpha/tree/master/samples/models)
