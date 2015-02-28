@@ -9,6 +9,7 @@ Alpha is a lean framework for building Web Applications / REST API's based on th
  * [How does alpha work](#how-does-alpha-work)
  * [Controllers](#controllers-go-to-samples)
  * [Views](#views-go-to-samples)
+ * [Filters](#filters)
  * [Buckets/Repositories](#bucketsrepositories-go-to-samples)
  * [Connectors](#connectors-go-to-sample)
  * [Localization/i18n](#localizationi18n-go-to-samples)
@@ -146,6 +147,31 @@ Alpha is a lean framework for building Web Applications / REST API's based on th
       ```
 **Note:** To use Views you must plug **View** Connector. [check connectors section](#connectors-go-to-sample)
     
+## Filters
+
+Filters are used to intercept requests and execute actions. They must be defined in the **controller constructor** and can be applied to all actions or to a specific action in the Controller. 
+
+The types of Filters available are :
+
+   * **Pre-Filters** : executed immediatly *before* the Controller Action is executed,  e.g. Login filters.
+  
+```
+$this->preFilter(function() {
+                            if(User::isNotLoggedIn()){
+                                // redirect to login page
+                            }
+                        }, 'getById');
+```
+        
+   * **Post-Filters** : executed immediatly *after* the Controller Action is executed, e.g. Data validation filters.
+ 
+```
+$this->postFilter(function($data) {            
+                    if(!isset($data['some_value'])){
+                        // do stuff
+                    }
+                }, 'postEdit');
+```
     
 ## Buckets/Repositories [(go to samples)](https://github.com/pintorafael/alpha/tree/master/samples/models)
 
