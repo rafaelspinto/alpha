@@ -48,9 +48,9 @@ class CrudBaseController extends ControllerAbstract
     public function execute($context, $actionName, array $parameters)
     {           
         if(filter_var($actionName, FILTER_VALIDATE_INT) !== false) {
-            $this->executeFilters('pre', [], 'getById');
+            $this->executeFilters('before', [], 'getById');
             $this->getById($actionName);
-            $this->executeFilters('post', $this->data, 'getById');
+            $this->executeFilters('after', $this->data, 'getById');
             return $this->makeResponse($this->getContentForView($this->getViewFilename($this->modelVar, 'get' . ucfirst($this->modelVar))));
         }
         return parent::execute($context, $actionName, $parameters);

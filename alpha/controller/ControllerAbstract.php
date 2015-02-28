@@ -115,7 +115,7 @@ abstract class ControllerAbstract
      */
     public function execute($context, $actionName, array $parameters)
     {        
-        $this->executeFilters('pre', [], $actionName);
+        $this->executeFilters('before', [], $actionName);
         $content = $this->getContentForView($this->getViewFilename($context, $actionName));                
         if(($hasMethod = method_exists($this, $actionName))) {
             $otherView = call_user_func_array(array($this, $actionName), $parameters);
@@ -127,7 +127,7 @@ abstract class ControllerAbstract
 
         if($content|| $hasMethod) {
             $response = $this->makeResponse($content);
-            $this->executeFilters('post', $this->data, $actionName);
+            $this->executeFilters('after', $this->data, $actionName);
             return $response;
         }
         
@@ -187,7 +187,7 @@ abstract class ControllerAbstract
      * 
      * @return void
      */
-    public function filter(callable $filter, $type = 'pre', $actionName = null)
+    public function filter(callable $filter, $type = 'before', $actionName = null)
     {
         if(!empty($actionName)) {
             $this->filters[$type][$actionName][] = $filter;
@@ -205,7 +205,7 @@ abstract class ControllerAbstract
      * 
      * @return void
      */
-    protected function executeFilters($type = 'pre', array $data = array(), $actionName = null)
+    protected function executeFilters($type = 'before', array $data = array(), $actionName = null)
     {
         // post-filters action specific
         if(isset($this->filters[$type][$actionName])) {

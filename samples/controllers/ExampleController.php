@@ -12,13 +12,13 @@ class ExampleController extends \Alpha\Controller\ControllerAbstract
                             if(User::isNotLoggedIn()){
                                 // redirect to login page
                             }
-                        }, 'pre', 'getById');
+                        }, 'before', 'getById');
         
         $this->filter(function($data) {            
                             if(!isset($data['some_value'])){
                                 // do stuff
                             }
-                        }, 'post', 'postEdit');
+                        }, 'after', 'postEdit');
     }
 
     
