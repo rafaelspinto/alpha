@@ -247,7 +247,7 @@ abstract class ControllerAbstract
      */
     protected function executePostFilters(array $data = array(), $actionName = null)
     {
-        // pre-filters action specific
+        // post-filters action specific
         if(isset($this->postFilters[$actionName])) {
             foreach($this->postFilters[$actionName] as $filter) {
                 $this->executeFilter($filter, $data);
