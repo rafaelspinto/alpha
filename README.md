@@ -160,7 +160,7 @@ $this->preFilter(function() {
                             if(User::isNotLoggedIn()){
                                 // redirect to login page
                             }
-                        }, 'getById');
+                        }); // applies to all actions in the controller
 ```
         
    * **Post-Filters** : executed immediatly *after* the Controller Action is executed, e.g. Data validation filters.
@@ -170,7 +170,7 @@ $this->postFilter(function($data) {
                     if(!isset($data['some_value'])){
                         // do stuff
                     }
-                }, 'postEdit');
+                }, 'postEdit'); // applies only to postEdit action
 ```
     
 ## Buckets/Repositories [(go to samples)](https://github.com/pintorafael/alpha/tree/master/samples/models)
