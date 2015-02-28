@@ -3,6 +3,25 @@ namespace Webapp\Controllers;
 
 class ExampleController extends \Alpha\Controller\ControllerAbstract
 {       
+    public function __construct($viewsPath)
+    {
+        parent::__construct($viewsPath);
+        
+        // example of definition of filters
+        $this->preFilter(function() {
+                            if(User::isNotLoggedIn()){
+                                // redirect to login page
+                            }
+                        }, 'getById');
+        
+        $this->postFilter(function($data) {            
+                            if(!isset($data['some_value'])){
+                                // do stuff
+                            }
+                        }, 'postEdit');
+    }
+
+    
     public function getSearch($QUERY_name)
     {
         print sprintf('You searched for "%s".', $QUERY_name);
