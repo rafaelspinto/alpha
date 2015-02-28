@@ -88,6 +88,35 @@ class UriHandler
     }
         
     /**
+     * Sets the value of a component.
+     * 
+     * @param string $name  The name of the component.
+     * @param mixed  $value The value of the component.
+     * 
+     * @return void
+     */
+    public function setComponent($name, $value)
+    {
+        $this->components[$name]['value'] = $value;
+        $this->components[$name]['type']  = filter_var($value, FILTER_VALIDATE_INT) !== false ? (int) $value : (string) $value;
+    }
+    
+    /**
+     * Sets the components.
+     * 
+     * @param array $components The array containing the components.
+     * 
+     * @return void
+     */
+    public function setComponents(array $components)
+    {
+        foreach($components as $name => $value){
+            $this->setComponent($name, $value);
+        }
+    }
+
+        
+    /**
      * Builds the URI components from the defined URI.
      * 
      * @return void
