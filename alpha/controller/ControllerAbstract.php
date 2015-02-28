@@ -19,7 +19,7 @@ use Alpha\Exception\ControllerActionNotFoundException;
  */
 abstract class ControllerAbstract
 {
-    protected $data, $statusCode, $contentType, $viewsPath, $preFilters, $postFilters;
+    protected $data, $statusCode, $contentType, $viewsPath, $filters;
     
     /**
      * Constructs a ControllerAbstract.
@@ -32,8 +32,7 @@ abstract class ControllerAbstract
         $this->statusCode  = StatusCode::OK;
         $this->contentType = ContentType::TEXT_HTML;
         $this->data        = [];
-        $this->preFilters  = [];
-        $this->postFilters = [];
+        $this->filters     = [];
     }
           
     /**
@@ -116,7 +115,7 @@ abstract class ControllerAbstract
      */
     public function execute($context, $actionName, array $parameters)
     {        
-        $this->executePreFilters($actionName);
+        $this->executeFilters('pre', [], $actionName);
         $content = $this->getContentForView($this->getViewFilename($context, $actionName));                
         if(($hasMethod = method_exists($this, $actionName))) {
             $otherView = call_user_func_array(array($this, $actionName), $parameters);
@@ -128,7 +127,7 @@ abstract class ControllerAbstract
 
         if($content|| $hasMethod) {
             $response = $this->makeResponse($content);
-            $this->executePostFilters($this->data, $actionName);
+            $this->executeFilters('post', $this->data, $actionName);
             return $response;
         }
         
@@ -180,83 +179,44 @@ abstract class ControllerAbstract
     }
     
     /**
-     * Adds a filter to the PRE execute list.
+     * Adds a filter to the list.
      * 
      * @param callable $filter     The filter.
+     * @param string   $type       The type of filter (pre|post)
      * @param string   $actionName The name of the action.
      * 
      * @return void
      */
-    public function preFilter(callable $filter, $actionName = null)
+    public function filter(callable $filter, $type = 'pre', $actionName = null)
     {
         if(!empty($actionName)) {
-            $this->preFilters[$actionName][] = $filter;
+            $this->filters[$type][$actionName][] = $filter;
         }else {
-            $this->preFilters['global'][] = $filter;
-        }
-    }
-    
-    /**
-     * Adds a filter to the POST execute list.
-     * 
-     * @param callable $filter     The filter.
-     * @param string   $actionName The name of the action.
-     * 
-     * @return void
-     */
-    public function postFilter(callable $filter, $actionName = null)
-    {
-        if(!empty($actionName)) {
-            $this->postFilters[$actionName][] = $filter;
-        }else {
-            $this->postFilters['global'][] = $filter;
-        }
-    }
-    
-    /**
-     * Executes the PRE filters list.
-     * 
-     * @param string $actionName The name of the action.
-     * 
-     * @return void
-     */
-    protected function executePreFilters($actionName = null)
-    {
-        // pre-filters action specific
-        if(isset($this->preFilters[$actionName])) {
-            foreach($this->preFilters[$actionName] as $filter) {                
-                $this->executeFilter($filter);
-            }
-        }
-        
-        // global filters
-        if(isset($this->preFilters['global'])) {            
-            foreach($this->preFilters['global'] as $filter) {
-                $this->executeFilter($filter);
-            }
+            $this->filters[$type]['global'][] = $filter;
         }
     }
 
     /**
      * Executes the POST filters list.
      * 
+     * @param string $type       The type of filter (pre|post)
      * @param array  $data       The array containing the data resulting of the request execute.
      * @param string $actionName The name of the action.
      * 
      * @return void
      */
-    protected function executePostFilters(array $data = array(), $actionName = null)
+    protected function executeFilters($type = 'pre', array $data = array(), $actionName = null)
     {
         // post-filters action specific
-        if(isset($this->postFilters[$actionName])) {
-            foreach($this->postFilters[$actionName] as $filter) {
+        if(isset($this->filters[$type][$actionName])) {
+            foreach($this->filters[$type][$actionName] as $filter) {
                 $this->executeFilter($filter, $data);
             }
         }
         
         // global filters
-        if(isset($this->postFilters['global'])) {            
-            foreach($this->postFilters['global'] as $filter) {
+        if(isset($this->filters[$type]['global'])) {            
+            foreach($this->filters[$type]['global'] as $filter) {
                 $this->executeFilter($filter, $data);
             }
         }        
