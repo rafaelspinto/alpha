@@ -31,6 +31,16 @@ class Router extends SingletonAbstract
     }
     
     /**
+     * Returns the UriHandler.
+     * 
+     * @return UriHandler
+     */
+    public static function getUriHandler()
+    {
+        return static::getInstance()->getUriHandler();
+    }
+    
+    /**
      * Returns the RouteHandler instance that should be used as a singleton.
      * 
      * @return static

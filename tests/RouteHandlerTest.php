@@ -1,6 +1,7 @@
 <?php
 namespace Tests;
 
+use Alpha\Core\Config;
 use Alpha\Handler\RouteHandler;
 use Alpha\Handler\UriHandler;
 
@@ -96,6 +97,8 @@ class RouteHandlerTest extends \Alpha\Test\Unit\TestCaseAbstract
     {
         $mocksDir     = __DIR__ . DIRECTORY_SEPARATOR . 'mocks' . DIRECTORY_SEPARATOR;
         $routeHandler = new RouteHandler(new UriHandler(), $mocksDir, $mocksDir, null, 'MockDefault');
+        // fake config
+        Config::set('path', 'models', $mocksDir);        
         $this->assertTrue($routeHandler->makeController('MockBucket') instanceof \Alpha\Controller\CrudBaseController);
     }
     
@@ -106,9 +109,9 @@ class RouteHandlerTest extends \Alpha\Test\Unit\TestCaseAbstract
      */
     public function testExecute_ControllerIsStub_ShouldReturnJsonResponseOne()
     {
-        $mocksDir     = __DIR__ . DIRECTORY_SEPARATOR . 'mocks' . DIRECTORY_SEPARATOR;
-        $stubsDir     = __DIR__ . DIRECTORY_SEPARATOR . 'stubs' . DIRECTORY_SEPARATOR;
-        $uriHandler   = new UriHandler();
+        $mocksDir   = __DIR__ . DIRECTORY_SEPARATOR . 'mocks' . DIRECTORY_SEPARATOR;
+        $stubsDir   = __DIR__ . DIRECTORY_SEPARATOR . 'stubs' . DIRECTORY_SEPARATOR;
+        $uriHandler = new UriHandler();
         $uriHandler->setPattern('/{s:controller}/{s:action}/{i:id}');
         $routeHandler = new RouteHandler($uriHandler, $stubsDir, $mocksDir, null, 'MockDefault');        
         $this->assertEquals(json_encode(array('stub' => 'one')), $routeHandler->go('/Stub/one')->getContent());

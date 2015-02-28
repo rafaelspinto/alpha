@@ -7,7 +7,8 @@
 namespace Alpha\Handler;
 
 use Alpha\Core\Autoloader;
-use Alpha\Core\Connectors;
+use Alpha\Core\Buckets;
+use Alpha\Core\Parameters;
 use Alpha\Controller\CrudBaseController;
 use Alpha\Exception\ControllerNotFoundException;
 
@@ -57,7 +58,7 @@ class RouteHandler
         $action         = $this->uriHandler->getComponent('action');
         $controller     = $this->makeController($controllerName);
         $actionName     = $this->buildActionMethodName($action);
-        $parameters     = $this->buildParameters($controller, $actionName);        
+        $parameters     = Parameters::get($controller, $actionName);        
         return $controller->execute($controllerName, $actionName, $parameters);        
     }
     
@@ -75,16 +76,17 @@ class RouteHandler
         $controllerFilename = $this->makeControllerFilename($controllerName);
         if (file_exists($controllerFilename)) {
             $controllerClass = Autoloader::getFullyQualifiedClassNameForFilename($controllerFilename);
+            $reflection      = new \ReflectionClass($controllerClass);
+            if($reflection->isSubclassOf('\Alpha\Controller\CrudBaseController')) {
+                return new $controllerClass(Buckets::get($controllerName), $this->viewsPath);
+            }
             return new $controllerClass($this->viewsPath);            
         }
         
         // check if exists model
         $modelFile = $this->modelsPath . $controllerName . '.php';
         if(file_exists($modelFile)) {            
-            include_once $modelFile;
-            $bucketClass = Autoloader::getFullyQualifiedClassNameForFilename($modelFile);
-            $bucket      = new $bucketClass(Connectors::get('Repo'));
-            return new CrudBaseController($bucket, $this->viewsPath);
+            return new CrudBaseController(Buckets::get($controllerName), $this->viewsPath);
         }
         
         // could be the default controller
@@ -124,68 +126,6 @@ class RouteHandler
     }
     
     /**
-     * Builds the parameters required for the action.
-     * 
-     * @param object $controller The instance of the controller.
-     * @param string $actionName The name of the action.
-     * 
-     * @return array
-     * 
-     * @throws \Exception
-     */
-    public function buildParameters($controller, $actionName)
-    {
-        $parameters = array();
-        if(method_exists($controller, $actionName)) {
-            $ref = new \ReflectionMethod($controller, $actionName);
-            foreach($ref->getParameters() as $parameter) {
-                $parameters[$parameter->getName()] = $this->makeParameterValue($parameter);
-            }
-        }
-        return $parameters;
-    }
-    
-    /**
-     * Returns the parameter value.
-     * 
-     * @param \ReflectionParameter $parameter The parameter of the action.
-     * 
-     * @return mixed
-     */
-    public function makeParameterValue(\ReflectionParameter $parameter)
-    {
-        $param = $parameter->getName();
-        if(strpos($param, '_') == false){
-            switch ($param){
-                case 'QUERY' :
-                    return $_GET;
-                case 'PARAM' :
-                    return $_POST;
-                case 'COOKIE' :
-                    return $_COOKIE;
-                case 'SESSION' :
-                    return $_SESSION;
-            }
-        }
-        $separatorPos = stripos($param, '_');
-        $paramType    = substr($param, 0, $separatorPos);
-        $paramName    = substr($param, $separatorPos + 1);
-        
-        switch($paramType) {
-            case 'PATH' :
-                return $this->uriHandler->getComponent($paramName);
-            case 'QUERY' :
-                return filter_input(INPUT_GET, $paramName);
-            case 'PARAM' :
-                return filter_input(INPUT_POST, $paramName);
-            case 'COOKIE' :
-                return filter_input(INPUT_COOKIE, $paramName);
-            case 'SESSION' :
-                return filter_input(INPUT_SESSION, $paramName);
-        }
-    }
-    
-    /**
      * Returns the filename for the controller.
      * 
      * @param string $controllerName The name of the controller.
@@ -195,5 +135,15 @@ class RouteHandler
     public function makeControllerFilename($controllerName)
     {
         return $this->controllersPath . $controllerName . 'Controller.php';
-    }    
+    }
+    
+    /**
+     * Returns the UriHandlers.
+     * 
+     * @return UriHandler
+     */
+    public function getUriHandler()
+    {
+        return $this->uriHandler;
+    }
 }
