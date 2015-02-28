@@ -153,24 +153,24 @@ Filters are used to intercept requests and execute actions. They must be defined
 
 The types of Filters available are :
 
-   * **Pre-Filters** : executed immediatly *before* the Controller Action is executed,  e.g. Login filters.
+   * Executed immediatly **before** the Controller Action is executed,  e.g. Login filters.
   
 ```
-$this->preFilter(function() {
+$this->filter(function() {
                             if(User::isNotLoggedIn()){
                                 // redirect to login page
                             }
                         }); // applies to all actions in the controller
 ```
         
-   * **Post-Filters** : executed immediatly *after* the Controller Action is executed, e.g. Data validation filters.
+   * Executed immediatly **after** the Controller Action is executed, e.g. Data validation filters.
  
 ```
-$this->postFilter(function($data) {            
+$this->filter(function($data) {            
                     if(!isset($data['some_value'])){
                         // do stuff
                     }
-                }, 'postEdit'); // applies only to postEdit action
+                }, 'after', 'postEdit'); // applies only after postEdit action
 ```
     
 ## Buckets/Repositories [(go to samples)](https://github.com/pintorafael/alpha/tree/master/samples/models)
