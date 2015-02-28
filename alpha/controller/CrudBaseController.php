@@ -6,6 +6,7 @@
  */
 namespace Alpha\Controller;
 
+use Alpha\Core\Router;
 use Alpha\Storage\BucketInterface;
 use Alpha\Controller\ControllerAbstract;
 
@@ -48,6 +49,7 @@ class CrudBaseController extends ControllerAbstract
     public function execute($context, $actionName, array $parameters)
     {           
         if(filter_var($actionName, FILTER_VALIDATE_INT) !== false) {
+            Router::getUriHandler()->setComponents(['action' => 'getById', 'id' => $actionName]);
             $this->executeFilters('before', [], 'getById');
             $this->getById($actionName);
             $this->executeFilters('after', $this->data, 'getById');
