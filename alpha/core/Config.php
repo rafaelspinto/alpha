@@ -28,6 +28,20 @@ class Config extends SingletonAbstract
     }
     
     /**
+     * Sets the configuration for the section and key,
+     * 
+     * @param string $section The section of the configuration.
+     * @param string $key     The key of the property.
+     * @param mixed  $value   The value.
+     * 
+     * @return void
+     */
+    public static function set($section, $key, $value)
+    {
+        static::getInstance()->set($section, $key, $value);
+    }
+    
+    /**
      * Returns the root path.
      * 
      * @return string
