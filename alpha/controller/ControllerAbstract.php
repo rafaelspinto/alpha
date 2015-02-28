@@ -102,20 +102,29 @@ abstract class ControllerAbstract
      */
     public function execute($context, $actionName, array $parameters)
     {        
+        // apply BEFORE filters
         $this->executeFilters('before', [], $actionName);
         $content = $this->getContentForView($this->getViewFilename($context, $actionName));                
         if(($hasMethod = method_exists($this, $actionName))) {
-            $otherView = call_user_func_array(array($this, $actionName), $parameters);
-            if($otherView) {                
-                $otherView = $this->viewsPath . $otherView;
-                $content   = $this->getContentForView($otherView);
+            $response = call_user_func_array(array($this, $actionName), $parameters);
+            
+            // apply AFTER filters
+            $this->executeFilters('after', $this->data, $actionName);
+            
+            // response is already the final response
+            if($response instanceof Response) {
+                return $response;
+            }
+            
+            // response is the name of the view to be used
+            if(is_string($response)) {
+                $response = $this->viewsPath . $response;
+                $content  = $this->getContentForView($response);
             }
         }
 
         if($content|| $hasMethod) {
-            $response = $this->makeResponse($content);
-            $this->executeFilters('after', $this->data, $actionName);
-            return $response;
+            return $this->makeResponse($content);
         }
         
         throw new ControllerActionNotFoundException($actionName);
