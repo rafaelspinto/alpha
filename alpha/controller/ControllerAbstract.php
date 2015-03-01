@@ -153,9 +153,9 @@ abstract class ControllerAbstract
     }
 
     /**
-     * Executes the POST filters list.
+     * Executes the filters list.
      * 
-     * @param string $type       The type of filter (pre|post)
+     * @param string $type       The type of filter (before|after)
      * @param array  $data       The array containing the data resulting of the request execute.
      * @param string $actionName The name of the action.
      * 
@@ -163,7 +163,7 @@ abstract class ControllerAbstract
      */
     protected function executeFilters($type = 'before', array $data = array(), $actionName = null)
     {
-        // post-filters action specific
+        // filters action specific
         if(isset($this->filters[$type][$actionName])) {
             foreach($this->filters[$type][$actionName] as $filter) {
                 $this->executeFilter($filter, $data);
