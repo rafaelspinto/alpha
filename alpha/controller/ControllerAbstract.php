@@ -7,9 +7,7 @@
 namespace Alpha\Controller;
 
 use Alpha\Core\Connectors;
-use Alpha\Http\Header;
 use Alpha\Http\Response;
-use Alpha\Http\StatusCode;
 use Alpha\Http\ContentType;
 use Alpha\Utils\ArrayUtils;
 use Alpha\Exception\ControllerActionNotFoundException;
@@ -19,7 +17,12 @@ use Alpha\Exception\ControllerActionNotFoundException;
  */
 abstract class ControllerAbstract
 {
-    protected $data, $statusCode, $contentType, $viewsPath, $filters;
+    /**
+     * @var Response
+     */
+    protected $response;
+
+    protected $data, $viewsPath, $filters;
     
     /**
      * Constructs a ControllerAbstract.
@@ -28,57 +31,12 @@ abstract class ControllerAbstract
      */
     public function __construct($viewsPath)
     {
-        $this->viewsPath   = $viewsPath;
-        $this->statusCode  = StatusCode::OK;
-        $this->contentType = ContentType::TEXT_HTML;
-        $this->data        = [];
-        $this->filters     = [];
+        $this->viewsPath = $viewsPath;
+        $this->response  = new Response();
+        $this->data      = [];
+        $this->filters   = [];
     }
           
-    /**
-     * Sets the HTTP status code.
-     * 
-     * @param int $statusCode The http status code.
-     * 
-     * @return void
-     */
-    public function setStatusCode($statusCode)
-    {
-        $this->statusCode = $statusCode;
-    }
-
-    /**
-     * Sets the content type.
-     * 
-     * @param string $contentType The content type.
-     * 
-     * @return void
-     */
-    public function setContentType($contentType)
-    {
-        $this->contentType = $contentType;
-    }
-
-    /**
-     * Returns the http status code.
-     * 
-     * @return int
-     */
-    public function getStatusCode()
-    {
-        return $this->statusCode;
-    }
-
-    /**
-     * Returns the content type.
-     * 
-     * @return string
-     */
-    public function getContentType()
-    {
-        return $this->contentType;
-    }
-    
     /**
      * Returns the array of data.
      * 
@@ -138,12 +96,14 @@ abstract class ControllerAbstract
      * @return \Alpha\Http\Response
      */
     public function makeResponse($content)
-    {
-        // json response
-        if(empty($content) && !empty ($this->data)){            
-            return new Response(json_encode(ArrayUtils::encodeToUtf8($this->data)), $this->getStatusCode(), ContentType::APPLICATION_JSON);
-        }      
-        return new Response(Connectors::get('View')->render($content, $this->data), $this->getStatusCode(), $this->getContentType());
+    {        
+        if(empty($content) && !empty ($this->data)){
+            $this->response->setContentType(ContentType::APPLICATION_JSON);
+            $this->response->setContent(json_encode(ArrayUtils::encodeToUtf8($this->data)));            
+        }else if(!empty ($content)){
+            $this->response->setContent(Connectors::get('View')->render($content, $this->data));
+        }
+        return $this->response;
     }
     
     /**

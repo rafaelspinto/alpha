@@ -22,7 +22,7 @@ class Router extends SingletonAbstract
      * 
      * @param string $uri The uri of the request.
      * 
-     * @return Response
+     * @return \Alpha\Http\Response
      * 
      * @throws \Exception
      */

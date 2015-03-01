@@ -11,6 +11,7 @@ namespace Alpha\Http;
  */
 class Header
 {
-    const LOCATION = 'Location';
+    const LOCATION     = 'Location';
+    const CONTENT_TYPE = 'Content-Type';
 }
 
